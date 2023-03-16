@@ -5,18 +5,18 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "mysql"
   url      = env("DATABASE_URL")
 }
 
-model Suplier {
-  id             Int              @id @default(autoincrement())
-  suplierName    String
-  suplierCPJ     String           @unique
-  SuplierProduct SuplierProduct[]
-  Delivery       Delivery[]
+model Supplier {
+  id              Int               @id @default(autoincrement())
+  supplierName    String
+  supplierCPJ     String            @unique
+  SupplierProduct SupplierProduct[]
+  Delivery        Delivery[]
 
-  @@map("supliers")
+  @@map("suppliers")
 }
 
 model QualityTest {
@@ -31,7 +31,7 @@ model QualityTest {
 model Product {
   id              Int               @id @default(autoincrement())
   productName     String
-  SuplierProduct  SuplierProduct[]
+  SupplierProduct SupplierProduct[]
   DeliveryProduct DeliveryProduct[]
   QualityProduct  QualityProduct[]
 
@@ -49,14 +49,14 @@ model QualityProduct {
   @@map("qualitiesProducts")
 }
 
-model SuplierProduct {
-  Suplier   Suplier @relation(fields: [idSuplier], references: [id])
-  idSuplier Int
-  Product   Product @relation(fields: [idProduct], references: [id])
-  idProduct Int
+model SupplierProduct {
+  Supplier   Supplier @relation(fields: [idSupplier], references: [id])
+  idSupplier Int
+  Product    Product  @relation(fields: [idProduct], references: [id])
+  idProduct  Int
 
-  @@id([idProduct, idSuplier])
-  @@map("supliersProducts")
+  @@id([idProduct, idSupplier])
+  @@map("suppliersProducts")
 }
 
 model ShippingCompany {
@@ -78,8 +78,8 @@ model DeliveryStep {
 model Delivery {
   id                  Int                   @id @default(autoincrement())
   nfe                 String                @unique
-  Suplier             Suplier               @relation(fields: [idSuplier], references: [id])
-  idSuplier           Int
+  Supplier            Supplier              @relation(fields: [idSupplier], references: [id])
+  idSupplier          Int
   ShippingCompany     ShippingCompany       @relation(fields: [idShippingCompany], references: [id])
   idShippingCompany   Int
   DeliveryStep        DeliveryStep          @relation(fields: [deliveryStepId], references: [id])
@@ -135,7 +135,7 @@ model User {
 
 model StatusDelivery {
   id         Int      @id @default(autoincrement())
-  aprovado   Boolean
+  approved   Boolean
   Delivery   Delivery @relation(fields: [deliveryId], references: [id])
   deliveryId Int
   User       User     @relation(fields: [userId], references: [id])
