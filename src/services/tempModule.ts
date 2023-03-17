@@ -1,4 +1,4 @@
-/* 
+/*
 STD DOCTEXT TEMPLATE
 ---------------------
     Linha 1 - O que o módulo faz
@@ -9,9 +9,9 @@ Módulo HelloWorld
 ------------------
     - 1. Módulo que gerencia e retorna uma mensagem de boas vindas
     - 2. IN(
-            constructor message[string], 
+            constructor message[string],
             setMessage() newMessage[string]
-         ), 
+         ),
          OU(
             getMessage()[string]
          )
@@ -20,18 +20,18 @@ Módulo HelloWorld
             >> "Bem vindo"
 */
 
-export default class HelloWorld{
-    private message: string;
-    
-    constructor(message: string){
-        this.message = message;
-    }
-    
-    public setMessage(newMessage: string){
-        this.message = newMessage;
-    }
+export default class HelloWorld {
+  private message: string;
 
-    public getMessage(){
-        return this.message;
-    }
+  constructor(message: string) {
+    this.message = message;
+  }
+
+  public setMessage(newMessage: string) {
+    this.message = newMessage;
+  }
+
+  public getMessage() {
+    return this.message;
+  }
 }
