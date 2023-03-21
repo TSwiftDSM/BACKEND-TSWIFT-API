@@ -14,11 +14,13 @@ class QualitativeStageController {
                 idProduct: true
             }
         })
-        const qualityProducts = await prisma.qualitiesProducts.findMany({
+        const Products = await prisma.products.findMany({
             where: {
                 idProduct: { in: [deliveryProduct] },
             },
+            
         })
+
 
 
     }
