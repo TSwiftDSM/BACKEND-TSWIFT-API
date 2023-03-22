@@ -78,12 +78,12 @@ model DeliveryStep {
 model Delivery {
   id                  Int                   @id @default(autoincrement())
   nfe                 String                @unique
-  Supplier            Supplier              @relation(fields: [idSupplier], references: [id])
-  idSupplier          Int
-  ShippingCompany     ShippingCompany       @relation(fields: [idShippingCompany], references: [id])
-  idShippingCompany   Int
-  DeliveryStep        DeliveryStep          @relation(fields: [deliveryStepId], references: [id])
-  deliveryStepId      Int
+  Supplier            Supplier?              @relation(fields: [idSupplier], references: [id])
+  idSupplier          Int?
+  ShippingCompany     ShippingCompany?       @relation(fields: [idShippingCompany], references: [id])
+  idShippingCompany   Int?
+  DeliveryStep        DeliveryStep?          @relation(fields: [deliveryStepId], references: [id])
+  deliveryStepId      Int?
   DeliveryProduct     DeliveryProduct[]
   StatusDelivery      StatusDelivery[]
   DisapprovalDelivery DisapprovalDelivery[]
@@ -94,8 +94,8 @@ model Delivery {
 model DisapprovalDelivery {
   id            Int         @id @default(autoincrement())
   motivo        String
-  QualityTest   QualityTest @relation(fields: [qualityTestId], references: [id])
-  qualityTestId Int
+  QualityTest   QualityTest? @relation(fields: [qualityTestId], references: [id])
+  qualityTestId Int?
   Delivery      Delivery    @relation(fields: [deliveryId], references: [id])
   deliveryId    Int
 
@@ -126,8 +126,8 @@ model User {
   name           String
   login          String
   password       String
-  UserType       UserType         @relation(fields: [userTypeId], references: [id])
-  userTypeId     Int
+  UserType       UserType?         @relation(fields: [userTypeId], references: [id])
+  userTypeId     Int?
   StatusDelivery StatusDelivery[]
 
   @@map("users")
@@ -138,8 +138,8 @@ model StatusDelivery {
   approved   Boolean
   Delivery   Delivery @relation(fields: [deliveryId], references: [id])
   deliveryId Int
-  User       User     @relation(fields: [userId], references: [id])
-  userId     Int
+  User       User?     @relation(fields: [userId], references: [id])
+  userId     Int?
 
   @@map("statusDeliveries")
 }

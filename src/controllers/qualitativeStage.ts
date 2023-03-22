@@ -5,7 +5,7 @@ const prisma = new PrismaClient()
 
 class QualitativeStageController {
     async get(req: Request, res: Response) {
-        const {idDelivery} = req.body
+        const { idDelivery } = req.body
         const deliveryProduct = await prisma.deliveriesProducts.findMany({
             where: {
                 idDelivery: idDelivery
@@ -14,11 +14,23 @@ class QualitativeStageController {
                 idProduct: true
             }
         })
-        const Products = await prisma.products.findMany({
+        const qualitiesProducts = await prisma.qualitiesProducts.findMany({
             where: {
                 idProduct: { in: [deliveryProduct] },
             },
-            
+            include: {
+                qualitiesTests: {
+                    select: {
+                        name: true
+                    }
+                },
+                products: {
+                    select: {
+                        productName: true
+                    }
+                }
+            }
+
         })
 
 
