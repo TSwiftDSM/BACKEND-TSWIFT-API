@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conferência Quantitativa</title>
+</head>
+<body>
+    <div align="center">
+    <form action="/conferencia/quantitativa" method="post">
+    <% Object.entries(products_object).forEach(([key, value]) => { %>
+        <h1><%= key %> <%= value["name"] %></h1>
+        <h3>Peso Unitário(kg)</h3>
+        <input type="text" name="<%= key %>_weight" required>
+        <h3>Quantidade</h3>
+        <input type="text" name="<%= key %>_qtt" required>
+    <% }); %>
+        <button type="submit">Continuar</button>
+    </form>
+    </div>
+</body>
+</html>

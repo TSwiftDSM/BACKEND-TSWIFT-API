@@ -24,6 +24,7 @@
     "@types/jest": "^29.4.0",
     "@typescript-eslint/eslint-plugin": "^5.55.0",
     "@typescript-eslint/parser": "^5.55.0",
+    "body-parser": "^1.20.2",
     "eslint": "^8.36.0",
     "eslint-config-prettier": "^8.7.0",
     "eslint-config-standard-with-typescript": "^34.0.1",
@@ -43,6 +44,6 @@
     "ejs": "^3.1.9",
     "express": "^4.18.2",
     "joi": "^17.8.4",
-    "package.json": "^2.0.1"
+    "package.json": "^0.0.0"
   }
 }
