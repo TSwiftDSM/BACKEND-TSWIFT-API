@@ -1,6 +1,7 @@
 import { Router } from "express";
 
 import { default as productRoutes } from "./product";
+import { default as declineRoutes } from "./declineStepOne";
 
 const router = Router();
 
@@ -19,5 +20,6 @@ router.get("/", (req, res) => {
 });
 
 router.use("/produto", productRoutes);
+router.use("/declineDelivery",declineRoutes );
 
 export default router;
