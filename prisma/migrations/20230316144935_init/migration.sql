@@ -8,6 +8,9 @@ CREATE TABLE `suppliers` (
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
+INSERT INTO suppliers VALUES('Fornecedor1','1');
+INSERT INTO suppliers VALUES('Fornecedor2','2');
+
 -- CreateTable
 CREATE TABLE `qualitiesTests` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
@@ -16,6 +19,9 @@ CREATE TABLE `qualitiesTests` (
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
+INSERT INTO qualitiesTests VALUES('TESTE QUALIDADE 1');
+INSERT INTO qualitiesTests VALUES('TESTE QUALIDADE 2');
+
 -- CreateTable
 CREATE TABLE `products` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
@@ -23,6 +29,9 @@ CREATE TABLE `products` (
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+INSERT INTO products VALUES('PRODUTO 1');
+INSERT INTO products VALUES('PRODUTO 2');
 
 -- CreateTable
 CREATE TABLE `qualitiesProducts` (
@@ -33,6 +42,10 @@ CREATE TABLE `qualitiesProducts` (
     PRIMARY KEY (`qualityTestId`, `productId`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
+INSERT INTO qualitiesProducts VALUES(1, 1, 1);
+INSERT INTO qualitiesProducts VALUES(1, 2, 1);
+INSERT INTO qualitiesProducts VALUES(1, 1, 2);
+
 -- CreateTable
 CREATE TABLE `suppliersProducts` (
     `idSupplier` INTEGER NOT NULL,
@@ -40,6 +53,11 @@ CREATE TABLE `suppliersProducts` (
 
     PRIMARY KEY (`idProduct`, `idSupplier`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+INSERT INTO suppliersProducts VALUES(1,1);
+INSERT INTO suppliersProducts VALUES(1,2);
+INSERT INTO suppliersProducts VALUES(2,2);
+
 
 -- CreateTable
 CREATE TABLE `shippingCompany` (
@@ -49,6 +67,10 @@ CREATE TABLE `shippingCompany` (
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
+INSERT INTO shippingCompany VALUES('TRANSPORTADORA 1');
+INSERT INTO shippingCompany VALUES('TRANSPORTADORA 2');
+
+
 -- CreateTable
 CREATE TABLE `deliveriesSteps` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
@@ -56,6 +78,11 @@ CREATE TABLE `deliveriesSteps` (
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+INSERT INTO deliveriesSteps VALUES('RECEBIMENTO DO PRODUTO');
+INSERT INTO deliveriesSteps VALUES('QUANTITATIVA');
+INSERT INTO deliveriesSteps VALUES('QUALITATIVA');
+
 
 -- CreateTable
 CREATE TABLE `deliveries` (
@@ -68,6 +95,9 @@ CREATE TABLE `deliveries` (
     UNIQUE INDEX `deliveries_nfe_key`(`nfe`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+INSERT INTO deliveries VALUES('1123', 1, 1, 1);
+INSERT INTO deliveries VALUES('1123', 2, 1, 1);
 
 -- CreateTable
 CREATE TABLE `disapprovalsDeliveries` (
@@ -89,6 +119,10 @@ CREATE TABLE `deliveriesProducts` (
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
+INSERT INTO deliveriesProducts VALUES(20.4, 1,1);
+INSERT INTO deliveriesProducts VALUES(1, 2,1);
+INSERT INTO deliveriesProducts VALUES(1, 2,2);
+
 -- CreateTable
 CREATE TABLE `usersTypes` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
@@ -96,6 +130,11 @@ CREATE TABLE `usersTypes` (
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+INSERT INTO usersTypes VALUES('ADM');
+INSERT INTO usersTypes VALUES('GERENTE');
+INSERT INTO usersTypes VALUES('CONFERENTE');
+
 
 -- CreateTable
 CREATE TABLE `users` (
@@ -108,6 +147,10 @@ CREATE TABLE `users` (
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
+INSERT INTO users VALUES('adm1', 'TESTE1', '1234', '1234', 1)
+INSERT INTO users VALUES('GERENTE1', 'TESTE2', '1234', '1234', 2)
+INSERT INTO users VALUES('CONFERENTE1', 'TESTE3', '1234', '1234', 3)
+
 -- CreateTable
 CREATE TABLE `statusDeliveries` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
@@ -118,44 +161,49 @@ CREATE TABLE `statusDeliveries` (
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
--- AddForeignKey
-ALTER TABLE `qualitiesProducts` ADD CONSTRAINT `qualitiesProducts_qualityTestId_fkey` FOREIGN KEY (`qualityTestId`) REFERENCES `qualitiesTests`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+INSERT INTO statusDeliveries VALUES(NULL, 1, 1, 1)
+INSERT INTO statusDeliveries VALUES(NULL, 2, 2, 1)
 
 -- AddForeignKey
-ALTER TABLE `qualitiesProducts` ADD CONSTRAINT `qualitiesProducts_productId_fkey` FOREIGN KEY (`productId`) REFERENCES `products`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE `qualitiesProducts` ADD CONSTRAINT `qualitiesProducts_qualityTestId_fkey` FOREIGN KEY (`qualityTestId`) REFERENCES `qualitiesTests`(`id`)  ;
 
 -- AddForeignKey
-ALTER TABLE `suppliersProducts` ADD CONSTRAINT `suppliersProducts_idSupplier_fkey` FOREIGN KEY (`idSupplier`) REFERENCES `suppliers`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE `qualitiesProducts` ADD CONSTRAINT `qualitiesProducts_productId_fkey` FOREIGN KEY (`productId`) REFERENCES `products`(`id`)  ;
 
 -- AddForeignKey
-ALTER TABLE `suppliersProducts` ADD CONSTRAINT `suppliersProducts_idProduct_fkey` FOREIGN KEY (`idProduct`) REFERENCES `products`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE `suppliersProducts` ADD CONSTRAINT `suppliersProducts_idSupplier_fkey` FOREIGN KEY (`idSupplier`) REFERENCES `suppliers`(`id`)  ;
 
 -- AddForeignKey
-ALTER TABLE `deliveries` ADD CONSTRAINT `deliveries_idSupplier_fkey` FOREIGN KEY (`idSupplier`) REFERENCES `suppliers`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE `suppliersProducts` ADD CONSTRAINT `suppliersProducts_idProduct_fkey` FOREIGN KEY (`idProduct`) REFERENCES `products`(`id`)  ;
 
 -- AddForeignKey
-ALTER TABLE `deliveries` ADD CONSTRAINT `deliveries_idShippingCompany_fkey` FOREIGN KEY (`idShippingCompany`) REFERENCES `shippingCompany`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE `deliveries` ADD CONSTRAINT `deliveries_idSupplier_fkey` FOREIGN KEY (`idSupplier`) REFERENCES `suppliers`(`id`)  ;
 
 -- AddForeignKey
-ALTER TABLE `deliveries` ADD CONSTRAINT `deliveries_deliveryStepId_fkey` FOREIGN KEY (`deliveryStepId`) REFERENCES `deliveriesSteps`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE `deliveries` ADD CONSTRAINT `deliveries_idShippingCompany_fkey` FOREIGN KEY (`idShippingCompany`) REFERENCES `shippingCompany`(`id`)  ;
 
 -- AddForeignKey
-ALTER TABLE `disapprovalsDeliveries` ADD CONSTRAINT `disapprovalsDeliveries_qualityTestId_fkey` FOREIGN KEY (`qualityTestId`) REFERENCES `qualitiesTests`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE `deliveries` ADD CONSTRAINT `deliveries_deliveryStepId_fkey` FOREIGN KEY (`deliveryStepId`) REFERENCES `deliveriesSteps`(`id`)  ;
 
 -- AddForeignKey
-ALTER TABLE `disapprovalsDeliveries` ADD CONSTRAINT `disapprovalsDeliveries_deliveryId_fkey` FOREIGN KEY (`deliveryId`) REFERENCES `deliveries`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE `disapprovalsDeliveries` ADD CONSTRAINT `disapprovalsDeliveries_qualityTestId_fkey` FOREIGN KEY (`qualityTestId`) REFERENCES `qualitiesTests`(`id`)  ;
 
 -- AddForeignKey
-ALTER TABLE `deliveriesProducts` ADD CONSTRAINT `deliveriesProducts_idProduct_fkey` FOREIGN KEY (`idProduct`) REFERENCES `products`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE `disapprovalsDeliveries` ADD CONSTRAINT `disapprovalsDeliveries_deliveryId_fkey` FOREIGN KEY (`deliveryId`) REFERENCES `deliveries`(`id`)  ;
 
 -- AddForeignKey
-ALTER TABLE `deliveriesProducts` ADD CONSTRAINT `deliveriesProducts_idDelivery_fkey` FOREIGN KEY (`idDelivery`) REFERENCES `deliveries`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE `deliveriesProducts` ADD CONSTRAINT `deliveriesProducts_idProduct_fkey` FOREIGN KEY (`idProduct`) REFERENCES `products`(`id`)  ;
 
 -- AddForeignKey
-ALTER TABLE `users` ADD CONSTRAINT `users_userTypeId_fkey` FOREIGN KEY (`userTypeId`) REFERENCES `usersTypes`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE `deliveriesProducts` ADD CONSTRAINT `deliveriesProducts_idDelivery_fkey` FOREIGN KEY (`idDelivery`) REFERENCES `deliveries`(`id`)  ;
 
 -- AddForeignKey
-ALTER TABLE `statusDeliveries` ADD CONSTRAINT `statusDeliveries_deliveryId_fkey` FOREIGN KEY (`deliveryId`) REFERENCES `deliveries`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE `users` ADD CONSTRAINT `users_userTypeId_fkey` FOREIGN KEY (`userTypeId`) REFERENCES `usersTypes`(`id`)  ;
 
 -- AddForeignKey
-ALTER TABLE `statusDeliveries` ADD CONSTRAINT `statusDeliveries_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `users`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE `statusDeliveries` ADD CONSTRAINT `statusDeliveries_deliveryId_fkey` FOREIGN KEY (`deliveryId`) REFERENCES `deliveries`(`id`)  ;
+
+-- AddForeignKey
+ALTER TABLE `statusDeliveries` ADD CONSTRAINT `statusDeliveries_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `users`(`id`)  ;
+
+
