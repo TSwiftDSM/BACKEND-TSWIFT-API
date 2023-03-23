@@ -80,9 +80,9 @@ CREATE TABLE `deliveriesSteps` (
 CREATE TABLE `deliveries` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `nfe` VARCHAR(191) NOT NULL,
-    `idSupplier` INTEGER NOT NULL,
-    `idShippingCompany` INTEGER NOT NULL,
-    `deliveryStepId` INTEGER NOT NULL,
+    `idSupplier` INTEGER,
+    `idShippingCompany` INTEGER,
+    `deliveryStepId` INTEGER,
 
     UNIQUE INDEX `deliveries_nfe_key`(`nfe`),
     PRIMARY KEY (`id`)
@@ -93,8 +93,8 @@ CREATE TABLE `deliveries` (
 CREATE TABLE `disapprovalsDeliveries` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `motivo` VARCHAR(191) NOT NULL,
-    `qualityTestId` INTEGER NOT NULL,
-    `deliveryId` INTEGER NOT NULL,
+    `qualityTestId` INTEGER,
+    `deliveryId` INTEGER,
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
