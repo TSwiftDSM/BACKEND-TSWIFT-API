@@ -1,3 +1,8 @@
+-- drop database Tswift;
+create database Tswift;
+
+use Tswift;
+
 -- CreateTable
 CREATE TABLE `suppliers` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
@@ -8,8 +13,6 @@ CREATE TABLE `suppliers` (
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
-INSERT INTO suppliers VALUES('Fornecedor1','1');
-INSERT INTO suppliers VALUES('Fornecedor2','2');
 
 -- CreateTable
 CREATE TABLE `qualitiesTests` (
@@ -19,8 +22,7 @@ CREATE TABLE `qualitiesTests` (
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
-INSERT INTO qualitiesTests VALUES('TESTE QUALIDADE 1');
-INSERT INTO qualitiesTests VALUES('TESTE QUALIDADE 2');
+
 
 -- CreateTable
 CREATE TABLE `products` (
@@ -30,8 +32,6 @@ CREATE TABLE `products` (
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
-INSERT INTO products VALUES('PRODUTO 1');
-INSERT INTO products VALUES('PRODUTO 2');
 
 -- CreateTable
 CREATE TABLE `qualitiesProducts` (
@@ -42,9 +42,7 @@ CREATE TABLE `qualitiesProducts` (
     PRIMARY KEY (`qualityTestId`, `productId`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
-INSERT INTO qualitiesProducts VALUES(1, 1, 1);
-INSERT INTO qualitiesProducts VALUES(1, 2, 1);
-INSERT INTO qualitiesProducts VALUES(1, 1, 2);
+
 
 -- CreateTable
 CREATE TABLE `suppliersProducts` (
@@ -54,9 +52,6 @@ CREATE TABLE `suppliersProducts` (
     PRIMARY KEY (`idProduct`, `idSupplier`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
-INSERT INTO suppliersProducts VALUES(1,1);
-INSERT INTO suppliersProducts VALUES(1,2);
-INSERT INTO suppliersProducts VALUES(2,2);
 
 
 -- CreateTable
@@ -67,8 +62,7 @@ CREATE TABLE `shippingCompany` (
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
-INSERT INTO shippingCompany VALUES('TRANSPORTADORA 1');
-INSERT INTO shippingCompany VALUES('TRANSPORTADORA 2');
+
 
 
 -- CreateTable
@@ -79,9 +73,7 @@ CREATE TABLE `deliveriesSteps` (
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
-INSERT INTO deliveriesSteps VALUES('RECEBIMENTO DO PRODUTO');
-INSERT INTO deliveriesSteps VALUES('QUANTITATIVA');
-INSERT INTO deliveriesSteps VALUES('QUALITATIVA');
+
 
 
 -- CreateTable
@@ -96,8 +88,6 @@ CREATE TABLE `deliveries` (
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
-INSERT INTO deliveries VALUES('1123', 1, 1, 1);
-INSERT INTO deliveries VALUES('1123', 2, 1, 1);
 
 -- CreateTable
 CREATE TABLE `disapprovalsDeliveries` (
@@ -119,9 +109,6 @@ CREATE TABLE `deliveriesProducts` (
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
-INSERT INTO deliveriesProducts VALUES(20.4, 1,1);
-INSERT INTO deliveriesProducts VALUES(1, 2,1);
-INSERT INTO deliveriesProducts VALUES(1, 2,2);
 
 -- CreateTable
 CREATE TABLE `usersTypes` (
@@ -131,9 +118,6 @@ CREATE TABLE `usersTypes` (
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
-INSERT INTO usersTypes VALUES('ADM');
-INSERT INTO usersTypes VALUES('GERENTE');
-INSERT INTO usersTypes VALUES('CONFERENTE');
 
 
 -- CreateTable
@@ -147,9 +131,7 @@ CREATE TABLE `users` (
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
-INSERT INTO users VALUES('adm1', 'TESTE1', '1234', '1234', 1)
-INSERT INTO users VALUES('GERENTE1', 'TESTE2', '1234', '1234', 2)
-INSERT INTO users VALUES('CONFERENTE1', 'TESTE3', '1234', '1234', 3)
+
 
 -- CreateTable
 CREATE TABLE `statusDeliveries` (
@@ -161,8 +143,7 @@ CREATE TABLE `statusDeliveries` (
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
-INSERT INTO statusDeliveries VALUES(NULL, 1, 1, 1)
-INSERT INTO statusDeliveries VALUES(NULL, 2, 2, 1)
+
 
 -- AddForeignKey
 ALTER TABLE `qualitiesProducts` ADD CONSTRAINT `qualitiesProducts_qualityTestId_fkey` FOREIGN KEY (`qualityTestId`) REFERENCES `qualitiesTests`(`id`)  ;
@@ -206,4 +187,49 @@ ALTER TABLE `statusDeliveries` ADD CONSTRAINT `statusDeliveries_deliveryId_fkey`
 -- AddForeignKey
 ALTER TABLE `statusDeliveries` ADD CONSTRAINT `statusDeliveries_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `users`(`id`)  ;
 
+-- Inserts
+
+INSERT INTO qualitiesTests VALUES(1, 'TESTE QUALIDADE 1');
+INSERT INTO qualitiesTests VALUES(2, 'TESTE QUALIDADE 2');
+
+INSERT INTO products VALUES(1,'PRODUTO 1');
+INSERT INTO products VALUES(2,'PRODUTO 2');
+
+INSERT INTO suppliers VALUES(1,'Fornecedor1','1');
+INSERT INTO suppliers VALUES(2,'Fornecedor2','2');
+
+INSERT INTO qualitiesProducts VALUES(1, 1, 1);
+INSERT INTO qualitiesProducts VALUES(1, 2, 1);
+INSERT INTO qualitiesProducts VALUES(1, 1, 2);
+
+INSERT INTO shippingCompany VALUES(1,'TRANSPORTADORA 1');
+INSERT INTO shippingCompany VALUES(2,'TRANSPORTADORA 2');
+
+INSERT INTO deliveriesSteps VALUES(1,'RECEBIMENTO DO PRODUTO');
+INSERT INTO deliveriesSteps VALUES(2,'QUANTITATIVA');
+INSERT INTO deliveriesSteps VALUES(3,'QUALITATIVA');
+
+INSERT INTO deliveries VALUES(1,'1123', 1, 1, 1);
+INSERT INTO deliveries VALUES(2,'11241', 2, 1, 1);
+
+INSERT INTO deliveriesProducts VALUES(1,20.4, 1,1);
+INSERT INTO deliveriesProducts VALUES(2,1, 2,1);
+INSERT INTO deliveriesProducts VALUES(3,1, 2,2);
+
+INSERT INTO suppliersProducts VALUES(1,1);
+INSERT INTO suppliersProducts VALUES(1,2);
+INSERT INTO suppliersProducts VALUES(2,2);
+
+
+
+INSERT INTO usersTypes VALUES(1,'ADM');
+INSERT INTO usersTypes VALUES(2,'GERENTE');
+INSERT INTO usersTypes VALUES(3,'CONFERENTE');
+
+INSERT INTO users VALUES(1,'adm1', 'TESTE1', '1234', 1);
+INSERT INTO users VALUES(2,'GERENTE1', 'TESTE2', '1234',  2);
+INSERT INTO users VALUES(3,'CONFERENTE1', 'TESTE3', '1234', 3);
+
+INSERT INTO statusDeliveries VALUES(NULL, 1, 1, 1);
+INSERT INTO statusDeliveries VALUES(NULL, 2, 2, 1);
 
