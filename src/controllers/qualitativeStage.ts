@@ -7,52 +7,22 @@ import { number, string } from "joi";
 const prisma = new PrismaClient();
 
 class QualitativeStageController {
-  async selectDeliveryProduct(idDelivery: number) {
-    const deliveryProduct = await prisma.deliveryProduct.findMany({
-      where: {
-        idDelivery: idDelivery,
-      },
-      select: {
-        idProduct: true,
-      },
-    });
-    return deliveryProduct;
-  }
-  async selectDelivertProducts(listDeliveryProducts: Array<number>) {
-    const qualitiesProducts = await prisma.qualityProduct.findMany({
-      where: {
-        Product: {
-          id: {
-            in: listDeliveryProducts,
-          },
-        },
-      },
-      select: {
-        QualityTest: {
-          select: {
-            id: true,
-            name: true,
-          },
-        },
-        Product: {
-          select: {
-            id: true,
-            productName: true,
-          },
-        },
-      },
-    });
-    return qualitiesProducts;
-  }
+
   async get(req: Request, res: Response) {
-    res.render("test");
+    
+    
+    const { qualityTests = {
+      idProducts: Number, // Id dos produtos
+      idQuality: Number, // Id dos testes de qualidade
+      approved: Boolean, // Se foi aprovado ou não
+      mandatory: Boolean // Se é obrigatório ou não ser aprovado
+    } } = req.body
+
+    //res.render("test");
   }
   async post(req: Request, res: Response) {
     const { idDelivery } = req.body;
 
-    console.log(req.body);
-
-    console.log(idDelivery);
     const deliveryProduct = await prisma.deliveryProduct.findMany({
       where: {
         idDelivery: parseInt(idDelivery),
@@ -96,7 +66,7 @@ class QualitativeStageController {
       },
     });
     //res.send(qualitiesProducts)
-    res.render("qualityTest", { qualitiesProducts: qualitiesProducts });
+    res.render("qualityStage", { qualitiesProducts: qualitiesProducts });
   }
 }
 
