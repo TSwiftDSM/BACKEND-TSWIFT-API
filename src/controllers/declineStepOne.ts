@@ -12,26 +12,26 @@ class  DeclineDeliveryStepOneController{
     res.render("declineStepOne")
   };
 
-    // async declineStepOne(motivo:string)  {
-    //     const declineDelivery = await prisma.disapprovalDelivery.create({
-    //         data: {
-    //           motivo: motivo ,
-    //           qualityTestId: 2,
-    //           deliveryId:1
-
-
-    //         },
-    //       })
-    // };
-    
-
-
     async post (req: Request, res: Response) {
+      let inconsistencia = req.body.inconsistencia
+      if (inconsistencia == "Fornecedor"){
+        inconsistencia = 1
+      }
+      else if (inconsistencia == "Transportadora"){
+        inconsistencia = 2
+      }
+      else if (inconsistencia == "Tipo de frete"){
+        inconsistencia = 3
+      }
+      else if (inconsistencia == "Condição de pagamento"){
+        inconsistencia = 4
+      }
+      console.log(inconsistencia)
       const motivo = req.body.motivo
       const declineDelivery = await prisma.disapprovalDelivery.create({
         data: {
           motivo: motivo ,
-          qualityTestId: 1,
+          qualityTestId: parseInt(inconsistencia),
           deliveryId:1
         },
       })
