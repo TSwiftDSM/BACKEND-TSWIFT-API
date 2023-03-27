@@ -12,6 +12,6 @@ router.get("/", (req, res) => {
 
 router.use("/produto", productRoutes);
 
-router.use("/qualitativeStage", qualitativeStageRoutes)
+router.use("/qualitativeStage", qualitativeStageRoutes);
 
 export default router;
