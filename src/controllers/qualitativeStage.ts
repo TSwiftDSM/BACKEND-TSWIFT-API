@@ -9,16 +9,16 @@ const prisma = new PrismaClient();
 class QualitativeStageController {
 
   async get(req: Request, res: Response) {
-    
-    
-    const { qualityTests = {
-      idProducts: Number, // Id dos produtos
-      idQuality: Number, // Id dos testes de qualidade
-      approved: Boolean, // Se foi aprovado ou não
-      mandatory: Boolean // Se é obrigatório ou não ser aprovado
-    } } = req.body
-
-    //res.render("test");
+    let qualitiesProducts;
+    if (typeof req.query.qualitiesProducts === 'string') {
+      qualitiesProducts = JSON.parse(req.query.qualitiesProducts);
+  } else {
+      qualitiesProducts = req.query.qualitiesProducts;
+    }
+    console.log('teste get')
+    console.log(qualitiesProducts);
+  
+    // Resto do código da rota
   }
   async post(req: Request, res: Response) {
     const { idDelivery } = req.body;
@@ -65,6 +65,16 @@ class QualitativeStageController {
         },
       },
     });
+    for (const x of qualitiesProducts) {
+      Object.defineProperty(x, 'Approved', {
+        value: false,
+        writable: true,
+        enumerable: true,
+        configurable: true
+      });
+    }
+
+    //console.log(qualitiesProducts)
     //res.send(qualitiesProducts)
     res.render("qualityStage", { qualitiesProducts: qualitiesProducts });
   }

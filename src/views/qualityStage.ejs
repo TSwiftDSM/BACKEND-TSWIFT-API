@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <form action="" method="post">
+    <form action="/qualitativeStage" method="get">
 
         <% for( var products of qualitiesProducts) { %>
             <div>
@@ -19,14 +19,31 @@
             <div>
                 <%= products.QualityTest.name %>
             </div>
-            <h4>Sim:</h4><input type="checkbox" name="qualidadeSim" id="">
-            <h4>Não:</h4><input type="checkbox" name="qualidadeNao" id="">
+            <h4>Sim:</h4><input type="checkbox" name="qualidadeSim<%= products.Product.id %>-<%= products.QualityTest.id %> id="qualidadeSim<%= products.Product.id %>-<%= products.QualityTest.id %>"> 
+            <h4>Não:</h4> <input type="checkbox" name="qualidadeNao<%= products.Product.id %>-<%= products.QualityTest.id %>" id="qualidadeNao<%= products.Product.id %>-<%= products.QualityTest.id %>">
+           
             
-            <input type="text" value="<%= products.Product.id %>" name="idProduct" hidden>
-            <input type="text" value="<%= products.QualityTest.id %>" name="idQuality" hidden>
             <% } %>
-                <input type="submit" value="Testar">
+            <input type="hidden" name="qualitiesProducts" value="<%= JSON.stringify(qualitiesProducts) %>">
+            <input type="submit" value="Testar">
     </form>
 </body>
 
 </html>
+
+<script>
+    function verificarCheckboxes() {
+        <% for (var products of qualitiesProducts) { %>
+            var checkboxSim = document.querySelector("#qualidadeSim<%= products.Product.id %>-<%= products.QualityTest.id %>");
+            var checkboxNao = document.querySelector("#qualidadeNao<%= products.Product.id %>-<%= products.QualityTest.id %>");
+            var sim = checkboxSim.checked;
+            var nao = checkboxNao.checked;
+            if (sim) {
+                products.Approved = true
+            } else if(nao) {
+                products.Approved = false
+            }
+            console.log("Produto <%= products.Product.id %> - Teste <%= products.QualityTest.id %>: sim=", sim, ", nao=", nao);
+        <% } %>
+    }
+    </script>
