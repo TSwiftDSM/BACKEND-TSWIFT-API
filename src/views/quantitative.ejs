@@ -9,12 +9,12 @@
 <body>
     <div align="center">
     <form action="/conferencia/quantitativa" method="post">
-    <% Object.entries(products_object).forEach(([key, value]) => { %>
-        <h1><%= key %> <%= value["name"] %></h1>
+    <% products_object.forEach((product) => { %>
+        <h1><%= product["Product"]["productName"] %></h1>
         <h3>Peso Unitário(kg)</h3>
-        <input type="text" name="<%= key %>_weight" required>
+        <input type="text" name="<%= product['Product']['id'] %>_weight" required>
         <h3>Quantidade</h3>
-        <input type="text" name="<%= key %>_qtt" required>
+        <input type="text" name="<%= product['Product']['id'] %>_qtt" required>
     <% }); %>
         <button type="submit">Continuar</button>
     </form>

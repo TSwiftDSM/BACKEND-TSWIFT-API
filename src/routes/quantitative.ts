@@ -4,7 +4,7 @@ import { QuantitativeController } from "../controllers";
 
 const routes = Router();
 
-routes.get("/", QuantitativeController.get);
+routes.get("/:deliveryId", QuantitativeController.get);
 routes.post("/", QuantitativeController.post);
 
 // routes.post("/conferencia/quantitativa", console.log("Post"))
