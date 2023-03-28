@@ -105,6 +105,7 @@ model DisapprovalDelivery {
 model DeliveryProduct {
   id              Int      @id @default(autoincrement())
   predictedWeight Float
+  specification   String
   unit            String
   quantity        Int
   actualWeight    Float
@@ -146,3 +147,4 @@ model StatusDelivery {
 
   @@map("statusDeliveries")
 }
+
