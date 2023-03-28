@@ -15,7 +15,7 @@ router.get("/", (req, res) => {
     "Vitor",
     "Yasmin",
   ];
-  res.render("home", { users: users });
+  res.render("conferenciaQuantitativa", { users: users });
 });
 
 router.use("/produto", productRoutes);
