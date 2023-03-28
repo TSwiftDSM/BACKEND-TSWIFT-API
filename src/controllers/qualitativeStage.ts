@@ -15,7 +15,7 @@ class QualitativeStageController {
   } else {
       qualitiesProducts = req.query.qualitiesProducts;
     }
-    console.log('teste get')
+    console.log('----- TESTE GET -----')
     console.log(qualitiesProducts);
   
     // Resto do código da rota
