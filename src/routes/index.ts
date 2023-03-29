@@ -1,5 +1,5 @@
 import { Router } from "express";
-
+import { default as declineRoutes } from "./declineStepOne";
 const router = Router();
 
 router.get("/", (req, res) => {
@@ -15,5 +15,7 @@ router.get("/", (req, res) => {
   ];
   res.render("conferenciaQuantitativa", { users: users });
 });
+
+router.use("/declineDelivery",declineRoutes );
 
 export default router;

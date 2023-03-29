@@ -190,8 +190,10 @@ ALTER TABLE `statusEntregas` ADD CONSTRAINT `statusEntregas_usuarioId_fkey` FORE
 
 -- Inserts
 
-INSERT INTO testesQualidades VALUES(1, 'TESTE QUALIDADE 1');
-INSERT INTO testesQualidades VALUES(2, 'TESTE QUALIDADE 2');
+INSERT INTO testesQualidades VALUES(1, 'Fornecedor');
+INSERT INTO testesQualidades VALUES(2, 'Transportadora');
+INSERT INTO testesQualidades VALUES(3, 'Tipo de frete');
+INSERT INTO testesQualidades VALUES(4, 'Condição de pagamento');
 
 INSERT INTO produtos VALUES(1,'PRODUTO 1');
 INSERT INTO produtos VALUES(2,'PRODUTO 2');
