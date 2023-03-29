@@ -9,162 +9,163 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Supplier {
-  id              Int    @id @default(autoincrement())
-  supplierName    String
-  supplierCNPJ    String @unique
-  corporateName   String
-  supplierAddress String
+model Fornecedor {
+  id                       Int                        @id @default(autoincrement())
+  nomeFantasia             String
+  fornecedorCNPJ           String                     @unique
+  razaoSocial              String
+  Endereco                 String
+  TransportadoraPropria    Boolean
+  FornecedorProduto        FornecedorProduto[]
+  Entrega                  Entrega[]
+  TransportadoraFornecedor TransportadoraFornecedor[]
 
-  SupplierProduct SupplierProduct[]
-  Delivery        Delivery[]
-
-  @@map("suppliers")
+  @@map("fornecedores")
 }
 
-model QualityTest {
-  id   Int    @id @default(autoincrement())
-  name String
+model Transportadora {
+  id                       Int                        @id @default(autoincrement())
+  nomeFantasia             String
+  fornecedorCNPJ           String                     @unique
+  razaoSocial              String
+  Endereco                 String
+  Entrega                  Entrega[]
+  TransportadoraFornecedor TransportadoraFornecedor[]
 
-  QualityProduct      QualityProduct[]
-  DisapprovalDelivery DisapprovalDelivery[]
-
-  @@map("qualityTests")
+  @@map("transportadoras")
 }
 
-model Product {
-  id          Int    @id @default(autoincrement())
-  productName String
-
-  SupplierProduct SupplierProduct[]
-  DeliveryProduct DeliveryProduct[]
-  QualityProduct  QualityProduct[]
-
-  @@map("products")
-}
-
-model QualityProduct {
-  QualityTest   QualityTest @relation(fields: [qualityTestId], references: [id])
-  qualityTestId Int
-  Product       Product     @relation(fields: [productId], references: [id])
-  productId     Int
-
-  @@id([qualityTestId, productId])
-  @@map("qualitiesProducts")
-}
-
-model SupplierProduct {
-  Supplier   Supplier @relation(fields: [idSupplier], references: [id])
-  idSupplier Int
-  Product    Product  @relation(fields: [idProduct], references: [id])
-  idProduct  Int
-
-  @@id([idProduct, idSupplier])
-  @@map("suppliersProducts")
-}
-
-model ShippingCompany {
-  id                  Int    @id @default(autoincrement())
-  nameShippingCompany String
-
-  Delivery Delivery[]
-
-  @@map("shippingCompany")
-}
-
-model DeliveryStep {
-  id       Int    @id @default(autoincrement())
-  stepName String
-
-  StatusDelivery StatusDelivery[]
-
-  @@map("deliverySteps")
-}
-
-model Delivery {
-  id  Int    @id @default(autoincrement())
-  nfe String @unique
-
-  Supplier          Supplier?        @relation(fields: [idSupplier], references: [id])
-  idSupplier        Int?
-  ShippingCompany   ShippingCompany? @relation(fields: [idShippingCompany], references: [id])
-  idShippingCompany Int?
-
-  DeliveryProduct     DeliveryProduct[]
-  StatusDelivery      StatusDelivery[]
-  DisapprovalDelivery DisapprovalDelivery[]
-
-  @@map("deliveries")
-}
-
-model DisapprovalDelivery {
-  id     Int    @id @default(autoincrement())
-  motivo String
-
-  QualityTest   QualityTest @relation(fields: [qualityTestId], references: [id])
-  qualityTestId Int
-  Delivery      Delivery    @relation(fields: [deliveryId], references: [id])
-  deliveryId    Int
-
-  @@map("disapprovalsDeliveries")
-}
-
-model Unit {
-  id              Int               @id @default(autoincrement())
-  unitName        String
-  DeliveryProduct DeliveryProduct[]
-
-  @@map("units")
-}
-
-model DeliveryProduct {
-  id              Int   @id @default(autoincrement())
-  predictedWeight Float
-
-  Product    Product  @relation(fields: [idProduct], references: [id])
-  idProduct  Int
-  Delivery   Delivery @relation(fields: [idDelivery], references: [id])
-  idDelivery Int
-  Unit       Unit?    @relation(fields: [unitId], references: [id])
-  unitId     Int?
-
-  @@map("deliveriesProducts")
-}
-
-model UserType {
+model TransportadoraFornecedor {
   id Int @id @default(autoincrement())
 
-  userType String
-  User     User[]
+  Fornecedor       Fornecedor?     @relation(fields: [fornecedorId], references: [id])
+  fornecedorId     Int?
+  Transportadora   Transportadora? @relation(fields: [transportadoraId], references: [id])
+  transportadoraId Int?
 
-  @@map("userTypes")
+  @@map("transportadorasFornecedores")
 }
 
-model User {
-  id       Int    @id @default(autoincrement())
-  name     String
-  cpf      String @unique
-  login    String
-  password String
+model TesteQualidade {
+  id                Int                  @id @default(autoincrement())
+  nomeTeste         String
+  QualidadeProduto  QualidadeProduto[]
+  EntregaDesprovada EntregaDesparovada[]
 
-  UserType   UserType? @relation(fields: [userTypeId], references: [id])
-  userTypeId Int?
-
-  StatusDelivery StatusDelivery[]
-
-  @@map("users")
+  @@map("testesQualidades")
 }
 
-model StatusDelivery {
-  id       Int     @id @default(autoincrement())
-  approved Boolean
+model Produto {
+  id                Int                 @id @default(autoincrement())
+  nomeProduto       String
+  FornecedorProduto FornecedorProduto[]
+  EntregaProduto    EntregaProduto[]
+  QualidadeProduto  QualidadeProduto[]
 
-  Delivery       Delivery      @relation(fields: [deliveryId], references: [id])
-  deliveryId     Int
-  User           User          @relation(fields: [userId], references: [id])
-  userId         Int
-  DeliveryStep   DeliveryStep? @relation(fields: [deliveryStepId], references: [id])
-  deliveryStepId Int?
-
-  @@map("statusDeliveries")
+  @@map("produtos")
 }
+
+model QualidadeProduto {
+  obrigatorio      Boolean        @default(true)
+  TesteQualidade   TesteQualidade @relation(fields: [testeQualdidaeId], references: [id])
+  testeQualdidaeId Int
+  Produto          Produto        @relation(fields: [produtoId], references: [id])
+  produtoId        Int
+
+  @@id([testeQualdidaeId, produtoId])
+  @@map("qualidadeProdutos")
+}
+
+model FornecedorProduto {
+  Fornecedor   Fornecedor @relation(fields: [fornecedorId], references: [id])
+  fornecedorId Int
+  Produto      Produto    @relation(fields: [produtoId], references: [id])
+  produtoId    Int
+
+  @@id([produtoId, fornecedorId])
+  @@map("fornecedorProdutos")
+}
+
+model EtapaEntrega {
+  id        Int       @id @default(autoincrement())
+  nomeEtapa String
+  Entrega   Entrega[]
+
+  @@map("etapaEntrega")
+}
+
+model Entrega {
+  id                 Int                  @id @default(autoincrement())
+  nfe                String               @unique
+  tipoEntrega        String
+  Fornecedor         Fornecedor?          @relation(fields: [fornecedorId], references: [id])
+  fornecedorId       Int?
+  Transportadora     Transportadora?      @relation(fields: [tranportadoraId], references: [id])
+  tranportadoraId    Int?
+  EtapaEntrega       EtapaEntrega?        @relation(fields: [etapaEntregaId], references: [id])
+  etapaEntregaId     Int?
+  EntregaProduto     EntregaProduto[]
+  StatusEntrega      StatusEntrega[]
+  EntregaDesparovada EntregaDesparovada[]
+
+  @@map("entregas")
+}
+
+model EntregaDesparovada {
+  id               Int             @id @default(autoincrement())
+  motivo           String
+  TesteQualidade   TesteQualidade? @relation(fields: [testeQualidadeId], references: [id])
+  testeQualidadeId Int?
+  Entrega          Entrega         @relation(fields: [entregaId], references: [id])
+  entregaId        Int
+
+  @@map("entregasDesaprovadas")
+}
+
+model EntregaProduto {
+  id           Int     @id @default(autoincrement())
+  pesoPrevisto Float?
+  pesoAtual    Float?
+  unidade      String?
+  quantidade   Int?
+  Produto      Produto @relation(fields: [produtoId], references: [id])
+  produtoId    Int
+  Entrega      Entrega @relation(fields: [EntregaId], references: [id])
+  EntregaId    Int
+
+  @@map("entregaProdutos")
+}
+
+model TipoUsuario {
+  id          Int       @id @default(autoincrement())
+  tipoUsuario String
+  Usuario     Usuario[]
+
+  @@map("tiposUsuarios")
+}
+
+model Usuario {
+  id             Int             @id @default(autoincrement())
+  nome           String
+  login          String
+  senha          String
+  cpf            String
+  dataNascimento DateTime
+  TipoUsuario    TipoUsuario?    @relation(fields: [tipoUsuarioId], references: [id])
+  tipoUsuarioId  Int?
+  StatusEntrega  StatusEntrega[]
+
+  @@map("usuarios")
+}
+
+model StatusEntrega {
+  id        Int      @id @default(autoincrement())
+  approved  Boolean
+  Entrega   Entrega  @relation(fields: [entregaId], references: [id])
+  entregaId Int
+  Usuario   Usuario? @relation(fields: [usuarioId], references: [id])
+  usuarioId Int?
+
+  @@map("statusEntregas")
+}
+
