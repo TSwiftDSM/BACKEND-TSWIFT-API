@@ -9,14 +9,37 @@ const prisma = new PrismaClient();
 class QualitativeStageController {
 
   async get(req: Request, res: Response) {
-    let qualitiesProducts;
-    if (typeof req.query.qualitiesProducts === 'string') {
-      qualitiesProducts = JSON.parse(req.query.qualitiesProducts);
-  } else {
-      qualitiesProducts = req.query.qualitiesProducts;
-    }
-    console.log('----- TESTE GET -----')
-    console.log(qualitiesProducts);
+  //   let qualitiesProducts;
+  //   if (typeof req.query.qualitiesProducts === 'string') {
+  //     qualitiesProducts = JSON.parse(req.query.qualitiesProducts);
+  //     console.log('TESTE 1')
+  // } else {
+  //     qualitiesProducts = req.query.qualitiesProducts;
+  //     console.log('TESTE 2')
+  //   }
+  //   const statusDeliveries: {
+  //     approved: typeof qualitiesProducts.Approved
+  //     deliveryId: typeof qualitiesProducts.idDelivery
+  //     stepName: 'ETAPA QUALITATIVA'
+  //     userId: 1
+  //   }
+  //   let aprovado = 0 
+  //   for (const testeProduto of  qualitiesProducts){
+  //      if (testeProduto.Approved == false){
+  //        // Ação caso um dos produtos não tenha sido aprovado e não seja obrigatorio
+  //        aprovado = aprovado+1;
+  //       }
+  //     }
+  //   if (aprovado >0){
+  //     // Ação caso um dos produtos não tenha sido aprovado e não seja obrigatorio
+  //   }
+  //   else{
+  //     // Ação caso todos os produtos tenham sido aprovados
+  //     const statusEntrega = await prisma.StatusDelivery.create({ data: statusDeliveries })
+  //   }
+   
+  //   console.log('----- TESTE GET -----')
+  //   console.log(qualitiesProducts);
   
     // Resto do código da rota
   }
