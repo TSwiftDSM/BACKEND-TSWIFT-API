@@ -23,12 +23,12 @@ class QualitativeStageController {
   async post(req: Request, res: Response) {
     const { idDelivery } = req.body;
 
-    const deliveryProduct = await prisma.deliveryProduct.findMany({
+    const deliveryProduct = await prisma.entregaProduto.findMany({
       where: {
-        idDelivery: parseInt(idDelivery),
+        EntregaId: parseInt(idDelivery),
       },
       select: {
-        idProduct: true,
+        produtoId: true,
       },
     });
 
@@ -37,45 +37,49 @@ class QualitativeStageController {
 
     // Transformando deliveryProduct Em uma lista de números com os valores dos ID's
     (await deliveryProduct).forEach((idProdutcts) => {
-      products.push(idProdutcts.idProduct);
+      products.push(idProdutcts.produtoId);
     });
 
     const listDeliveryProducts: Array<number> = products;
 
-    const qualitiesProducts = await prisma.qualityProduct.findMany({
+    const qualitiesProducts = await prisma.qualidadeProduto.findMany({
       where: {
-        Product: {
+        Produto: {
           id: {
             in: listDeliveryProducts,
           },
         },
       },
       select: {
-        Product: {
+        Produto: {
           select: {
             id: true,
-            productName: true,
+            nomeProduto: true,
           },
         },
-        QualityTest: {
+        TesteQualidade: {
           select: {
             id: true,
-            name: true,
+            nomeTeste: true,
           },
         },
       },
     });
-    for (const x of qualitiesProducts) {
-      Object.defineProperty(x, 'Approved', {
+    for (const produtos of qualitiesProducts) {
+      Object.defineProperty(produtos, 'Aprovado', {
         value: false,
+        writable: true,
+        enumerable: true,
+        configurable: true
+      });
+      Object.defineProperty(produtos, 'EntregaId', {
+        value: idDelivery,
         writable: true,
         enumerable: true,
         configurable: true
       });
     }
 
-    //console.log(qualitiesProducts)
-    //res.send(qualitiesProducts)
     res.render("qualityStage", { qualitiesProducts: qualitiesProducts });
   }
 }
