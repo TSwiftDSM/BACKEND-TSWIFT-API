@@ -1,0 +1,150 @@
+// This is your Prisma schema file,// learn more about it in the docs: https://pris.ly/d/prisma-schemagenerator 
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Supplier {
+  id              Int               @id @default(autoincrement())
+  supplierName    String
+  supplierCPJ     String            @unique
+  SupplierProduct SupplierProduct[]
+  Delivery        Delivery[]
+
+  @@map("suppliers")
+}
+
+model QualityTest {
+  id                  Int                   @id @default(autoincrement())
+  name                String
+  QualityProduct      QualityProduct[]
+  DisapprovalDelivery DisapprovalDelivery[]
+
+  @@map("qualitiesTests")
+}
+
+model Product {
+  id              Int               @id @default(autoincrement())
+  productName     String
+  SupplierProduct SupplierProduct[]
+  DeliveryProduct DeliveryProduct[]
+  QualityProduct  QualityProduct[]
+
+  @@map("products")
+}
+
+model QualityProduct {
+  mandatory     Boolean     @default(true)
+  QualityTest   QualityTest @relation(fields: [qualityTestId], references: [id])
+  qualityTestId Int
+  Product       Product     @relation(fields: [productId], references: [id])
+  productId     Int
+
+  @@id([qualityTestId, productId])
+  @@map("qualitiesProducts")
+}
+
+model SupplierProduct {
+  Supplier   Supplier @relation(fields: [idSupplier], references: [id])
+  idSupplier Int
+  Product    Product  @relation(fields: [idProduct], references: [id])
+  idProduct  Int
+
+  @@id([idProduct, idSupplier])
+  @@map("suppliersProducts")
+}
+
+model ShippingCompany {
+  id                  Int        @id @default(autoincrement())
+  nameShippingCompany String
+  Delivery            Delivery[]
+
+  @@map("shippingCompany")
+}
+
+model DeliveryStep {
+  id       Int        @id @default(autoincrement())
+  stepName String
+  Delivery Delivery[]
+
+  @@map("deliveriesSteps")
+}
+
+model Delivery {
+  id                  Int                   @id @default(autoincrement())
+  nfe                 String                @unique
+  Supplier            Supplier?              @relation(fields: [idSupplier], references: [id])
+  idSupplier          Int?
+  ShippingCompany     ShippingCompany?       @relation(fields: [idShippingCompany], references: [id])
+  idShippingCompany   Int?
+  DeliveryStep        DeliveryStep?          @relation(fields: [deliveryStepId], references: [id])
+  deliveryStepId      Int?
+  DeliveryProduct     DeliveryProduct[]
+  StatusDelivery      StatusDelivery[]
+  DisapprovalDelivery DisapprovalDelivery[]
+
+  @@map("deliveries")
+}
+
+model DisapprovalDelivery {
+  id            Int         @id @default(autoincrement())
+  motivo        String
+  QualityTest   QualityTest? @relation(fields: [qualityTestId], references: [id])
+  qualityTestId Int?
+  Delivery      Delivery    @relation(fields: [deliveryId], references: [id])
+  deliveryId    Int
+
+  @@map("disapprovalsDeliveries")
+}
+
+model DeliveryProduct {
+  id              Int      @id @default(autoincrement())
+  predictedWeight Float
+  specification   String
+  unit            String
+  quantity        Int
+  actualWeight    Float
+  Product         Product  @relation(fields: [idProduct], references: [id])
+  idProduct       Int
+  Delivery        Delivery @relation(fields: [idDelivery], references: [id])
+  idDelivery      Int
+
+  @@map("deliveriesProducts")
+}
+
+model UserType {
+  id       Int    @id @default(autoincrement())
+  userType String
+  User     User[]
+
+  @@map("usersTypes")
+}
+
+model User {
+  id             Int              @id @default(autoincrement())
+  name           String
+  login          String
+  password       String
+  UserType       UserType?         @relation(fields: [userTypeId], references: [id])
+  userTypeId     Int?
+  StatusDelivery StatusDelivery[]
+
+  @@map("users")
+}
+
+model StatusDelivery {
+  id         Int      @id @default(autoincrement())
+  approved   Boolean
+  Delivery   Delivery @relation(fields: [deliveryId], references: [id])
+  deliveryId Int
+  User       User?     @relation(fields: [userId], references: [id])
+  userId     Int?
+
+  @@map("statusDeliveries")
+}
+
