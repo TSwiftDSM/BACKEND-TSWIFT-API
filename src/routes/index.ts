@@ -1,7 +1,5 @@
 import { Router } from "express";
 
-import { default as productRoutes } from "./product";
-
 const router = Router();
 
 router.get("/", (req, res) => {
@@ -17,7 +15,5 @@ router.get("/", (req, res) => {
   ];
   res.render("conferenciaQuantitativa", { users: users });
 });
-
-router.use("/produto", productRoutes);
 
 export default router;
