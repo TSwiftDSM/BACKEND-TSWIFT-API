@@ -105,10 +105,10 @@ model DisapprovalDelivery {
 model DeliveryProduct {
   id              Int      @id @default(autoincrement())
   predictedWeight Float
-  specification   String
-  unit            String
-  quantity        Int
-  actualWeight    Float
+  specification   String?
+  unit            String?
+  quantity        Int?
+  actualWeight    Float?
   Product         Product  @relation(fields: [idProduct], references: [id])
   idProduct       Int
   Delivery        Delivery @relation(fields: [idDelivery], references: [id])

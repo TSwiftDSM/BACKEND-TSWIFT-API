@@ -9,12 +9,28 @@
 <body>
     <div align="center">
     <form action="/conferencia/quantitativa" method="post">
+    <input type="hidden" name="id" value="<%= products_object['id'] %>">
     <% products_object.forEach((product) => { %>
         <h1><%= product["Product"]["productName"] %></h1>
-        <h3>Peso Unitário(kg)</h3>
-        <input type="text" name="<%= product['Product']['id'] %>_weight" required>
+        <h3>Especificação do produto</h3>
+        <select name="<%= product['Product']['id'] %>_specification" required>
+            <option value="Lata">Lata</option>
+            <option value="Palet">Palet</option>
+            <option value="Carreta">Carreta</option>
+            <option value="Saco">Saco</option>
+        </select>
+
+        <h3>Unidade</h3>
+        <input type="radio" name="<%= product['Product']['id'] %>_unit" value="Kg" checked>
+            <label for="<%= product['Product']['id'] %>_unit">Kg</label><br>
+        <input type="radio" name="<%= product['Product']['id'] %>_unit" value="L">
+            <label for="<%= product['Product']['id'] %>_unit">L</label><br>  
+
         <h3>Quantidade</h3>
-        <input type="text" name="<%= product['Product']['id'] %>_qtt" required>
+            <input type="number" name="<%= product['Product']['id'] %>_quantity" required>
+
+        <h3>Peso Unitário</h3>
+            <input type="number" name="<%= product['Product']['id'] %>_weight" required>
     <% }); %>
         <button type="submit">Continuar</button>
     </form>
