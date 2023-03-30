@@ -12,7 +12,7 @@
     <input type="hidden" name="id" value="<%= products_object['id'] %>">
     <% products_object.forEach((product, index) => { %>
         <input type="hidden" name="dp_id<%= index %>" value="<%= product['id'] %>">
-        <h1><%= product["Product"]["productName"] %></h1>
+        <h1><%= product["Produto"]["nomeProduto"] %></h1>
         <h3>Especificação do produto</h3>
         <select name="specification<%= index %>" required>
             <option value="Lata">Lata</option>
