@@ -5,16 +5,16 @@ const prisma = new PrismaClient();
 
 async function getProducts(id: number): Promise<object>{
     try{
-        const products = await prisma.deliveryProduct.findMany({
+        const products = await prisma.entregaProduto.findMany({
             where:{
-                idDelivery: id
+                EntregaId: id
             },
             select:{
                 id: true,
-                Product:{
+                Produto:{
                     select:{
                         id:true,
-                        productName:true
+                        nomeProduto:true
                     }
                 }
             }
@@ -32,15 +32,15 @@ async function updateQuantitative(body: Array<string>): Promise<Array<object>> {
     for(let i=1; i < body.length; i = i + 5){
         const id_dp = Number(body[i])
         try{
-            const updatedDeliveryProduct = await prisma.deliveryProduct.update({
+            const updatedDeliveryProduct = await prisma.entregaProduto.update({
                 where: { 
                         id: id_dp
                 },
                 data: {
-                    specification: body[i+1],
-                    unit: body[i+2],
-                    quantity: Number(body[i+3]),
-                    actualWeight: (Number(body[i+3]) * Number(body[i+4])),
+                    especificacao: body[i+1],
+                    unidade: body[i+2],
+                    quantidade: Number(body[i+3]),
+                    pesoReal: (Number(body[i+3]) * Number(body[i+4])),
                 }
             });
             response_array.push(updatedDeliveryProduct);
