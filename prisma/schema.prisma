@@ -123,15 +123,16 @@ model EntregaDesparovada {
 }
 
 model EntregaProduto {
-  id           Int     @id @default(autoincrement())
-  pesoPrevisto Float?
-  pesoAtual    Float?
-  unidade      String?
-  quantidade   Int?
-  Produto      Produto @relation(fields: [produtoId], references: [id])
-  produtoId    Int
-  Entrega      Entrega @relation(fields: [EntregaId], references: [id])
-  EntregaId    Int
+  id            Int     @id @default(autoincrement())
+  pesoPrevisto  Float?
+  especificacao String?
+  unidade       String?
+  quantidade    Int?
+  pesoReal      Float?
+  Produto       Produto @relation(fields: [produtoId], references: [id])
+  produtoId     Int
+  Entrega       Entrega @relation(fields: [EntregaId], references: [id])
+  EntregaId     Int
 
   @@map("entregaProdutos")
 }
