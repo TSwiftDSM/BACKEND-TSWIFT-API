@@ -19,19 +19,21 @@ model Fornecedor {
   fornecedor               Boolean
   FornecedorProduto        FornecedorProduto[]
   Entrega                  Entrega[]
-  TransportadoraFornecedor TransportadoraFornecedor[]
+  TransportadoraFornecedor TransportadoraFornecedor[] @relation("Transportadora")
+  FornecedorTransportado   TransportadoraFornecedor[] @relation("Fornecedor")
 
   @@map("fornecedores")
 }
 
 model TransportadoraFornecedor {
-  id                       Int         @id @default(autoincrement())
-  Fornecedor               Fornecedor? @relation(fields: [fornecedorId], references: [id])
-  fornecedorId             Int?
-  FornecedorTransportadora Fornecedor? @relation(fields: [transportadoraId], references: [id])
-  transportadoraId         Int?
+  id                       Int        @id @default(autoincrement())
+  Fornecedor               Fornecedor @relation("Fornecedor", fields: [fornecedorId], references: [id])
+  fornecedorId             Int
+  FornecedorTransportadora Fornecedor @relation("Transportadora", fields: [transportadoraId], references: [id])
+  transportadoraId         Int
   Entrega                  Entrega[]
 
+  @@unique([fornecedorId, transportadoraId])
   @@map("transportadorasFornecedores")
 }
 
@@ -85,18 +87,18 @@ model EtapaEntrega {
 }
 
 model Entrega {
-  id                         Int                       @id @default(autoincrement())
-  nfe                        String                    @unique
-  tipoEntrega                String
-  Fornecedor                 Fornecedor?               @relation(fields: [fornecedorId], references: [id])
-  fornecedorId               Int?
-  EtapaEntrega               EtapaEntrega?             @relation(fields: [etapaEntregaId], references: [id])
-  etapaEntregaId             Int?
-  EntregaProduto             EntregaProduto[]
-  StatusEntrega              StatusEntrega[]
-  EntregaDesparovada         EntregaDesparovada[]
-  TransportadoraFornecedor   TransportadoraFornecedor? @relation(fields: [transportadoraFornecedorId], references: [id])
-  transportadoraFornecedorId Int?
+  id                 Int                       @id @default(autoincrement())
+  nfe                String                    @unique
+  tipoEntrega        String
+  Fornecedor         Fornecedor?               @relation(fields: [fornecedorId], references: [id])
+  fornecedorId       Int?
+  EtapaEntrega       EtapaEntrega?             @relation(fields: [etapaEntregaId], references: [id])
+  etapaEntregaId     Int?
+  EntregaProduto     EntregaProduto[]
+  StatusEntrega      StatusEntrega[]
+  EntregaDesparovada EntregaDesparovada[]
+  Transportadora     TransportadoraFornecedor? @relation(fields: [transportadoraId], references: [id])
+  transportadoraId   Int?
 
   @@map("entregas")
 }
