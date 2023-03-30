@@ -4,8 +4,8 @@ import { QualitativeStageController } from "../controllers";
 
 const routes = Router();
 
-routes.get("/", QualitativeStageController.get);
+routes.post("/", QualitativeStageController.PersistenciaDados);
 
-routes.post("/", QualitativeStageController.post);
+routes.post("/conferencia/qualitativa", QualitativeStageController.post);
 
 export default routes;

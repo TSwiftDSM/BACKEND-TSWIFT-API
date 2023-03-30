@@ -9,49 +9,26 @@
 </head>
 
 <body>
-    <form action="/qualitativeStage" method="get" >
+    <form action="/qualitativeStage" method="post">
 
-        <% for( var products of qualitiesProducts) { %>
+        <% for( var produtos of qualidadeProdutos) { %>
             <div>
-                <%= products.Product.productName %>
+                <%= produtos.Produto.nomeProduto %>
             </div>
 
             <div>
-                <%= products.QualityTest.name %>
+                <%= produtos.TesteQualidade.nomeTeste %>
             </div>
-            <h4>Sim:</h4><input type="checkbox" onclick="verificarCheckboxes(qualitiesProducts)" name="qualidadeSim<%= products.Product.id %>-<%= products.QualityTest.id %>" id="qualidadeSim<%= products.Product.id %>-<%= products.QualityTest.id %>" > 
-            <h4>Não:</h4> <input type="checkbox" onclick="verificarCheckboxes(qualitiesProducts)" name="qualidadeNao<%= products.Product.id %>-<%= products.QualityTest.id %>" id="qualidadeNao<%= products.Product.id %>-<%= products.QualityTest.id %>">
-
+            <input type="radio" value="true" name="qualidadeSim<%= produtos.Produto.id %>-<%= produtos.TesteQualidade.id %>" id="qualidadeSim<%= produtos.Produto.id %>-<%= produtos.TesteQualidade.id %>" > 
+                <label for="qualidadeSim<%= produtos.Produto.id %>-<%= produtos.TesteQualidade.id %>">Sim</label>
+            <input type="radio" value="false" name="qualidadeNao<%= produtos.Produto.id %>-<%= produtos.TesteQualidade.id %>" id="qualidadeNao<%= produtos.Produto.id %>-<%= produtos.TesteQualidade.id %>">
+                <label for="qualidadeNao<%= produtos.Produto.id %>-<%= produtos.TesteQualidade.id %>">Não</label>
            
             
             <% } %>
-            <input type="hidden" name="qualitiesProducts" value="<%= JSON.stringify(qualitiesProducts) %>">
+            <input type="hidden" name="qualidadeProdutos" value="<%= JSON.stringify(qualidadeProdutos) %>">
             <input type="submit" value="Testar">
     </form>
 </body>
 
 </html>
-
-<script>
-    function verificarCheckboxes(qualitiesProducts) {
-        console.log("Função verificarCheckboxes() foi chamada!");
-        <% for (var products of qualitiesProducts) { %>
-            var checkboxSim = document.querySelector("#qualidadeSim<%= products.Product.id %>-<%= products.QualityTest.id %>");
-            var checkboxNao = document.querySelector("#qualidadeNao<%= products.Product.id %>-<%= products.QualityTest.id %>");
-            var sim = checkboxSim.checked;
-            var nao = checkboxNao.checked;
-            if (sim) {
-                console.log("Entrei no if SIM")
-                qualitiesProducts.Approved = true
-                console.log(qualitiesProducts)
-            } else if(nao) {
-                console.log("Entrei no if NÃO")
-                qualitiesProducts.Approved = false
-                console.log(qualitiesProducts)
-            }
-            console.log(qualitiesProducts)
-            console.log(qualitiesProducts.Approved)
-            console.log("Produto <%= products.Product.id %> - Teste <%= products.QualityTest.id %>: sim=", sim, ", nao=", nao);
-        <% } %>
-    }
-    </script>

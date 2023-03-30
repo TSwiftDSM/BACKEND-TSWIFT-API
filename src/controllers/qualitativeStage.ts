@@ -8,23 +8,34 @@ const prisma = new PrismaClient();
 
 class QualitativeStageController {
 
-  async get(req: Request, res: Response) {
-  //   let qualitiesProducts;
-  //   if (typeof req.query.qualitiesProducts === 'string') {
-  //     qualitiesProducts = JSON.parse(req.query.qualitiesProducts);
-  //     console.log('TESTE 1')
-  // } else {
-  //     qualitiesProducts = req.query.qualitiesProducts;
-  //     console.log('TESTE 2')
-  //   }
+  async PersistenciaDados(req: Request, res: Response) {
+    let qualidadeProdutos;
+    if (typeof req.query.qualidadeProdutos === 'string') {
+      qualidadeProdutos = JSON.parse(req.query.qualidadeProdutos);
+      console.log('TESTE 1')
+  } else {
+      qualidadeProdutos = req.query.qualidadeProdutos;
+      console.log('TESTE 2')
+    }
+  res.send(req.body)
+  //for (const produtos of qualidadeProdutos){
+    //  const nomeChkSim = `qualidadeSim${produtos.Produto.id}-${produtos.TesteQualidade.id}`
+    //  const nomeChkNao = `qualidadeNao${produtos.Produto.id}-${produtos.TesteQualidade.id}`
+    //  console.log(nomeChkSim)
+    //  console.log(nomeChkSim)
+    //  const aprovadoSim = req.body.Record
+    //  const aprovadoNao = req.body[nomeChkNao]
+    //  console.log(aprovadoSim)
+    //  console.log(aprovadoNao)
+  //}
   //   const statusDeliveries: {
-  //     approved: typeof qualitiesProducts.Approved
-  //     deliveryId: typeof qualitiesProducts.idDelivery
+  //     approved: typeof qualidadeProdutos.Approved
+  //     deliveryId: typeof qualidadeProdutos.idDelivery
   //     stepName: 'ETAPA QUALITATIVA'
   //     userId: 1
   //   }
   //   let aprovado = 0 
-  //   for (const testeProduto of  qualitiesProducts){
+  //   for (const testeProduto of  qualidadeProdutos){
   //      if (testeProduto.Approved == false){
   //        // Ação caso um dos produtos não tenha sido aprovado e não seja obrigatorio
   //        aprovado = aprovado+1;
@@ -37,11 +48,7 @@ class QualitativeStageController {
   //     // Ação caso todos os produtos tenham sido aprovados
   //     const statusEntrega = await prisma.StatusDelivery.create({ data: statusDeliveries })
   //   }
-   
-  //   console.log('----- TESTE GET -----')
-  //   console.log(qualitiesProducts);
   
-    // Resto do código da rota
   }
   async post(req: Request, res: Response) {
     const { idDelivery } = req.body;
@@ -59,13 +66,13 @@ class QualitativeStageController {
     const products: Array<any> = [];
 
     // Transformando deliveryProduct Em uma lista de números com os valores dos ID's
-    (await deliveryProduct).forEach((idProdutcts) => {
+    (await deliveryProduct).forEach((idProdutcts: { produtoId: any; }) => {
       products.push(idProdutcts.produtoId);
     });
 
     const listDeliveryProducts: Array<number> = products;
 
-    const qualitiesProducts = await prisma.qualidadeProduto.findMany({
+    const qualidadeProdutos = await prisma.qualidadeProduto.findMany({
       where: {
         Produto: {
           id: {
@@ -88,13 +95,7 @@ class QualitativeStageController {
         },
       },
     });
-    for (const produtos of qualitiesProducts) {
-      Object.defineProperty(produtos, 'Aprovado', {
-        value: false,
-        writable: true,
-        enumerable: true,
-        configurable: true
-      });
+    for (const produtos of qualidadeProdutos) {
       Object.defineProperty(produtos, 'EntregaId', {
         value: idDelivery,
         writable: true,
@@ -102,8 +103,7 @@ class QualitativeStageController {
         configurable: true
       });
     }
-
-    res.render("qualityStage", { qualitiesProducts: qualitiesProducts });
+    res.render("qualityStage", { qualidadeProdutos: qualidadeProdutos });
   }
 }
 
