@@ -16,6 +16,6 @@ router.get("/", (req, res) => {
   res.render("conferenciaQuantitativa", { users: users });
 });
 
-router.use("/declineDelivery",declineRoutes );
+router.use("/recusar/entradaMateriais",declineRoutes );
 
 export default router;
