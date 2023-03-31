@@ -1,40 +1,43 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Conferência Quantitativa</title>
-</head>
-<body>
+  <head>
+    <%- include('./partials/head') %>
+  </head>
+  <body>
+    <header><%- include('./partials/header') %></header>
     <div align="center">
-    <form action="/conferencia/quantitativa" method="post">
-    <input type="hidden" name="id" value="<%= products_object['id'] %>">
-    <% products_object.forEach((product, index) => { %>
-        <input type="hidden" name="dp_id<%= index %>" value="<%= product['id'] %>">
+      <form action="/conferencia/quantitativa" method="post">
+        <input type="hidden" name="id" value="<%= products_object['id'] %>" />
+        <% products_object.forEach((product, index) => { %>
+        <input
+          type="hidden"
+          name="dp_id<%= index %>"
+          value="<%= product['id'] %>"
+        />
         <h1><%= product["Produto"]["nomeProduto"] %></h1>
         <h3>Especificação do produto</h3>
         <select name="specification<%= index %>" required>
-            <option value="Lata">Lata</option>
-            <option value="Palet">Palet</option>
-            <option value="Carreta">Carreta</option>
-            <option value="Saco">Saco</option>
+          <option value="Lata">Lata</option>
+          <option value="Palet">Palet</option>
+          <option value="Carreta">Carreta</option>
+          <option value="Saco">Saco</option>
         </select>
 
         <h3>Unidade</h3>
-        <input type="radio" name="unit<%= index %>" value="Kg" checked>
-            <label for="unit<%= index %>">Kg</label><br>
-        <input type="radio" name="unit<%= index %>" value="L">
-            <label for="unit<%= index %>">L</label><br>  
+        <input type="radio" name="unit<%= index %>" value="Kg" checked />
+        <label for="unit<%= index %>">Kg</label><br />
+        <input type="radio" name="unit<%= index %>" value="L" />
+        <label for="unit<%= index %>">L</label><br />
 
         <h3>Quantidade</h3>
-            <input type="number" name="quantity<%= index %>" required>
+        <input type="number" name="quantity<%= index %>" required />
 
         <h3>Peso Unitário</h3>
-            <input type="number" name="weight<%= index %>" required>
-    <% }); %>
+        <input type="number" name="weight<%= index %>" required />
+        <% }); %>
         <button type="submit">Continuar</button>
-    </form>
+      </form>
     </div>
-</body>
+    <footer><%- include('./partials/footer') %></footer>
+  </body>
 </html>
