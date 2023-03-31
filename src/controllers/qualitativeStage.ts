@@ -14,7 +14,8 @@ class QualitativeStageController {
       qualidadeProdutos = JSON.parse(req.query.qualidadeProdutos);
       console.log('TESTE 1')
   } else {
-      qualidadeProdutos = req.body.qualidadeProdutos;
+      qualidadeProdutos = JSON.parse(req.body.qualidadeProdutos);
+      console.log(qualidadeProdutos)
       console.log('TESTE 2')
     }
 
