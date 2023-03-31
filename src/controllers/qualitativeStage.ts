@@ -14,20 +14,23 @@ class QualitativeStageController {
       qualidadeProdutos = JSON.parse(req.query.qualidadeProdutos);
       console.log('TESTE 1')
   } else {
-      qualidadeProdutos = req.query.qualidadeProdutos;
+      qualidadeProdutos = req.body.qualidadeProdutos;
       console.log('TESTE 2')
     }
-  res.send(req.body)
-  //for (const produtos of qualidadeProdutos){
-    //  const nomeChkSim = `qualidadeSim${produtos.Produto.id}-${produtos.TesteQualidade.id}`
-    //  const nomeChkNao = `qualidadeNao${produtos.Produto.id}-${produtos.TesteQualidade.id}`
-    //  console.log(nomeChkSim)
-    //  console.log(nomeChkSim)
-    //  const aprovadoSim = req.body.Record
-    //  const aprovadoNao = req.body[nomeChkNao]
-    //  console.log(aprovadoSim)
-    //  console.log(aprovadoNao)
-  //}
+
+
+  // for (const produtos of qualidadeProdutos){
+  //    const nomeChkSim = `qualidadeSim${produtos.Produto.id}-${produtos.TesteQualidade.id}`
+  //    const nomeChkNao = `qualidadeNao${produtos.Produto.id}-${produtos.TesteQualidade.id}`
+  //    //console.log(nomeChkSim)
+  //    //console.log(nomeChkSim)
+  //    //const aprovadoSim = req.body.Record
+  //    //const aprovadoNao = req.body[nomeChkNao]
+  //    //console.log(aprovadoSim)
+  //    //console.log(aprovadoNao)
+  // }
+
+  
   //   const statusDeliveries: {
   //     approved: typeof qualidadeProdutos.Approved
   //     deliveryId: typeof qualidadeProdutos.idDelivery
@@ -103,6 +106,7 @@ class QualitativeStageController {
         configurable: true
       });
     }
+    //res.send(qualidadeProdutos)
     res.render("qualityStage", { qualidadeProdutos: qualidadeProdutos });
   }
 }

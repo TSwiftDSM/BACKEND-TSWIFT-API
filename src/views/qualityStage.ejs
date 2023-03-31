@@ -11,7 +11,7 @@
 <body>
     <form action="/qualitativeStage" method="post">
 
-        <% for( var produtos of qualidadeProdutos) { %>
+        <% for( let produtos of qualidadeProdutos) { %>
             <div>
                 <%= produtos.Produto.nomeProduto %>
             </div>
@@ -19,10 +19,10 @@
             <div>
                 <%= produtos.TesteQualidade.nomeTeste %>
             </div>
-            <input type="radio" value="true" name="qualidadeSim<%= produtos.Produto.id %>-<%= produtos.TesteQualidade.id %>" id="qualidadeSim<%= produtos.Produto.id %>-<%= produtos.TesteQualidade.id %>" > 
-                <label for="qualidadeSim<%= produtos.Produto.id %>-<%= produtos.TesteQualidade.id %>">Sim</label>
-            <input type="radio" value="false" name="qualidadeNao<%= produtos.Produto.id %>-<%= produtos.TesteQualidade.id %>" id="qualidadeNao<%= produtos.Produto.id %>-<%= produtos.TesteQualidade.id %>">
-                <label for="qualidadeNao<%= produtos.Produto.id %>-<%= produtos.TesteQualidade.id %>">Não</label>
+            <input type="radio" value="true" name="aprovado<%= produtos.Produto.id %><%= produtos.TesteQualidade.id %>" id="sim" > 
+                <label for="sim">Sim</label>
+            <input type="radio" value="false" name="aprovado<%= produtos.Produto.id %><%= produtos.TesteQualidade.id %>" id="nao">
+                <label for="nao">Não</label>
            
             
             <% } %>
