@@ -20,6 +20,10 @@ Por fim, as "features" são branches individuais criadas para desenvolver funcio
 
 Esse ambiente de desenvolvimento permitiu uma colaboração mais eficiente entre a equipe, garantindo a qualidade do produto final e agilizando o processo de desenvolvimento e entrega.
 
+## :octocat: Gif do protótipo entregue na Sprint 1:
+
+<img src="/doc/img/Desktop.gif">
+
 #### Mockup no Figma:
 https://www.figma.com/file/iy9b2cY2hmpDLlnXDOKI2h/agro-%C3%A9-tec?node-id=0%3A1&t=Fc2jGCh2zCfoWF6M-1
 
