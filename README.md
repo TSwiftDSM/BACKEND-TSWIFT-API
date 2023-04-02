@@ -1,6 +1,3 @@
-<div align="center">
-![readme_banner](doc/img/bannertsw.png)
-</div>
 
 # Sobre o Projeto
 Baseado nos requisitos apresentados pelo cliente a TSwift desenvolveu o projeto que consiste no desenvolvimento de um sistema de inspeção de entrada para controle de recebimento de grãos no setor agroindustrial, com três perfis de usuários: administrativo, operacional e gerencial. O objetivo principal do sistema é gerenciar o processo de entrada, inspeção e recebimento de mercadorias, permitindo o acompanhamento em tempo real do status de entrega. O sistema conta com funcionalidades de cadastro de usuários, produtos e transportadoras garantindo a organização e a gestão das informações relacionadas às transações comerciais. Além disso, o sistema permite a criação de perfis de acesso distintos, de acordo com as funções desempenhadas pelos usuários, o que contribui para a segurança e a eficiência das operações.Na prática, o sistema funciona da seguinte forma: quando um fornecedor entrega uma carga de grãos, o operador responsável pelo recebimento utiliza o sistema para registrar a entrada da mercadoria e as informações relacionadas, como quantidade e tipo de produto. Em seguida, é realizada a inspeção da carga, que é avaliada quanto à qualidade e conformidade com as normas técnicas. Por fim, o sistema oferece relatórios gerenciais que permitem o acompanhamento e a análise dos dados.
@@ -11,7 +8,7 @@ Na primeira sprint, foram criados protótipos navegáveis de todas as interfaces
 #### Gitworkflow
 O gitworkflow é um conjunto de práticas e fluxos de trabalho que permitem o desenvolvimento colaborativo e organizado do código-fonte em projetos de software usando o Git. Ele envolve a utilização de branches, revisão e aprovação de código antes da integração, e fluxos de trabalho específicos como o Gitflow.
 
-<img src="/doc/img/gitworkflow.png">
+<img src="/doc/img/gitworkflow.jpg">
 
 A criação de branches permitem que diferentes membros da equipe trabalhem simultaneamente em suas próprias versões do código sem afetar o código principal. Dentre as branches, destacam-se a "main", a "develop" e as "features".
 
@@ -25,7 +22,7 @@ Esse ambiente de desenvolvimento permitiu uma colaboração mais eficiente entre
 
 :chart_with_upwards_trend: **Burndown Chart da Sprint 1**:
 
-<img src="/doc/img/burndownsprint1.png">
+<img src="/doc/img/burndownsprint1.jpg">
 
 # Processo de instalação:
 
