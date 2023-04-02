@@ -29,23 +29,24 @@ https://www.figma.com/file/iy9b2cY2hmpDLlnXDOKI2h/agro-%C3%A9-tec?node-id=0%3A1&
 
 # :memo: Product Backlog Total:
 
-| ID | UserStory | Requisitos | Prioridade | Sprint |
-|----|-----------|------------|------------|--------|
-|US_01|Eu, como empresa, preciso de um software para recebimento de mercadoria| Realizar o mapeamento de entrega| Alta | S1|
-|US_02|Eu, como empresa, preciso de um software para recebimento de mercadoria| Montar um protótipo navegável | Alta | S1|
-|US_03|Eu, como empresa, preciso cadastrar perfil administrativo para manipular o sistema| Ter cadastrado o perfil de administrador cadastrado|  Média | S2 |
-|US_04|Eu, como administrador, preciso de uma interface para acesso as rotinas administrativas| Média | S2 |
-|US_05|Eu, como administrador, preciso de uma interface para cadastrar produtos| Média | S3 |
-|US_06|Eu, como administrador, preciso de uma interface para cadastrar fornecedores/transportadora| Média | S3 |
-|US_07|Eu, como administrador, preciso de uma interface para cadastrar colaboradores| Média | S3 |
-|US_08|Eu, como administrador preciso de uma interface para cadastrar compras| Média | S3 |
-|US_09|Eu, como conferente, preciso de uma interface para fazer login| Média | S3 |
-|US_10|Eu, como conferente, preciso de uma interface para dar entrada no recebimento de mercadoria| Média | S4 |
-|US_11|Eu, como gerente, preciso de um interface para acompanhar o status da entrega| Média | S4 |
-|US_12|Eu, como gerente, preciso gerar relatórios para analise| Média | S4 |
-|US_13|Eu, como gerente, preciso de uma interface onde posso inserir regras de recebimento| Baixa| S4 |
+| ID | UserStory | Requisitos | Sprint |
+|----|-----------|------------|--------|
+|US_01|Eu, como empresa, preciso de um software para recebimento de mercadoria| Realizar o mapeamento de entrega| S1|
+|US_02|Eu, como empresa, preciso de um software para recebimento de mercadoria| Montar um protótipo navegável | S1|
+|US_03|Eu, como empresa, preciso cadastrar perfil administrativo para manipular o sistema| Ter cadastrado o perfil de administrador cadastrado| S2 |
+|US_04|Eu, como administrador, preciso de uma interface para acesso as rotinas administrativas| Na interface é necessário ter um painel/link que leva para outra interface de cadastro(cada uma para um propósito)| S3 |
+|US_05|Eu, como administrador, preciso de uma interface para cadastrar produtos| "Cadastro de produtos: Código, Nome, Unidade de medida" | S3 |
+|US_06|Eu, como administrador, preciso de uma interface para cadastrar fornecedores/transportadora|"Para se tornar um fornecedor é necessário os seguintes dados: Código, Nome da empresa (fantasia), CNPJ, Razão, Social Endereço" |  S3 |
+|US_07|Eu, como administrador, preciso de uma interface para cadastrar colaboradores| "Para todo colaborador é necessário os seguintes dados: Matrícula, Nome, CPF, Data, Nascimento, Cargo" | S3 |
+|US_08|Eu, como administrador preciso de uma interface para cadastrar compras| "Pedido de compra necessário: Nº do pedido, Cód do produto, Nome do produto, Cód do fornecedor, Nome do fornecedor, Tipo de frete, Condição de pagamento" | S3 |
+|US_09|Eu, como conferente, preciso de uma interface para fazer login| Interface com os campos Matrícula, senha e um botão para entrar |  S2 |
+|US_10|Eu, como conferente, preciso de uma interface para dar entrada no recebimento de mercadoria| Interfaces com os processos de entrada | S2 |
+|US_11|Eu, como gerente, preciso de um interface para acompanhar o status da entrega| Interface de acompanhamento de entrega | S4 |
+|US_12|Eu, como gerente, preciso gerar relatórios para analise| Botão correspondente ao pedido | S4 |
+|US_13|Eu, como gerente, preciso de uma interface onde posso inserir regras de recebimento| Interface de cadastro de regras | S4 |
 
-# Processo de instalação:
+
+# :hammer: Processo de instalação:
 
 ### Passo 1. Instalação das dependências
 
