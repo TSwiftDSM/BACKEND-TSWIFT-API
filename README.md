@@ -1,8 +1,8 @@
 
-# Sobre o Projeto
+# :page_facing_up:  Sobre o Projeto
 Baseado nos requisitos apresentados pelo cliente a TSwift desenvolveu o projeto que consiste no desenvolvimento de um sistema de inspeção de entrada para controle de recebimento de grãos no setor agroindustrial, com três perfis de usuários: administrativo, operacional e gerencial. O objetivo principal do sistema é gerenciar o processo de entrada, inspeção e recebimento de mercadorias, permitindo o acompanhamento em tempo real do status de entrega. O sistema conta com funcionalidades de cadastro de usuários, produtos e transportadoras garantindo a organização e a gestão das informações relacionadas às transações comerciais. Além disso, o sistema permite a criação de perfis de acesso distintos, de acordo com as funções desempenhadas pelos usuários, o que contribui para a segurança e a eficiência das operações.Na prática, o sistema funciona da seguinte forma: quando um fornecedor entrega uma carga de grãos, o operador responsável pelo recebimento utiliza o sistema para registrar a entrada da mercadoria e as informações relacionadas, como quantidade e tipo de produto. Em seguida, é realizada a inspeção da carga, que é avaliada quanto à qualidade e conformidade com as normas técnicas. Por fim, o sistema oferece relatórios gerenciais que permitem o acompanhamento e a análise dos dados.
 
-# Sobre a API
+# :bookmark_tabs: Sobre a API
 ### :black_flag: Sprint 1:
 Na primeira sprint, foram criados protótipos navegáveis de todas as interfaces, o organograma com as funcionalidades do sistema, o modelo conceitual do banco de dados, e a implementação de testes unitários e gitworkflow.
 #### Gitworkflow
@@ -20,9 +20,30 @@ Por fim, as "features" são branches individuais criadas para desenvolver funcio
 
 Esse ambiente de desenvolvimento permitiu uma colaboração mais eficiente entre a equipe, garantindo a qualidade do produto final e agilizando o processo de desenvolvimento e entrega.
 
-:chart_with_upwards_trend: **Burndown Chart da Sprint 1**:
+#### Mockup no Figma:
+https://www.figma.com/file/iy9b2cY2hmpDLlnXDOKI2h/agro-%C3%A9-tec?node-id=0%3A1&t=Fc2jGCh2zCfoWF6M-1
+
+### :chart_with_upwards_trend: **Burndown Chart da Sprint 1**:
 
 <img src="/doc/img/burndownsprint1.jpg">
+
+# :memo: Product Backlog Total:
+
+| ID | UserStory | Requisitos | Prioridade | Sprint |
+|----|-----------|------------|------------|--------|
+|US_01|Eu, como empresa, preciso de um software para recebimento de mercadoria| Realizar o mapeamento de entrega| Alta | S1|
+|US_02|Eu, como empresa, preciso de um software para recebimento de mercadoria| Montar um protótipo navegável | Alta | S1|
+|US_03|Eu, como empresa, preciso cadastrar perfil administrativo para manipular o sistema| Ter cadastrado o perfil de administrador cadastrado|  Média | S2 |
+|US_04|Eu, como administrador, preciso de uma interface para acesso as rotinas administrativas| Média | S2 |
+|US_05|Eu, como administrador, preciso de uma interface para cadastrar produtos| Média | S3 |
+|US_06|Eu, como administrador, preciso de uma interface para cadastrar fornecedores/transportadora| Média | S3 |
+|US_07|Eu, como administrador, preciso de uma interface para cadastrar colaboradores| Média | S3 |
+|US_08|Eu, como administrador preciso de uma interface para cadastrar compras| Média | S3 |
+|US_09|Eu, como conferente, preciso de uma interface para fazer login| Média | S3 |
+|US_10|Eu, como conferente, preciso de uma interface para dar entrada no recebimento de mercadoria| Média | S4 |
+|US_11|Eu, como gerente, preciso de um interface para acompanhar o status da entrega| Média | S4 |
+|US_12|Eu, como gerente, preciso gerar relatórios para analise| Média | S4 |
+|US_13|Eu, como gerente, preciso de uma interface onde posso inserir regras de recebimento| Baixa| S4 |
 
 # Processo de instalação:
 
