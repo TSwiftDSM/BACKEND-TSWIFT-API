@@ -1,113 +1,59 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Request, Response } from "express";
-import { PrismaClient } from "@prisma/client";
 import { number, string } from "joi";
+import  { CadastroStatusEntrega }  from "../services/qualitativeStageServices"
+import { PrismaClient } from "@prisma/client";
+
 
 const prisma = new PrismaClient();
 
-class QualitativeStageController {
+const cadastroStatusEntrega = new CadastroStatusEntrega
+
+class QualitativeStageController { 
 
   async PersistenciaDados(req: Request, res: Response) {
+    
     let qualidadeProdutos;
+    // Pega o Objeto que vem do Front e verrifica se ele é uma String
     if (typeof req.query.qualidadeProdutos === 'string') {
       qualidadeProdutos = JSON.parse(req.query.qualidadeProdutos);
-      console.log('TESTE 1')
-  } else {
+    } else {
+      // Transforma o que veio de Front em um Json
       qualidadeProdutos = JSON.parse(req.body.qualidadeProdutos);
-      console.log(qualidadeProdutos)
-      console.log('TESTE 2')
     }
-
-
-  // for (const produtos of qualidadeProdutos){
-  //    const nomeChkSim = `qualidadeSim${produtos.Produto.id}-${produtos.TesteQualidade.id}`
-  //    const nomeChkNao = `qualidadeNao${produtos.Produto.id}-${produtos.TesteQualidade.id}`
-  //    //console.log(nomeChkSim)
-  //    //console.log(nomeChkSim)
-  //    //const aprovadoSim = req.body.Record
-  //    //const aprovadoNao = req.body[nomeChkNao]
-  //    //console.log(aprovadoSim)
-  //    //console.log(aprovadoNao)
-  // }
-
   
-  //   const statusDeliveries: {
-  //     approved: typeof qualidadeProdutos.Approved
-  //     deliveryId: typeof qualidadeProdutos.idDelivery
-  //     stepName: 'ETAPA QUALITATIVA'
-  //     userId: 1
-  //   }
-  //   let aprovado = 0 
-  //   for (const testeProduto of  qualidadeProdutos){
-  //      if (testeProduto.Approved == false){
-  //        // Ação caso um dos produtos não tenha sido aprovado e não seja obrigatorio
-  //        aprovado = aprovado+1;
-  //       }
-  //     }
-  //   if (aprovado >0){
-  //     // Ação caso um dos produtos não tenha sido aprovado e não seja obrigatorio
-  //   }
-  //   else{
-  //     // Ação caso todos os produtos tenham sido aprovados
-  //     const statusEntrega = await prisma.StatusDelivery.create({ data: statusDeliveries })
-  //   }
-  
+    const contadorObrigatorio = await cadastroStatusEntrega.VerificandoRecusa(req, qualidadeProdutos)   
+
+    //Verifica se teve algum deste obrigatorio que foi recusado
+    if (await contadorObrigatorio > 0) {
+      //Caso sim ele chama a tela de recusa qualitativa
+      // Função que chama o cadastro de Recusa da entrega
+      console.log('Entrega recusada')
+    }
+    else {
+      //Caso não ele cadastra que foi aprovado     
+      cadastroStatusEntrega.cadastroStatusEntrega(true, parseInt(qualidadeProdutos[0].EntregaId), parseInt('1'), 'Qualitativa')
+    }
   }
-  async post(req: Request, res: Response) {
-    const { idDelivery } = req.body;
 
-    const deliveryProduct = await prisma.entregaProduto.findMany({
-      where: {
-        EntregaId: parseInt(idDelivery),
-      },
-      select: {
-        produtoId: true,
-      },
-    });
+  async post(req: Request, res: Response) {
+    const  idEntrega  = parseInt(req.body.idEntrega);
+
+    const deliveryProduct = cadastroStatusEntrega.SelecionarEntregaProduto(idEntrega)
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const products: Array<any> = [];
+    const produtos: Array<any> = [];
 
     // Transformando deliveryProduct Em uma lista de números com os valores dos ID's
     (await deliveryProduct).forEach((idProdutcts: { produtoId: any; }) => {
-      products.push(idProdutcts.produtoId);
+      produtos.push(idProdutcts.produtoId);
     });
 
-    const listDeliveryProducts: Array<number> = products;
+    const listDeliveryProducts: Array<number> = produtos;
 
-    const qualidadeProdutos = await prisma.qualidadeProduto.findMany({
-      where: {
-        Produto: {
-          id: {
-            in: listDeliveryProducts,
-          },
-        },
-      },
-      select: {
-        Produto: {
-          select: {
-            id: true,
-            nomeProduto: true,
-          },
-        },
-        TesteQualidade: {
-          select: {
-            id: true,
-            nomeTeste: true,
-          },
-        },
-      },
-    });
-    for (const produtos of qualidadeProdutos) {
-      Object.defineProperty(produtos, 'EntregaId', {
-        value: idDelivery,
-        writable: true,
-        enumerable: true,
-        configurable: true
-      });
-    }
-    //res.send(qualidadeProdutos)
+    const qualidadeProdutos = await cadastroStatusEntrega.SelecionarQualidadeProduto(listDeliveryProducts, idEntrega)
+
     res.render("qualityStage", { qualidadeProdutos: qualidadeProdutos });
   }
 }

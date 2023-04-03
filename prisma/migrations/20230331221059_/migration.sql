@@ -4,31 +4,21 @@ CREATE TABLE `fornecedores` (
     `nomeFantasia` VARCHAR(191) NOT NULL,
     `fornecedorCNPJ` VARCHAR(191) NOT NULL,
     `razaoSocial` VARCHAR(191) NOT NULL,
-    `Endereco` VARCHAR(191) NOT NULL,
-    `TransportadoraPropria` BOOLEAN NOT NULL,
+    `endereco` VARCHAR(191) NOT NULL,
+    `transportadora` BOOLEAN NOT NULL,
+    `fornecedor` BOOLEAN NOT NULL,
 
     UNIQUE INDEX `fornecedores_fornecedorCNPJ_key`(`fornecedorCNPJ`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `transportadoras` (
-    `id` INTEGER NOT NULL AUTO_INCREMENT,
-    `nomeFantasia` VARCHAR(191) NOT NULL,
-    `fornecedorCNPJ` VARCHAR(191) NOT NULL,
-    `razaoSocial` VARCHAR(191) NOT NULL,
-    `Endereco` VARCHAR(191) NOT NULL,
-
-    UNIQUE INDEX `transportadoras_fornecedorCNPJ_key`(`fornecedorCNPJ`),
-    PRIMARY KEY (`id`)
-) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-
--- CreateTable
 CREATE TABLE `transportadorasFornecedores` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
-    `fornecedorId` INTEGER NULL,
-    `transportadoraId` INTEGER NULL,
+    `fornecedorId` INTEGER NOT NULL,
+    `transportadoraId` INTEGER NOT NULL,
 
+    UNIQUE INDEX `transportadorasFornecedores_fornecedorId_transportadoraId_key`(`fornecedorId`, `transportadoraId`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -44,6 +34,7 @@ CREATE TABLE `testesQualidades` (
 CREATE TABLE `produtos` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `nomeProduto` VARCHAR(191) NOT NULL,
+    `unidade` VARCHAR(191) NULL,
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
@@ -66,21 +57,13 @@ CREATE TABLE `fornecedorProdutos` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `etapaEntrega` (
-    `id` INTEGER NOT NULL AUTO_INCREMENT,
-    `nomeEtapa` VARCHAR(191) NOT NULL,
-
-    PRIMARY KEY (`id`)
-) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-
--- CreateTable
 CREATE TABLE `entregas` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `nfe` VARCHAR(191) NOT NULL,
     `tipoEntrega` VARCHAR(191) NOT NULL,
     `fornecedorId` INTEGER NULL,
-    `tranportadoraId` INTEGER NULL,
-    `etapaEntregaId` INTEGER NULL,
+    `etapaEntrega` VARCHAR(191) NULL,
+    `transportadoraId` INTEGER NULL,
 
     UNIQUE INDEX `entregas_nfe_key`(`nfe`),
     PRIMARY KEY (`id`)
@@ -101,7 +84,6 @@ CREATE TABLE `entregaProdutos` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `pesoPrevisto` DOUBLE NULL,
     `especificacao` VARCHAR(191) NULL,
-    `unidade` VARCHAR(191) NULL,
     `quantidade` INTEGER NULL,
     `pesoReal` DOUBLE NULL,
     `produtoId` INTEGER NOT NULL,
@@ -134,7 +116,8 @@ CREATE TABLE `usuarios` (
 -- CreateTable
 CREATE TABLE `statusEntregas` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
-    `approved` BOOLEAN NOT NULL,
+    `aprovado` BOOLEAN NOT NULL,
+    `etapaEntrega` VARCHAR(191) NULL,
     `entregaId` INTEGER NOT NULL,
     `usuarioId` INTEGER NULL,
 
@@ -142,10 +125,10 @@ CREATE TABLE `statusEntregas` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- AddForeignKey
-ALTER TABLE `transportadorasFornecedores` ADD CONSTRAINT `transportadorasFornecedores_fornecedorId_fkey` FOREIGN KEY (`fornecedorId`) REFERENCES `fornecedores`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE `transportadorasFornecedores` ADD CONSTRAINT `transportadorasFornecedores_fornecedorId_fkey` FOREIGN KEY (`fornecedorId`) REFERENCES `fornecedores`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `transportadorasFornecedores` ADD CONSTRAINT `transportadorasFornecedores_transportadoraId_fkey` FOREIGN KEY (`transportadoraId`) REFERENCES `transportadoras`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE `transportadorasFornecedores` ADD CONSTRAINT `transportadorasFornecedores_transportadoraId_fkey` FOREIGN KEY (`transportadoraId`) REFERENCES `fornecedores`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `qualidadeProdutos` ADD CONSTRAINT `qualidadeProdutos_testeQualdidaeId_fkey` FOREIGN KEY (`testeQualdidaeId`) REFERENCES `testesQualidades`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -163,10 +146,7 @@ ALTER TABLE `fornecedorProdutos` ADD CONSTRAINT `fornecedorProdutos_produtoId_fk
 ALTER TABLE `entregas` ADD CONSTRAINT `entregas_fornecedorId_fkey` FOREIGN KEY (`fornecedorId`) REFERENCES `fornecedores`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `entregas` ADD CONSTRAINT `entregas_tranportadoraId_fkey` FOREIGN KEY (`tranportadoraId`) REFERENCES `transportadoras`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE `entregas` ADD CONSTRAINT `entregas_etapaEntregaId_fkey` FOREIGN KEY (`etapaEntregaId`) REFERENCES `etapaEntrega`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE `entregas` ADD CONSTRAINT `entregas_transportadoraId_fkey` FOREIGN KEY (`transportadoraId`) REFERENCES `transportadorasFornecedores`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `entregasDesaprovadas` ADD CONSTRAINT `entregasDesaprovadas_testeQualidadeId_fkey` FOREIGN KEY (`testeQualidadeId`) REFERENCES `testesQualidades`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
