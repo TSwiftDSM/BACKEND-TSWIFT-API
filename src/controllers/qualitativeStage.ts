@@ -23,10 +23,10 @@ class QualitativeStageController {
       qualidadeProdutos = JSON.parse(req.body.qualidadeProdutos);
     }
   
-    const contadorObrigatorio = await cadastroStatusEntrega.VerificandoRecusa(req, qualidadeProdutos)   
+    const aprovado = await cadastroStatusEntrega.VerificandoRecusa(req, qualidadeProdutos)   
 
-    //Verifica se teve algum deste obrigatorio que foi recusado
-    if (await contadorObrigatorio > 0) {
+    //Verifica se teve algum teste obrigatorio que foi recusado
+    if (await aprovado == false) {
       //Caso sim ele chama a tela de recusa qualitativa
       // Função que chama o cadastro de Recusa da entrega
       console.log('Entrega recusada')

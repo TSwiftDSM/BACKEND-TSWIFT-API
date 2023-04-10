@@ -76,59 +76,52 @@ export class CadastroStatusEntrega {
         });
         for (const produtos of qualidadeProdutoSelecao) {
             Object.defineProperty(produtos, 'EntregaId', {
-              value: idEntrega,
-              writable: true,
-              enumerable: true,
-              configurable: true
+                value: idEntrega,
+                writable: true,
+                enumerable: true,
+                configurable: true
             });
         }
         return qualidadeProdutoSelecao
     }
 
     public async VerificandoRecusa(req: Request, qualidadeProdutos: any) {
-        let contador = 0 //Contador que controla em qual endereço da lista de arrays será acessado dentro do loop
-        let contadorObrigatorio = 0 //Contador que controla se um teste de qualidade obrigatório não passou no teste de qualidade
-        // O req.body funciona com chave e valor, sendo "key a chave"
-        for (const key in req.body) {
-            //Estamos procurando toda a chave que começa com "aprovado" pois as chaves do body serão variadas
-            if (key.startsWith(`aprovado`)) {
-                const idProduto = parseInt(qualidadeProdutos[contador].Produto.id)
-                const idTesteQualiadade = parseInt(qualidadeProdutos[contador].TesteQualidade.id)
-                const recusado = req.body[key];
+        const idProduto = parseInt(qualidadeProdutos[0].Produto.id)
+        const idTesteQualiadade = parseInt(qualidadeProdutos[0].TesteQualidade.id)
+        const recusado = req.body.aprovado;
+        let aprovado = true
 
-                // Verifica se ele foi aprovado ou não, caso recusado = true quer dizer que ele foi recusado
-                if (recusado == 'true') {
-                    // Adiciona um elemento "Aprovado" dentro do Objeto
-                    qualidadeProdutos[contador].Aprovado = false
-                    // Pega o campo "obrigatorio" para verificar se o teste qualidade daquele Produto é obrigatório ou não
-                    const obrigatorio = await prisma.qualidadeProduto.findFirst({
-                        where: {
-                            Produto: {
-                                id: idProduto
-                            },
-                            TesteQualidade: {
-                                id: idTesteQualiadade
-                            }
-                        },
-                        select: {
-                            obrigatorio: true
-                        }
-                    })
-                    //Verifica se o teste de qualidade é obrigatório ou não quando o teste de qualidade foi recusado
-                    if (obrigatorio?.obrigatorio && recusado == 'true') {
-                        //Caso seja obrigatório ele adiciona o elemento "Obrigatorio"  como true e adiciona 1 no contador
-                        qualidadeProdutos[contador].Obrigatorio = true
-                        contadorObrigatorio = contadorObrigatorio + 1
-                    } else {
-                        //Caso não seja obrigatório apenas adiciona o elemnto "Obrigatorio" como false
-                        qualidadeProdutos[contador].Obrigatorio = false
+        // Verifica se ele foi aprovado ou não, caso recusado = true quer dizer que ele foi recusado
+        if (recusado == 'true') {
+            // Adiciona um elemento "Aprovado" dentro do Objeto
+            qualidadeProdutos[0].Aprovado = false
+            // Pega o campo "obrigatorio" para verificar se o teste qualidade daquele Produto é obrigatório ou não
+            const obrigatorio = await prisma.qualidadeProduto.findFirst({
+                where: {
+                    Produto: {
+                        id: idProduto
+                    },
+                    TesteQualidade: {
+                        id: idTesteQualiadade
                     }
+                },
+                select: {
+                    obrigatorio: true
                 }
-                // Adiciona 1 no contador
-                contador = contador + 1;
+            })
+            //Verifica se o teste de qualidade é obrigatório ou não quando o teste de qualidade foi recusado
+            if (obrigatorio?.obrigatorio && recusado == 'true') {
+                //Caso seja obrigatório ele adiciona o elemento "Obrigatorio"  como true e adiciona 1 no contador
+                qualidadeProdutos[0].Obrigatorio = true
+                aprovado = false
+                
+            } else {
+                //Caso não seja obrigatório apenas adiciona o elemento "Obrigatorio" como false
+                qualidadeProdutos[0].Obrigatorio = false
             }
         }
-        return contadorObrigatorio
+        
+        return aprovado
     }
 
 }
