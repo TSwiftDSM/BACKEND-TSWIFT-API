@@ -81,8 +81,10 @@ class  DeclineDeliveryStepThreeController{
         const motivo = JSON.stringify(nomesTestes).replace(/\"/g, ""); //Salva cada teste recusado na variavel
         const motivoCompleto = "Inconsistências encontradas:" + motivo
         console.log(motivoCompleto)
-        declineDelivery(motivoCompleto,1) // Função para recusar a entrega
-        const idStatusDelivery= await findIdStatusDelivery(1)
+        const entregaId= parseInt(req.params.entregaId);
+        console.log(req.params.entregaId)
+        declineDelivery(motivoCompleto,entregaId) // Função para recusar a entrega
+        const idStatusDelivery= await findIdStatusDelivery(entregaId)
         console.log(`${idStatusDelivery}`)
         const idObj = JSON.parse(JSON.stringify(idStatusDelivery)) as StatusDelivery; // pegar o id da função findIdStatusDelivery pelo atributo id 
         const idInt = idObj.id;

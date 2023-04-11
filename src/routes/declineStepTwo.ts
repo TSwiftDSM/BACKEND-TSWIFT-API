@@ -4,7 +4,7 @@ import { DeclineTwoController } from "../controllers";
 const routes = Router();
 
 // routes.get("/",DeclineTwoController.get);
-routes.post("/",DeclineTwoController.post)
+routes.post("/:entregaId",DeclineTwoController.post)
 
 
 

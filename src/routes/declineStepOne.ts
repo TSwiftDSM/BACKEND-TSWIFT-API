@@ -3,8 +3,8 @@ import { DeclineController } from "../controllers";
 
 const routes = Router();
 
-routes.get("/",DeclineController.get);
-routes.post("/",DeclineController.post)
+routes.get("/:entregaId",DeclineController.get);
+routes.post("/:entregaId",DeclineController.post)
 
 
 

@@ -3,8 +3,8 @@ import { DeclineThreeController } from "../controllers";
 
 const routes = Router();
 
-// routes.get("/",DeclineTwoController.get);
-routes.post("/",DeclineThreeController.post)
+// routes.get("/",DeclineThreeController.get);
+routes.post("/:entregaId",DeclineThreeController.post)
 
 
 

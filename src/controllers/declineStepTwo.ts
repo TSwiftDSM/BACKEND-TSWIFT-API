@@ -85,8 +85,10 @@ class  DeclineDeliveryStepTwoController{
       const observacoes = JSON.stringify(req.body.observacoes); //Salva as observações escritas pelo usuario
       const motivoCompleto = "Inconsistências encontradas:" + motivo + " " + "Observações:" + observacoes // Junta os testes e as observações
       console.log(motivoCompleto)
-      declineDelivery(motivoCompleto,1) // Função para recusar a entrega
-      const idStatusDelivery= await findIdStatusDelivery(1)
+      const entregaId= parseInt(req.params.entregaId);
+      console.log(req.params.entregaId)
+      declineDelivery(motivoCompleto,entregaId) // Função para recusar a entrega
+      const idStatusDelivery= await findIdStatusDelivery(entregaId)
       console.log(`${idStatusDelivery}`)
       const idObj = JSON.parse(JSON.stringify(idStatusDelivery)) as StatusDelivery; // pegar o id da função findIdStatusDelivery pelo atributo id 
       const idInt = idObj.id;
