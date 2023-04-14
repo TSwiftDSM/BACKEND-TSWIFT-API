@@ -6,7 +6,7 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 
-class MenuPrincipal {
+class Menu {
     //
     async PesquisaPedidos(req: Request, res: Response) {
         //
@@ -23,4 +23,4 @@ class MenuPrincipal {
     }
 }
 
-export default new MenuPrincipal();
+export default new Menu();
