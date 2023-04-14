@@ -78,7 +78,6 @@ model FornecedorProduto {
   @@map("fornecedorProdutos")
 }
 
-<<<<<<< HEAD
 model Entrega {
   id                 Int                       @id @default(autoincrement())
   nfe                String                    @unique
@@ -128,66 +127,6 @@ model TipoUsuario {
   @@map("tiposUsuarios")
 }
 
-=======
-model EtapaEntrega {
-  id        Int       @id @default(autoincrement())
-  nomeEtapa String
-  Entrega   Entrega[]
-
-  @@map("etapaEntrega")
-}
-
-model Entrega {
-  id                 Int                       @id @default(autoincrement())
-  nfe                String                    @unique
-  tipoEntrega        String
-  Fornecedor         Fornecedor?               @relation(fields: [fornecedorId], references: [id])
-  fornecedorId       Int?
-  EtapaEntrega       EtapaEntrega?             @relation(fields: [etapaEntregaId], references: [id])
-  etapaEntregaId     Int?
-  EntregaProduto     EntregaProduto[]
-  StatusEntrega      StatusEntrega[]
-  EntregaDesparovada EntregaDesparovada[]
-  Transportadora     TransportadoraFornecedor? @relation(fields: [transportadoraId], references: [id])
-  transportadoraId   Int?
-
-  @@map("entregas")
-}
-
-model EntregaDesparovada {
-  id               Int             @id @default(autoincrement())
-  motivo           String
-  TesteQualidade   TesteQualidade? @relation(fields: [testeQualidadeId], references: [id])
-  testeQualidadeId Int?
-  Entrega          Entrega         @relation(fields: [entregaId], references: [id])
-  entregaId        Int
-
-  @@map("entregasDesaprovadas")
-}
-
-model EntregaProduto {
-  id            Int     @id @default(autoincrement())
-  pesoPrevisto  Float?
-  especificacao String?
-  quantidade    Int?
-  pesoReal      Float?
-  Produto       Produto @relation(fields: [produtoId], references: [id])
-  produtoId     Int
-  Entrega       Entrega @relation(fields: [EntregaId], references: [id])
-  EntregaId     Int
-
-  @@map("entregaProdutos")
-}
-
-model TipoUsuario {
-  id          Int       @id @default(autoincrement())
-  tipoUsuario String
-  Usuario     Usuario[]
-
-  @@map("tiposUsuarios")
-}
-
->>>>>>> develop
 model Usuario {
   id             Int             @id @default(autoincrement())
   nome           String
@@ -203,7 +142,6 @@ model Usuario {
 }
 
 model StatusEntrega {
-<<<<<<< HEAD
   id           Int      @id @default(autoincrement())
   aprovado     Boolean
   etapaEntrega String?
@@ -211,14 +149,6 @@ model StatusEntrega {
   entregaId    Int
   Usuario      Usuario? @relation(fields: [usuarioId], references: [id])
   usuarioId    Int?
-=======
-  id        Int      @id @default(autoincrement())
-  approved  Boolean
-  Entrega   Entrega  @relation(fields: [entregaId], references: [id])
-  entregaId Int
-  Usuario   Usuario? @relation(fields: [usuarioId], references: [id])
-  usuarioId Int?
->>>>>>> develop
 
   @@map("statusEntregas")
 }
