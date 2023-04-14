@@ -28,14 +28,15 @@ export class CadastroStatusEntrega {
     //Cadastra O Status da Entrega, pegando se foi aprovado ou Não pelo argumento "Aprovado"
     public async cadastroStatusEntrega(aprovado: boolean, entregaId: number, usuarioId: number, etapaEntrega: string) {
 
-        await prisma.statusEntrega.create({
+       const teste =  await prisma.statusEntrega.create({
             data: {
                 aprovado: aprovado,
                 entregaId: entregaId,
                 usuarioId: usuarioId,
                 etapaEntrega: etapaEntrega
             }
-        })
+       })
+        console.log(teste)
     }
 
     public async SelecionarEntregaProduto(idEntrega: number) {
@@ -87,8 +88,8 @@ export class CadastroStatusEntrega {
 
         let aprovado = true
 
-        testeProdutos.forEach( async(testeProduto: { status: string; idProduto: number; idQualidade: number; Obrigatorio: boolean; }) => {
-            if (testeProduto.status == 'false') {
+        for (const testeProduto of testeProdutos) {
+            if (!testeProduto.status) {
                 const obrigatorio = await prisma.qualidadeProduto.findFirst({
                     where: {
                         Produto: {
@@ -101,19 +102,19 @@ export class CadastroStatusEntrega {
                     select: {
                         obrigatorio: true
                     }
-                });
+                })
                 if (obrigatorio?.obrigatorio) {
                     aprovado = false
                     testeProduto.Obrigatorio = true
                 } else {
                     //Caso não seja obrigatório apenas adiciona o elemento "Obrigatorio" como false
                     testeProduto.Obrigatorio = false
-                }
+                };
             }
             else {
                 testeProduto.Obrigatorio = true
             }
-        });
+        }
 
         // Pega o campo "obrigatorio" para verificar se o teste qualidade daquele Produto é obrigatório ou não
 
