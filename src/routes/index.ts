@@ -1,13 +1,14 @@
 import { Router } from "express";
 
-import { default as productRoutes } from "./product";
 
 import { default as qualitativeStageRoutes } from "./qualitativeStage";
 
+import { default as cadastroFornecedorRoutes } from "./cadastroFornecedor";
+
 const router = Router();
 
-router.use("/produto", productRoutes);
-
 router.use("/qualitativeStage", qualitativeStageRoutes);
+
+router.use("/cadastrar/fornecedor",cadastroFornecedorRoutes );
 
 export default router;

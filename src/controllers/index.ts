@@ -1,2 +1,2 @@
-export { default as ProductController } from "./product";
 export { default as QualitativeStageController } from "./qualitativeStage";
+export { default as CadastroFornecedorController } from "./cadastroFornecedor"
