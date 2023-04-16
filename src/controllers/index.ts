@@ -1,2 +1,2 @@
-export { default as ProductController } from "./product";
+export { default as Menu } from "./menu"
 export { default as QualitativeStageController } from "./qualitativeStage";
