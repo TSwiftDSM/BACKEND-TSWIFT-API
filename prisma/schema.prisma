@@ -14,35 +14,26 @@ model Fornecedor {
   nomeFantasia             String
   fornecedorCNPJ           String                     @unique
   razaoSocial              String
-  Endereco                 String
-  TransportadoraPropria    Boolean
+  endereco                 String
+  transportadora           Boolean
+  fornecedor               Boolean
   FornecedorProduto        FornecedorProduto[]
   Entrega                  Entrega[]
-  TransportadoraFornecedor TransportadoraFornecedor[]
+  TransportadoraFornecedor TransportadoraFornecedor[] @relation("Transportadora")
+  FornecedorTransportado   TransportadoraFornecedor[] @relation("Fornecedor")
 
   @@map("fornecedores")
 }
 
-model Transportadora {
-  id                       Int                        @id @default(autoincrement())
-  nomeFantasia             String
-  fornecedorCNPJ           String                     @unique
-  razaoSocial              String
-  Endereco                 String
-  Entrega                  Entrega[]
-  TransportadoraFornecedor TransportadoraFornecedor[]
-
-  @@map("transportadoras")
-}
-
 model TransportadoraFornecedor {
-  id Int @id @default(autoincrement())
+  id                       Int        @id @default(autoincrement())
+  Fornecedor               Fornecedor @relation("Fornecedor", fields: [fornecedorId], references: [id])
+  fornecedorId             Int
+  FornecedorTransportadora Fornecedor @relation("Transportadora", fields: [transportadoraId], references: [id])
+  transportadoraId         Int
+  Entrega                  Entrega[]
 
-  Fornecedor       Fornecedor?     @relation(fields: [fornecedorId], references: [id])
-  fornecedorId     Int?
-  Transportadora   Transportadora? @relation(fields: [transportadoraId], references: [id])
-  transportadoraId Int?
-
+  @@unique([fornecedorId, transportadoraId])
   @@map("transportadorasFornecedores")
 }
 
@@ -58,6 +49,7 @@ model TesteQualidade {
 model Produto {
   id                Int                 @id @default(autoincrement())
   nomeProduto       String
+  unidade           String?
   FornecedorProduto FornecedorProduto[]
   EntregaProduto    EntregaProduto[]
   QualidadeProduto  QualidadeProduto[]
@@ -86,27 +78,19 @@ model FornecedorProduto {
   @@map("fornecedorProdutos")
 }
 
-model EtapaEntrega {
-  id        Int       @id @default(autoincrement())
-  nomeEtapa String
-  Entrega   Entrega[]
-
-  @@map("etapaEntrega")
-}
-
 model Entrega {
-  id                 Int                  @id @default(autoincrement())
-  nfe                String               @unique
+  id                 Int                       @id @default(autoincrement())
+  nfe                String                    @unique
+  numeroPedido       String                    @unique
   tipoEntrega        String
-  Fornecedor         Fornecedor?          @relation(fields: [fornecedorId], references: [id])
+  Fornecedor         Fornecedor?               @relation(fields: [fornecedorId], references: [id])
   fornecedorId       Int?
-  Transportadora     Transportadora?      @relation(fields: [tranportadoraId], references: [id])
-  tranportadoraId    Int?
-  EtapaEntrega       EtapaEntrega?        @relation(fields: [etapaEntregaId], references: [id])
-  etapaEntregaId     Int?
+  etapaEntrega       String?
   EntregaProduto     EntregaProduto[]
   StatusEntrega      StatusEntrega[]
   EntregaDesparovada EntregaDesparovada[]
+  Transportadora     TransportadoraFornecedor? @relation(fields: [transportadoraId], references: [id])
+  transportadoraId   Int?
 
   @@map("entregas")
 }
@@ -126,7 +110,6 @@ model EntregaProduto {
   id            Int     @id @default(autoincrement())
   pesoPrevisto  Float?
   especificacao String?
-  unidade       String?
   quantidade    Int?
   pesoReal      Float?
   Produto       Produto @relation(fields: [produtoId], references: [id])
@@ -160,13 +143,13 @@ model Usuario {
 }
 
 model StatusEntrega {
-  id        Int      @id @default(autoincrement())
-  approved  Boolean
-  Entrega   Entrega  @relation(fields: [entregaId], references: [id])
-  entregaId Int
-  Usuario   Usuario? @relation(fields: [usuarioId], references: [id])
-  usuarioId Int?
+  id           Int      @id @default(autoincrement())
+  aprovado     Boolean
+  etapaEntrega String?
+  Entrega      Entrega  @relation(fields: [entregaId], references: [id])
+  entregaId    Int
+  Usuario      Usuario? @relation(fields: [usuarioId], references: [id])
+  usuarioId    Int?
 
   @@map("statusEntregas")
 }
-
