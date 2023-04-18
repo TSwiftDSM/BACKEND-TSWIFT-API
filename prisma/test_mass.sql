@@ -14,8 +14,8 @@ INSERT INTO qualidadeProdutos VALUES(1, 1, 2);
 INSERT INTO transportadorasFornecedores VALUES(1,1, 1);
 INSERT INTO transportadorasFornecedores VALUES(2,2,2);
 
-INSERT INTO entregas VALUES(1,'1123entregas','123', 'cif', 1, 1, 1);
-INSERT INTO entregas VALUES(2,'11241','12341', 'cif', 2, 1, 1);
+INSERT INTO entregas VALUES(1,'1123entregas','123', '6X', 'CIF', 1, 1, 1);
+INSERT INTO entregas VALUES(2,'11241','12341', '6X','CIF', 2, 1, 1);
 
 INSERT INTO entregaProdutos VALUES(1,20.4, 'CAMINHAO', 50, 20, 1,1);
 INSERT INTO entregaProdutos VALUES(2,100, 'CAMINHAO', 50, 40,2,1);
@@ -32,8 +32,3 @@ INSERT INTO tiposUsuarios VALUES(3,'CONFERENTE');
 INSERT INTO usuarios VALUES(1,'adm1', 'TESTE1', '1234', '123', curdate(),1);
 INSERT INTO usuarios VALUES(2,'GERENTE1', 'TESTE2', '1234', '1234', curdate() ,2);
 INSERT INTO usuarios VALUES(3,'CONFERENTE1', 'TESTE3', '1234', '12345', curdate(),3);
-<<<<<<< HEAD
-
-
-=======
->>>>>>> origin/develop
