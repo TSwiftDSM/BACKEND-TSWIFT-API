@@ -25,14 +25,23 @@ class QualitativeStageController {
     if (await !aprovado) {
       //Caso sim ele chama a tela de recusa qualitativa
       // Função que chama o cadastro de Recusa da entrega
-      cadastroStatusEntrega.cadastroRecusa(qualidadeProdutos)
-      cadastroStatusEntrega.cadastroStatusEntrega(false, parseInt(qualidadeProdutos[0].idEntrega), 1, 'QUALITATIVA')
-    }
-    else {
-      //Caso não ele cadastra que foi aprovado     
-      cadastroStatusEntrega.cadastroStatusEntrega(true, parseInt(qualidadeProdutos[0].idEntrega), 1, 'QUALITATIVA')
-      cadastroStatusEntrega.cadastroRecusa(qualidadeProdutos)
-      res.status(201)
+      cadastroStatusEntrega.cadastroRecusa(qualidadeProdutos);
+      cadastroStatusEntrega.cadastroStatusEntrega(
+        false,
+        parseInt(qualidadeProdutos[0].idEntrega),
+        1,
+        "QUALITATIVA"
+      );
+    } else {
+      //Caso não ele cadastra que foi aprovado
+      cadastroStatusEntrega.cadastroStatusEntrega(
+        true,
+        parseInt(qualidadeProdutos[0].idEntrega),
+        1,
+        "QUALITATIVA"
+      );
+      cadastroStatusEntrega.cadastroRecusa(qualidadeProdutos);
+      res.status(201);
     }
   }
 

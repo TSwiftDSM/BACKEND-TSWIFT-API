@@ -25,24 +25,30 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 export class CadastroStatusEntrega {
-    //Cadastra O Status da Entrega, pegando se foi aprovado ou Não pelo argumento "Aprovado"
-    
-    public async cadastroRecusa(testeProdutos: any){
-        //
-         await testeProdutos.forEach(async (testeProduto: {idEntrega: number; idQualidade: number; idProduto: number; status: boolean; }) => {
-            if(!testeProduto.status){
-                await prisma.entregaDesaprovada.create({
-                    data: {
-                        motivo: "Produto: " + testeProduto.idProduto,
-                        testeQualidadeId: testeProduto.idQualidade,
-                        entregaId: testeProduto.idEntrega
-                    }
-                });
-            }
-        });
-    }
-    
- 
+  //Cadastra O Status da Entrega, pegando se foi aprovado ou Não pelo argumento "Aprovado"
+
+  public async cadastroRecusa(testeProdutos: any) {
+    //
+    await testeProdutos.forEach(
+      async (testeProduto: {
+        idEntrega: number;
+        idQualidade: number;
+        idProduto: number;
+        status: boolean;
+      }) => {
+        if (!testeProduto.status) {
+          await prisma.entregaDesaprovada.create({
+            data: {
+              motivo: "Produto: " + testeProduto.idProduto,
+              testeQualidadeId: testeProduto.idQualidade,
+              entregaId: testeProduto.idEntrega,
+            },
+          });
+        }
+      }
+    );
+  }
+
   //Cadastra O Status da Entrega, pegando se foi aprovado ou Não pelo argumento "Aprovado"
   public async cadastroStatusEntrega(
     aprovado: boolean,
@@ -134,7 +140,7 @@ export class CadastroStatusEntrega {
           //Caso não seja obrigatório apenas adiciona o elemento "Obrigatorio" como false
           testeProduto.Obrigatorio = false;
         }
-        return aprovado
+        return aprovado;
       } else {
         testeProduto.Obrigatorio = true;
       }
