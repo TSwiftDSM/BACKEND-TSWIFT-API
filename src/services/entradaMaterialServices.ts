@@ -3,6 +3,7 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 
+
 export default class EntradaMaterialServices{
 
     public async VerificacaoEntradaMaterial(data: any, pedido: any) {
@@ -18,6 +19,8 @@ export default class EntradaMaterialServices{
             select: {
                 numeroPedido: true,
                 nfe: true,
+                tipoFrete: true,
+                formaPagmento: true,
                 Fornecedor: {
                     select: {
                         nomeFantasia: true

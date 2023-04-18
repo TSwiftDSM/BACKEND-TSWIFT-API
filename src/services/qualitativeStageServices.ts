@@ -26,6 +26,22 @@ const prisma = new PrismaClient();
 
 export class CadastroStatusEntrega {
     //Cadastra O Status da Entrega, pegando se foi aprovado ou Não pelo argumento "Aprovado"
+    
+    public async cadastroRecusa(testeProdutos: any){
+        //
+         await testeProdutos.forEach(async (testeProduto: {idEntrega: number; idQualidade: number; idProduto: number; status: boolean; }) => {
+            if(!testeProduto.status){
+                await prisma.entregaDesparovada.create({
+                    data: {
+                        motivo: "Produto: " + testeProduto.idProduto,
+                        testeQualidadeId: testeProduto.idQualidade,
+                        entregaId: testeProduto.idEntrega
+                    }
+                });
+            }
+        });
+    }
+    
     public async cadastroStatusEntrega(aprovado: boolean, entregaId: number, usuarioId: number, etapaEntrega: string) {
 
        const teste =  await prisma.statusEntrega.create({
