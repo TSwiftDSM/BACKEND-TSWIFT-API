@@ -3,6 +3,12 @@ import { PrismaClient } from '@prisma/client'
 
 const prisma = new PrismaClient();
 
+interface updateObject {
+    id_entrega_produto: number,
+    especificacao: string,
+    quantidade: number
+}
+
 async function getProducts(id: number): Promise<object>{
     try{
         const products = await prisma.entregaProduto.findMany({
@@ -10,7 +16,7 @@ async function getProducts(id: number): Promise<object>{
                 EntregaId: id
             },
             select:{
-                id: true,
+                id:true,
                 Produto:{
                     select:{
                         id:true,
@@ -26,28 +32,27 @@ async function getProducts(id: number): Promise<object>{
     }
 }
 
-async function updateQuantitative(body: Array<string>): Promise<Array<object>> {
+async function updateQuantitative(body: Array<updateObject>): Promise<Array<object>> {
     const response_array: Array<object> = [];
 
-    for(let i=1; i < body.length; i = i + 5){
-        const id_dp = Number(body[i])
+    for (let cont = 0; cont <= body.length-1; cont ++){
         try{
             const updatedDeliveryProduct = await prisma.entregaProduto.update({
                 where: { 
-                        id: id_dp
+                        id: body[cont].id_entrega_produto
                 },
                 data: {
-                    especificacao: body[i+1],
-                    unidade: body[i+2],
-                    quantidade: Number(body[i+3]),
-                    pesoReal: (Number(body[i+3]) * Number(body[i+4])),
+                    especificacao: body[cont].especificacao,
+                    quantidade: body[cont].quantidade,
+                    pesoReal: body[cont].quantidade
                 }
             });
             response_array.push(updatedDeliveryProduct);
         } catch(exception){
             response_array.push({});
         }
-    }
+    };
+        
     return response_array;
 }
 
@@ -60,22 +65,19 @@ class QuantitativeController {
         let products = await getProducts(id["id"]);
 
         products = Object.assign(products, id);
-        console.log(products)
-        res.render("quantitative", {products_object: products})
+        res.json(products)
     }
     
     async post (req: Request, res: Response) {
-        const body = req.body
-        const array_body: Array<string> = []
+        const req_json: Array<updateObject> = req.body.data
+
+        console.log(req_json)
         
-        for (const key in body) {
-            array_body.push(body[key])    
-        }
-
-        const res_array: Array<object> = await updateQuantitative(array_body)
-
+        const res_array: Array<object> = await updateQuantitative(req_json)
+        
         res.send(res_array)     
     }
 }
 
 export default new QuantitativeController;
+

@@ -18,5 +18,7 @@ app.use(router);
 
 app.use(express.static("public"));
 
-app.listen(3001);
+app.listen(3000, ()=>{
+    console.log('Ouvindo a porta 3000')
+});
  
