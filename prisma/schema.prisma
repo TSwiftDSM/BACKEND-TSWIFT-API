@@ -103,7 +103,7 @@ model Entrega {
 
   StatusEntrega      StatusEntrega[]
   EntregaProduto     EntregaProduto[]
-  EntregaDesparovada EntregaDesaprovada[]
+  EntregaDesaprovada EntregaDesaprovada[]
 
   @@map("entregas")
 }
