@@ -1,4 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-enum FormaPagamento {
+export enum FormaPagamento {
   formapagamento1 = "6X",
 }
