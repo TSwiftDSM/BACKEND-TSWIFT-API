@@ -4,10 +4,34 @@ const prisma = new PrismaClient();
 
 
 
-export default class EntradaMaterialServices{
+export default class EntradaMaterialServices {
+
+    public async cadastroStatusEntrega(aprovado: boolean, entregaId: number, usuarioId: number, etapaEntrega: string) {
+
+        const teste = await prisma.statusEntrega.create({
+            data: {
+                aprovado: aprovado,
+                entregaId: entregaId,
+                usuarioId: usuarioId,
+                etapaEntrega: etapaEntrega
+            }
+        })
+        console.log(teste)
+    }
 
     public async VerificacaoEntradaMaterial(data: any, pedido: any) {
-        return { data, pedido }
+        let aprovado = false
+        if (data.laudo) {
+            if (data.numeroPedido == pedido.numeroPedido &&
+                data.notaFiscal == pedido.nfe &&
+                data.fornecedor == pedido.Fornecedor.nomeFantasia &&
+                data.transportadora == pedido.Transportadora.FornecedorTransportadora.nomeFantasia &&
+                data.tipoFrete == pedido.tipoFrete &&
+                data.condicaoPagamento == pedido.formaPagmento) {
+                aprovado = true
+            }
+        }
+        return aprovado
     }
 
     public async PesquisaEntradaMaterial(data: any) {
@@ -34,7 +58,7 @@ export default class EntradaMaterialServices{
                             }
                         }
                     }
-                }                
+                }
             }
         });
     }

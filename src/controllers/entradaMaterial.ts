@@ -23,9 +23,10 @@ class EntradaMaterial {
         const aprovado = entradaMaterial.VerificacaoEntradaMaterial(data, pedido)
 
         if (await aprovado) {
-            //
+            entradaMaterial.cadastroStatusEntrega(true, data.idEntrega, 1, Etapas.ETAPA1)
+        } else{
+            entradaMaterial.cadastroStatusEntrega(false, data.idEntrega, 1, Etapas.ETAPA1)
         }
-
     }
 }
 
