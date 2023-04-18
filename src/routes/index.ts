@@ -1,21 +1,15 @@
 import { Router } from "express";
 import { default as cadastroProdutoRoutes } from "./cadastroProduto";
+import  {default as Menu }  from "./menu";
+
+import { default as qualitativeStageRoutes } from "./qualitativeStage";
+
 
 const router = Router();
 
-router.get("/", (req, res) => {
-  const users = [
-    "Daniel",
-    "Elaine",
-    "Gabriel",
-    "Jackles",
-    "Miguel",
-    "Otávio",
-    "Vitor",
-    "Yasmin",
-  ];
-  res.render("conferenciaQuantitativa", { users: users });
-});
+router.use("/menu", Menu)
+
+router.use("/qualitativeStage", qualitativeStageRoutes);
 
 router.use("/cadastrar/produto",cadastroProdutoRoutes );
 
