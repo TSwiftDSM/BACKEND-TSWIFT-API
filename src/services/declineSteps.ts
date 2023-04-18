@@ -53,7 +53,7 @@ public async  findIdStatusDelivery(entregaId:number){
           id: idStatusEntrega,
         },
         data: {
-          approved: false,
+          aprovado: false,
         },
       })
     }catch(exception){

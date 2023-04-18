@@ -2,21 +2,16 @@ import { Router } from "express";
 import { default as declineRoutes } from "./declineStepOne";
 import { default as declineTwoRoutes } from "./declineStepTwo";
 import { default as declineThreeRoutes } from "./declineStepThree";
+import  {default as Menu }  from "./menu";
+
+import { default as qualitativeStageRoutes } from "./qualitativeStage";
+
+
 const router = Router();
 
-router.get("/", (req, res) => {
-  const users = [
-    "Daniel",
-    "Elaine",
-    "Gabriel",
-    "Jackles",
-    "Miguel",
-    "Otávio",
-    "Vitor",
-    "Yasmin",
-  ];
-  res.render("conferenciaQuantitativa", { users: users });
-});
+router.use("/menu", Menu)
+
+router.use("/qualitativeStage", qualitativeStageRoutes);
 
 router.use("/recusar/entradaMateriais",declineRoutes );
 router.use("/recusar/qualitativa",declineTwoRoutes );

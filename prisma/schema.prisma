@@ -78,22 +78,14 @@ model FornecedorProduto {
   @@map("fornecedorProdutos")
 }
 
-model EtapaEntrega {
-  id        Int       @id @default(autoincrement())
-  nomeEtapa String
-  Entrega   Entrega[]
-
-  @@map("etapaEntrega")
-}
-
 model Entrega {
   id                 Int                       @id @default(autoincrement())
   nfe                String                    @unique
+  numeroPedido       String                    @unique
   tipoEntrega        String
   Fornecedor         Fornecedor?               @relation(fields: [fornecedorId], references: [id])
   fornecedorId       Int?
-  EtapaEntrega       EtapaEntrega?             @relation(fields: [etapaEntregaId], references: [id])
-  etapaEntregaId     Int?
+  etapaEntrega       String?
   EntregaProduto     EntregaProduto[]
   StatusEntrega      StatusEntrega[]
   EntregaDesparovada EntregaDesparovada[]
@@ -151,12 +143,13 @@ model Usuario {
 }
 
 model StatusEntrega {
-  id        Int      @id @default(autoincrement())
-  approved  Boolean
-  Entrega   Entrega  @relation(fields: [entregaId], references: [id])
-  entregaId Int
-  Usuario   Usuario? @relation(fields: [usuarioId], references: [id])
-  usuarioId Int?
+  id           Int      @id @default(autoincrement())
+  aprovado     Boolean
+  etapaEntrega String?
+  Entrega      Entrega  @relation(fields: [entregaId], references: [id])
+  entregaId    Int
+  Usuario      Usuario? @relation(fields: [usuarioId], references: [id])
+  usuarioId    Int?
 
   @@map("statusEntregas")
 }
