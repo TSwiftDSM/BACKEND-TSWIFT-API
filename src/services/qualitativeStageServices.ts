@@ -115,10 +115,6 @@ export class CadastroStatusEntrega {
                 testeProduto.Obrigatorio = true
             }
         }
-
-        // Pega o campo "obrigatorio" para verificar se o teste qualidade daquele Produto é obrigatório ou não
-
-        //Verifica se o teste de qualidade é obrigatório ou não quando o teste de qualidade foi recusado
         return aprovado
     }
 
