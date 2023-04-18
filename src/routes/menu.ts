@@ -5,5 +5,4 @@ const routes = Router();
 
 routes.get("/api/PesquisarPedidos", menu.PesquisaPedidos);
 
-
 export default routes;

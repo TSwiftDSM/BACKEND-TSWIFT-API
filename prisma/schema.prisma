@@ -41,7 +41,7 @@ model TesteQualidade {
   id                Int                  @id @default(autoincrement())
   nomeTeste         String
   QualidadeProduto  QualidadeProduto[]
-  EntregaDesprovada EntregaDesparovada[]
+  EntregaDesprovada EntregaDesaprovada[]
 
   @@map("testesQualidades")
 }
@@ -79,23 +79,25 @@ model FornecedorProduto {
 }
 
 model Entrega {
-  id                 Int                       @id @default(autoincrement())
-  nfe                String                    @unique
-  numeroPedido       String                    @unique
-  tipoEntrega        String
-  Fornecedor         Fornecedor?               @relation(fields: [fornecedorId], references: [id])
-  fornecedorId       Int?
-  etapaEntrega       String?
-  EntregaProduto     EntregaProduto[]
+  id               Int     @id @default(autoincrement())
+  nfe              String  @unique
+  numeroPedido     String  @unique
+  tipoFrete        String
+  formaPagamento   String
+  fornecedorId     Int?
+  etapaEntrega     String?
+  transportadoraId Int?
   StatusEntrega      StatusEntrega[]
-  EntregaDesparovada EntregaDesparovada[]
-  Transportadora     TransportadoraFornecedor? @relation(fields: [transportadoraId], references: [id])
-  transportadoraId   Int?
+  EntregaProduto     EntregaProduto[]
+  EntregaDesparovada EntregaDesaprovada[]
+
+  Fornecedor     Fornecedor?               @relation(fields: [fornecedorId], references: [id])
+  Transportadora TransportadoraFornecedor? @relation(fields: [transportadoraId], references: [id])
 
   @@map("entregas")
 }
 
-model EntregaDesparovada {
+model EntregaDesaprovada {
   id               Int             @id @default(autoincrement())
   motivo           String
   TesteQualidade   TesteQualidade? @relation(fields: [testeQualidadeId], references: [id])

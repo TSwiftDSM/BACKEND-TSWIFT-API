@@ -22,7 +22,7 @@ class CadastroProduto{
         const nome = req.body.nome;
         const unidadeMedida = req.body.unidadeMedida;
         cadastrarProduto(nome,unidadeMedida);
-        res.json("Produto Cadastrado").status(200);
+        res.send("Produto Cadastrado").status(200);
     };
 }
 
