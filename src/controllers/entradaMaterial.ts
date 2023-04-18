@@ -1,8 +1,6 @@
 import { Request, Response } from "express";
 import EntradaMaterialServices from "../services/entradaMaterialServices";
 
-
-
 const entradaMaterial = new EntradaMaterialServices()
 
 class EntradaMaterial {
@@ -23,9 +21,9 @@ class EntradaMaterial {
         const aprovado = entradaMaterial.VerificacaoEntradaMaterial(data, pedido)
 
         if (await aprovado) {
-            entradaMaterial.cadastroStatusEntrega(true, data.idEntrega, 1, Etapas.ETAPA1)
+            entradaMaterial.cadastroStatusEntrega(true, data.idEntrega, 1, "ENTRADA DE MATERIAL")
         } else{
-            entradaMaterial.cadastroStatusEntrega(false, data.idEntrega, 1, Etapas.ETAPA1)
+            entradaMaterial.cadastroStatusEntrega(false, data.idEntrega, 1, "ENTRADA DE MATERIAL")
         }
     }
 }

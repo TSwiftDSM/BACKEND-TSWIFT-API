@@ -27,7 +27,7 @@ export default class EntradaMaterialServices {
                 data.fornecedor == pedido.Fornecedor.nomeFantasia &&
                 data.transportadora == pedido.Transportadora.FornecedorTransportadora.nomeFantasia &&
                 data.tipoFrete == pedido.tipoFrete &&
-                data.condicaoPagamento == pedido.formaPagmento) {
+                data.condicaoPagamento == pedido.formaPagamento) {
                 aprovado = true
             }
         }
@@ -44,7 +44,7 @@ export default class EntradaMaterialServices {
                 numeroPedido: true,
                 nfe: true,
                 tipoFrete: true,
-                formaPagmento: true,
+                formaPagamento: true,
                 Fornecedor: {
                     select: {
                         nomeFantasia: true
