@@ -81,6 +81,7 @@ model FornecedorProduto {
 model Entrega {
   id                 Int                       @id @default(autoincrement())
   nfe                String                    @unique
+  numeroPedido       String                    @unique
   tipoEntrega        String
   Fornecedor         Fornecedor?               @relation(fields: [fornecedorId], references: [id])
   fornecedorId       Int?

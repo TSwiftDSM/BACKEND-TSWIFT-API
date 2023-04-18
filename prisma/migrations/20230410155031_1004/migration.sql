@@ -60,12 +60,14 @@ CREATE TABLE `fornecedorProdutos` (
 CREATE TABLE `entregas` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `nfe` VARCHAR(191) NOT NULL,
+    `numeroPedido` VARCHAR(191) NOT NULL,
     `tipoEntrega` VARCHAR(191) NOT NULL,
     `fornecedorId` INTEGER NULL,
     `etapaEntrega` VARCHAR(191) NULL,
     `transportadoraId` INTEGER NULL,
 
     UNIQUE INDEX `entregas_nfe_key`(`nfe`),
+    UNIQUE INDEX `entregas_numeroPedido_key`(`numeroPedido`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
