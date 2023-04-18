@@ -10,36 +10,41 @@ datasource db {
 }
 
 model Fornecedor {
-  id                       Int                        @id @default(autoincrement())
-  nomeFantasia             String
-  fornecedorCNPJ           String                     @unique
-  razaoSocial              String
-  endereco                 String
-  transportadora           Boolean
-  fornecedor               Boolean
-  FornecedorProduto        FornecedorProduto[]
+  id             Int     @id @default(autoincrement())
+  nomeFantasia   String
+  fornecedorCNPJ String  @unique
+  razaoSocial    String
+  endereco       String
+  transportadora Boolean
+  fornecedor     Boolean
+
   Entrega                  Entrega[]
-  TransportadoraFornecedor TransportadoraFornecedor[] @relation("Transportadora")
+  FornecedorProduto        FornecedorProduto[]
   FornecedorTransportado   TransportadoraFornecedor[] @relation("Fornecedor")
+  TransportadoraFornecedor TransportadoraFornecedor[] @relation("Transportadora")
 
   @@map("fornecedores")
 }
 
 model TransportadoraFornecedor {
-  id                       Int        @id @default(autoincrement())
-  Fornecedor               Fornecedor @relation("Fornecedor", fields: [fornecedorId], references: [id])
-  fornecedorId             Int
-  FornecedorTransportadora Fornecedor @relation("Transportadora", fields: [transportadoraId], references: [id])
+  id Int @id @default(autoincrement())
+
+  fornecedorId Int
+  Fornecedor   Fornecedor @relation("Fornecedor", fields: [fornecedorId], references: [id])
+
   transportadoraId         Int
-  Entrega                  Entrega[]
+  FornecedorTransportadora Fornecedor @relation("Transportadora", fields: [transportadoraId], references: [id])
+
+  Entrega Entrega[]
 
   @@unique([fornecedorId, transportadoraId])
   @@map("transportadorasFornecedores")
 }
 
 model TesteQualidade {
-  id                Int                  @id @default(autoincrement())
-  nomeTeste         String
+  id        Int    @id @default(autoincrement())
+  nomeTeste String
+
   QualidadeProduto  QualidadeProduto[]
   EntregaDesprovada EntregaDesaprovada[]
 
@@ -47,9 +52,10 @@ model TesteQualidade {
 }
 
 model Produto {
-  id                Int                 @id @default(autoincrement())
-  nomeProduto       String
-  unidade           String?
+  id          Int     @id @default(autoincrement())
+  nomeProduto String
+  unidade     String?
+
   FornecedorProduto FornecedorProduto[]
   EntregaProduto    EntregaProduto[]
   QualidadeProduto  QualidadeProduto[]
@@ -58,100 +64,114 @@ model Produto {
 }
 
 model QualidadeProduto {
-  obrigatorio      Boolean        @default(true)
-  TesteQualidade   TesteQualidade @relation(fields: [testeQualdidaeId], references: [id])
+  obrigatorio Boolean @default(true)
+
   testeQualdidaeId Int
-  Produto          Produto        @relation(fields: [produtoId], references: [id])
-  produtoId        Int
+  TesteQualidade   TesteQualidade @relation(fields: [testeQualdidaeId], references: [id])
+
+  produtoId Int
+  Produto   Produto @relation(fields: [produtoId], references: [id])
 
   @@id([testeQualdidaeId, produtoId])
   @@map("qualidadeProdutos")
 }
 
 model FornecedorProduto {
-  Fornecedor   Fornecedor @relation(fields: [fornecedorId], references: [id])
   fornecedorId Int
-  Produto      Produto    @relation(fields: [produtoId], references: [id])
-  produtoId    Int
+  Fornecedor   Fornecedor @relation(fields: [fornecedorId], references: [id])
+
+  produtoId Int
+  Produto   Produto @relation(fields: [produtoId], references: [id])
 
   @@id([produtoId, fornecedorId])
   @@map("fornecedorProdutos")
 }
 
 model Entrega {
-  id               Int     @id @default(autoincrement())
-  nfe              String  @unique
-  numeroPedido     String  @unique
-  tipoFrete        String
-  formaPagamento   String
-  fornecedorId     Int?
-  etapaEntrega     String?
+  id             Int     @id @default(autoincrement())
+  nfe            String  @unique
+  numeroPedido   String  @unique
+  tipoFrete      String
+  formaPagamento String
+  etapaEntrega   String?
+
+  fornecedorId Int?
+  Fornecedor   Fornecedor? @relation(fields: [fornecedorId], references: [id])
+
   transportadoraId Int?
+  Transportadora   TransportadoraFornecedor? @relation(fields: [transportadoraId], references: [id])
+
   StatusEntrega      StatusEntrega[]
   EntregaProduto     EntregaProduto[]
-  EntregaDesparovada EntregaDesaprovada[]
-
-  Fornecedor     Fornecedor?               @relation(fields: [fornecedorId], references: [id])
-  Transportadora TransportadoraFornecedor? @relation(fields: [transportadoraId], references: [id])
+  EntregaDesaprovada EntregaDesaprovada[]
 
   @@map("entregas")
 }
 
 model EntregaDesaprovada {
-  id               Int             @id @default(autoincrement())
-  motivo           String
-  TesteQualidade   TesteQualidade? @relation(fields: [testeQualidadeId], references: [id])
+  id     Int    @id @default(autoincrement())
+  motivo String
+
   testeQualidadeId Int?
-  Entrega          Entrega         @relation(fields: [entregaId], references: [id])
-  entregaId        Int
+  TesteQualidade   TesteQualidade? @relation(fields: [testeQualidadeId], references: [id])
+
+  entregaId Int
+  Entrega   Entrega @relation(fields: [entregaId], references: [id])
 
   @@map("entregasDesaprovadas")
 }
 
 model EntregaProduto {
   id            Int     @id @default(autoincrement())
-  pesoPrevisto  Float?
-  especificacao String?
   quantidade    Int?
+  pesoPrevisto  Float?
   pesoReal      Float?
-  Produto       Produto @relation(fields: [produtoId], references: [id])
-  produtoId     Int
-  Entrega       Entrega @relation(fields: [EntregaId], references: [id])
-  EntregaId     Int
+  especificacao String?
+
+  produtoId Int
+  Produto   Produto @relation(fields: [produtoId], references: [id])
+
+  EntregaId Int
+  Entrega   Entrega @relation(fields: [EntregaId], references: [id])
 
   @@map("entregaProdutos")
 }
 
 model TipoUsuario {
-  id          Int       @id @default(autoincrement())
+  id          Int    @id @default(autoincrement())
   tipoUsuario String
-  Usuario     Usuario[]
+
+  Usuario Usuario[]
 
   @@map("tiposUsuarios")
 }
 
 model Usuario {
-  id             Int             @id @default(autoincrement())
+  id             Int      @id @default(autoincrement())
   nome           String
   login          String
   senha          String
   cpf            String
   dataNascimento DateTime
-  TipoUsuario    TipoUsuario?    @relation(fields: [tipoUsuarioId], references: [id])
-  tipoUsuarioId  Int?
-  StatusEntrega  StatusEntrega[]
+
+  tipoUsuarioId Int?
+  TipoUsuario   TipoUsuario? @relation(fields: [tipoUsuarioId], references: [id])
+
+  StatusEntrega StatusEntrega[]
 
   @@map("usuarios")
 }
 
 model StatusEntrega {
-  id           Int      @id @default(autoincrement())
-  aprovado     Boolean
+  id           Int     @id @default(autoincrement())
   etapaEntrega String?
-  Entrega      Entrega  @relation(fields: [entregaId], references: [id])
-  entregaId    Int
-  Usuario      Usuario? @relation(fields: [usuarioId], references: [id])
-  usuarioId    Int?
+  aprovado     Boolean
+
+  entregaId Int
+  Entrega   Entrega @relation(fields: [entregaId], references: [id])
+
+  usuarioId Int?
+  Usuario   Usuario? @relation(fields: [usuarioId], references: [id])
 
   @@map("statusEntregas")
 }

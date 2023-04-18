@@ -7,7 +7,15 @@ const prisma = new PrismaClient();
 class EntregaController {
   async get(req: Request, res: Response) {
     try {
-      const entregas = await prisma.entrega.findMany();
+      const entregas = await prisma.entrega.findMany({
+        include: {
+          Fornecedor: {
+            select: {
+              nomeFantasia: true,
+            },
+          },
+        },
+      });
       return res.status(200).json(entregas);
     } catch {
       res.send("Erro ao retornar dados");
