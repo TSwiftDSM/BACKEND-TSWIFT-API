@@ -1,10 +1,10 @@
 import { Router } from "express";
-import { DeclineTwoController } from "../controllers";
+import { RecusarQualitativaController } from "../controllers";
 
 const routes = Router();
 
 // routes.get("/",DeclineTwoController.get);
-routes.post("/:entregaId",DeclineTwoController.post)
+routes.post("/:entregaId",RecusarQualitativaController.post)
 
 
 

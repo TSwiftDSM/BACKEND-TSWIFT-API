@@ -1,20 +1,14 @@
 import { Request, Response } from "express";
-import { PrismaClient } from '@prisma/client'
 import DeclineStepsServices from "../services/declineSteps"
 
 
-const prisma = new PrismaClient()
+
 
 type StatusDelivery = {
   id: number;
 }
 
-class  DeclineDeliveryStepOneController{
-  
-//Criação da função get
-  async get (req: Request, res: Response) {
-    res.render("declineStepOne")
-  };
+class  RecusarEntradaMateriasController{
 //Criação da função post
     async post (req: Request, res: Response) {
       let inconsistencia = req.body.inconsistencia; //Pegar o valor que vem do front para a variavel inconsistencia
@@ -26,10 +20,9 @@ class  DeclineDeliveryStepOneController{
       const motivoCompleto = inconsistencia + ': ' + motivo; // Concatena as duas variáveis
       console.log( `${motivoCompleto}`);
       const entregaId= parseInt(req.params.entregaId);
-      console.log(req.params.entregaId)
-      DeclineStepsServices.declineDelivery(motivoCompleto,entregaId) // Função para recusar a entrega
-      const idStatusDelivery= await DeclineStepsServices.findIdStatusDelivery(entregaId)
-      console.log(`${idStatusDelivery}`)
+      console.log(`EntregaID = ${req.params.entregaId}`);
+      DeclineStepsServices.declineDelivery(motivoCompleto,entregaId); // Função para recusar a entrega
+      const idStatusDelivery= await DeclineStepsServices.findIdStatusDelivery(entregaId);
       const idObj = JSON.parse(JSON.stringify(idStatusDelivery)) as StatusDelivery; // pegar o id da função findIdStatusDelivery pelo atributo id 
       const idInt = idObj.id;
       
@@ -41,4 +34,4 @@ class  DeclineDeliveryStepOneController{
 }
  
 
-export default new DeclineDeliveryStepOneController();
+export default new RecusarEntradaMateriasController();
