@@ -10,31 +10,35 @@ interface Teste {
     esperado: boolean;
     obtido: boolean;
   }
+  
+interface TestData {
+    data: (Teste)[];
+  }
 
-  type StatusDelivery = {
+type StatusDelivery = {
     id: number;
   }
   
 class  DeclineDeliveryStepThreeController{
     async post (req: Request, res: Response){
-        const dados: Teste[] = req.body; // Pega o objeto JSON
-          const nomesTestes: string[] = dados // Pega os testes que não passaram no teste
-          .filter((teste) => teste.obtido === true)
-          .map((teste) => teste.nomeTeste); // retira o "?" no final de cada teste
-        const motivo = JSON.stringify(nomesTestes).replace(/\"/g, ""); //Salva cada teste recusado na variavel
-        const motivoCompleto = "Inconsistências encontradas:" + motivo
-        console.log(motivoCompleto)
-        const entregaId= parseInt(req.params.entregaId);
-        console.log(req.params.entregaId)
-        DeclineStepsServices.declineDelivery(motivoCompleto,entregaId) // Função para recusar a entrega
-        const idStatusDelivery= await DeclineStepsServices.findIdStatusDelivery(entregaId)
-        console.log(`${idStatusDelivery}`)
-        const idObj = JSON.parse(JSON.stringify(idStatusDelivery)) as StatusDelivery; // pegar o id da função findIdStatusDelivery pelo atributo id 
-        const idInt = idObj.id;
-        
-        await DeclineStepsServices.declineStatusDelivery(idInt); // ele altera o status de aprovado de acordo com o id do status
-        
-        res.json(nomesTestes).status(200)
+      const objeto: TestData = req.body;
+      let nomesTestes: string = "";
+      for (const item of objeto.data) {
+        if ('nomeTeste' in item && 'obtido' in item && item.obtido) {
+          nomesTestes += `${item.nomeTeste},`;
+        }                                                                 // Percorre todo o objeto e salva os testes reprovados e a observação
+      }
+      nomesTestes = nomesTestes.slice(0, -1); // remover última vírgula
+      const motivoCompleto = "Inconsistências encontradas:" + nomesTestes;// Junta os testes 
+      console.log(motivoCompleto);
+      const entregaId= parseInt(req.params.entregaId); //Pega o Id da entrega
+      console.log(`EntregaID = ${req.params.entregaId}`);
+      DeclineStepsServices.declineDelivery(motivoCompleto,entregaId); // Função para recusar a entrega
+      const idStatusDelivery= await DeclineStepsServices.findIdStatusDelivery(entregaId); // Função para pegar o Id do statusEntrega
+      const idObj = JSON.parse(JSON.stringify(idStatusDelivery)) as StatusDelivery; // pegar o id da função findIdStatusDelivery pelo atributo id 
+      const idInt = idObj.id;
+      await DeclineStepsServices.declineStatusDelivery(idInt); // ele altera o status de aprovado de acordo com o id do status
+      res.send("Entrega Recusada").status(200);
       };
 }
 

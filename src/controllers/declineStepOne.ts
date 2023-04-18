@@ -35,7 +35,7 @@ class  DeclineDeliveryStepOneController{
       
       await DeclineStepsServices.declineStatusDelivery(idInt); // ele altera o status de aprovado de acordo com o id do status
       
-      res.json("Entrega Recusada").status(200)
+      res.send("Entrega Recusada").status(200)
   };
              
 }

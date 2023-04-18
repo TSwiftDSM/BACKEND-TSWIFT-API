@@ -7,7 +7,7 @@ class DeclineStepServices{
     //Função para persistencia de dados das inconsistencias e motivos da recusa da entrega
 public async  declineDelivery(motivoCompleto:string,entregaId:number){
     try{
-      const reprovarEntrega =await prisma.entregaDesparovada.create({
+      const reprovarEntrega =await prisma.entregaDesaprovada.create({
         data: {
           motivo: motivoCompleto ,
           testeQualidadeId: null,

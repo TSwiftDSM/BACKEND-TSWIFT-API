@@ -1,44 +1,45 @@
 import { Request, Response } from "express";
-import { PrismaClient } from '@prisma/client'
 import DeclineStepsServices from "../services/declineSteps"
-import { string } from "joi";
-
-const prisma = new PrismaClient()
 
 interface Teste {
-    nomeTeste: string;
-    esperado: boolean;
-    obtido: boolean;
-  }
+  nomeTeste: string;
+  esperado: boolean;
+  obtido: boolean;
+}
+
+interface TestData {
+  data: (Teste | { observacoes: string })[];
+}
 
   type StatusDelivery = {
     id: number;
   }
   
 class  DeclineDeliveryStepTwoController{  
-  
     async post (req: Request, res: Response){
-      const dados: Teste[] = req.body; // Pega o objeto JSON
-
-        
-        const nomesTestes: string[] = dados // Pega os testes que não passaram no teste
-        .filter((teste) => teste.obtido === true)
-        .map((teste) => teste.nomeTeste.replace("?", "")); // retira o "?" no final de cada teste
-      const motivo = JSON.stringify(nomesTestes).replace(/\"/g, ""); //Salva cada teste recusado na variavel
-      const observacoes = JSON.stringify(req.body.observacoes); //Salva as observações escritas pelo usuario
-      const motivoCompleto = "Inconsistências encontradas:" + motivo + " " + "Observações:" + observacoes // Junta os testes e as observações
-      console.log(motivoCompleto)
-      const entregaId= parseInt(req.params.entregaId);
-      console.log(req.params.entregaId)
-      DeclineStepsServices.declineDelivery(motivoCompleto,entregaId) // Função para recusar a entrega
-      const idStatusDelivery= await DeclineStepsServices.findIdStatusDelivery(entregaId)
-      console.log(`${idStatusDelivery}`)
+      const objeto: TestData = req.body;
+      let nomesTestes: string = "";
+      let observacoes: string = "";
+      for (const item of objeto.data) {
+        if ('nomeTeste' in item && 'obtido' in item && item.obtido) {
+          nomesTestes += `${item.nomeTeste},`;
+        }                                                                 // Percorre todo o objeto e salva os testes reprovados e a observação
+        if ('observacoes' in item) {
+          observacoes += `${item.observacoes},`;
+        }
+      }
+      nomesTestes = nomesTestes.slice(0, -1); // remover última vírgula
+      observacoes = observacoes.slice(0, -1); // remover última vírgula
+      const motivoCompleto = "Inconsistências encontradas:" + nomesTestes + "  " + "Observações:" + observacoes;// Junta os testes e as observações
+      console.log(motivoCompleto);
+      const entregaId= parseInt(req.params.entregaId); //Pega o Id da entrega
+      console.log(`EntregaID = ${req.params.entregaId}`);
+      DeclineStepsServices.declineDelivery(motivoCompleto,entregaId); // Função para recusar a entrega
+      const idStatusDelivery= await DeclineStepsServices.findIdStatusDelivery(entregaId); // Função para pegar o Id do statusEntrega
       const idObj = JSON.parse(JSON.stringify(idStatusDelivery)) as StatusDelivery; // pegar o id da função findIdStatusDelivery pelo atributo id 
       const idInt = idObj.id;
-      
       await DeclineStepsServices.declineStatusDelivery(idInt); // ele altera o status de aprovado de acordo com o id do status
-      
-      res.json(nomesTestes).status(200)
+      res.send("Entrega Recusada").status(200);
     };
 }
 
