@@ -4,10 +4,60 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
-interface updateObject {
+
+interface dataObject {
   id_entrega_produto: number;
   especificacao: string;
   quantidade: number;
+  peso_previsto: number;
+}
+
+// Objeto de entrada
+interface reqObject {
+  id_entrega: number;
+  id_usuario: number;
+  update_objects: Array<dataObject>;
+}
+
+async function testeRecusaQuantitativa(
+  dataObj: Array<dataObject>,
+  id_delivery: number
+): Promise<boolean> {
+  const methods = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      data: [
+        {
+          nomeTeste: "O valor total informado ultrapassou o limite de +-5%",
+          esperado: false,
+          obtido: true,
+        },
+      ],
+    }),
+  };
+
+  for (let cont = 0; cont < dataObj.length; cont++) {
+    if (
+      dataObj[cont].quantidade < dataObj[cont].peso_previsto * 0.95 ||
+      dataObj[cont].quantidade > dataObj[cont].peso_previsto * 1.05
+    ) {
+      try {
+        await fetch(
+          `http://localhost:3000/recusar/quantitativa/${id_delivery}`,
+          methods
+        );
+        return true;
+      } catch (exception) {
+        console.log("Problema ao registrar recusa");
+        return false;
+      }
+    }
+  }
+
+  return false;
 }
 
 async function getProducts(id: number): Promise<object> {
@@ -18,6 +68,7 @@ async function getProducts(id: number): Promise<object> {
       },
       select: {
         id: true,
+        pesoPrevisto: true,
         Produto: {
           select: {
             id: true,
@@ -33,30 +84,36 @@ async function getProducts(id: number): Promise<object> {
   }
 }
 
-async function updateQuantitative(
-  body: Array<updateObject>
-): Promise<Array<object>> {
-  const response_array: Array<object> = [];
+async function updateQuantitative(body: reqObject): Promise<boolean> {
+  const update_data: Array<dataObject> = body.update_objects;
 
-  for (let cont = 0; cont <= body.length - 1; cont++) {
+  for (let cont = 0; cont <= update_data.length - 1; cont++) {
     try {
-      const updatedDeliveryProduct = await prisma.entregaProduto.update({
+      await prisma.entregaProduto.update({
         where: {
-          id: body[cont].id_entrega_produto,
+          id: update_data[cont].id_entrega_produto,
         },
         data: {
-          especificacao: body[cont].especificacao,
-          quantidade: body[cont].quantidade,
-          pesoReal: body[cont].quantidade,
+          especificacao: update_data[cont].especificacao,
+          quantidade: update_data[cont].quantidade,
+          pesoReal: update_data[cont].quantidade,
         },
       });
-      response_array.push(updatedDeliveryProduct);
+
+      await prisma.statusEntrega.create({
+        data: {
+          etapaEntrega: "Quantitativa",
+          aprovado: true,
+          entregaId: body.id_entrega,
+          usuarioId: body.id_usuario,
+        },
+      });
     } catch (exception) {
-      response_array.push({});
+      console.log(`Um erro aconteceu: ${exception}`);
+      return false;
     }
   }
-
-  return response_array;
+  return true;
 }
 
 class QuantitativeController {
@@ -66,19 +123,26 @@ class QuantitativeController {
     };
 
     let products = await getProducts(id["id"]);
-
     products = Object.assign(products, id);
     res.json(products);
   }
 
   async post(req: Request, res: Response) {
-    const req_json: Array<updateObject> = req.body.data;
-
-    console.log(req_json);
-
-    const res_array: Array<object> = await updateQuantitative(req_json);
-
-    res.send(res_array);
+    const req_json: reqObject = req.body.data;
+    const recusado: boolean = await testeRecusaQuantitativa(
+      req_json.update_objects,
+      req_json.id_entrega
+    );
+    if (recusado == true) {
+      res.send("Etapa Recusada");
+    } else {
+      const status_update: boolean = await updateQuantitative(req_json);
+      if (status_update == false) {
+        res.send("Um erro ocorreu");
+      } else {
+        res.send("Etapa Concluida");
+      }
+    }
   }
 }
 

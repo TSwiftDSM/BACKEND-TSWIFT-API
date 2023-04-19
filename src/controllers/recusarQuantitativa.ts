@@ -7,19 +7,15 @@ interface Teste {
   obtido: boolean;
 }
 
-interface TestData {
-  data: Teste[];
-}
-
 type StatusDelivery = {
   id: number;
 };
 
 class RecusarQuantitativaController {
   async post(req: Request, res: Response) {
-    const objeto: TestData = req.body;
+    const objeto: Array<Teste> = req.body.data;
     let nomesTestes: string = "";
-    for (const item of objeto.data) {
+    for (const item of objeto) {
       if ("nomeTeste" in item && "obtido" in item && item.obtido) {
         nomesTestes += `${item.nomeTeste},`;
       } // Percorre todo o objeto e salva os testes reprovados e a observação
