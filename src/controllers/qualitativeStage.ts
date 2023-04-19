@@ -8,40 +8,41 @@ const cadastroStatusEntrega = new CadastroStatusEntrega();
 
 class QualitativeStageController {
   async post(req: Request, res: Response) {
-    let qualidadeProdutos;
+    let data;
     // Pega o Objeto que vem do Front e verrifica se ele é uma String
-    if (typeof req.query.qualidadeProdutos === "string") {
-      qualidadeProdutos = JSON.parse(req.query.qualidadeProdutos);
+    if (typeof req.query.data === "string") {
+      data = JSON.parse(req.query.data);
     } else {
       // Transforma o que veio de Front em um Json
-      qualidadeProdutos = req.body.qualidadeProdutos;
+      data = req.body.data;
     }
 
-    const aprovado = await cadastroStatusEntrega.VerificandoRecusa(
-      qualidadeProdutos
-    );
+    const aprovado = await cadastroStatusEntrega.VerificandoRecusa(data);
 
     //Verifica se teve algum deste obrigatorio que foi recusado
     if (await !aprovado) {
       //Caso sim ele chama a tela de recusa qualitativa
       // Função que chama o cadastro de Recusa da entrega
-      cadastroStatusEntrega.cadastroRecusa(qualidadeProdutos);
+      cadastroStatusEntrega.cadastroRecusa(data);
       cadastroStatusEntrega.cadastroStatusEntrega(
         false,
-        parseInt(qualidadeProdutos[0].idEntrega),
+        parseInt(data[0].idEntrega),
         1,
         "QUALITATIVA"
       );
+      res.sendStatus(401);
+      res.send(data);
     } else {
       //Caso não ele cadastra que foi aprovado
       cadastroStatusEntrega.cadastroStatusEntrega(
         true,
-        parseInt(qualidadeProdutos[0].idEntrega),
+        parseInt(data[0].idEntrega),
         1,
         "QUALITATIVA"
       );
-      cadastroStatusEntrega.cadastroRecusa(qualidadeProdutos);
+      cadastroStatusEntrega.cadastroRecusa(data);
       res.status(201);
+      res.send(data);
     }
   }
 
