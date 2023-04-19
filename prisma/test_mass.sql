@@ -14,12 +14,12 @@ INSERT INTO qualidadeProdutos VALUES(1, 1, 2);
 INSERT INTO transportadorasFornecedores VALUES(1,1, 1);
 INSERT INTO transportadorasFornecedores VALUES(2,2,2);
 
-INSERT INTO entregas VALUES(1,'1123entregas','123', '6X', 'CIF', 1, 1, 1);
-INSERT INTO entregas VALUES(2,'11241','12341', '6X','CIF', 2, 1, 1);
+INSERT INTO entregas VALUES(1,'1123entregas','123', '6X', 'CIF', curdate(), 1, 1, 1);
+INSERT INTO entregas VALUES(2,'11241','12341', '6X','CIF', curdate(),2, 1, 1);
 
-INSERT INTO entregaProdutos VALUES(1,20.4, 'CAMINHAO', 50, 20, 1,1);
-INSERT INTO entregaProdutos VALUES(2,100, 'CAMINHAO', 50, 40,2,1);
-INSERT INTO entregaProdutos VALUES(3, 50, 'CAMINHAO', 50, 30,2,2);
+INSERT INTO entregaProdutos VALUES(1,20, 50, 20, 'CAMINHAO', 1,1);
+INSERT INTO entregaProdutos VALUES(2,100, 50, 40, 'CAMINHAO',2,1);
+INSERT INTO entregaProdutos VALUES(3, 50, 50, 30, 'CAMINHAO', 2,2);
 
 INSERT INTO fornecedorProdutos VALUES(1,1);
 INSERT INTO fornecedorProdutos VALUES(1,2);
