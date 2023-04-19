@@ -84,6 +84,7 @@ model Entrega {
   numeroPedido     String  @unique
   tipoFrete        String
   formaPagamento   String
+  dataEntrega      DateTime?
   fornecedorId     Int?
   etapaEntrega     String?
   transportadoraId Int?
