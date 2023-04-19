@@ -1,0 +1,5 @@
+export enum Etapas {
+  ETAPA1 = "ENTRADA DE MATERIAL",
+  ETAPA2 = "QUANTITATIVA",
+  ETAPA3 = "QUALITATIVA",
+}
