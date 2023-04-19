@@ -7,7 +7,7 @@ import { CadastroStatusEntrega } from "../services/qualitativeStageServices";
 const cadastroStatusEntrega = new CadastroStatusEntrega();
 
 class QualitativeStageController {
-  async PersistenciaDados(req: Request, res: Response) {
+  async post(req: Request, res: Response) {
     let qualidadeProdutos;
     // Pega o Objeto que vem do Front e verrifica se ele é uma String
     if (typeof req.query.qualidadeProdutos === "string") {
@@ -45,7 +45,7 @@ class QualitativeStageController {
     }
   }
 
-  async post(req: Request, res: Response) {
+  async get(req: Request, res: Response) {
     const idEntrega = parseInt(req.body.idEntrega);
 
     const deliveryProduct =

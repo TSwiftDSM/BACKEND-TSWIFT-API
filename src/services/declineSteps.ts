@@ -1,29 +1,28 @@
-import { PrismaClient } from '@prisma/client'
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { PrismaClient } from "@prisma/client";
 
+const prisma = new PrismaClient();
 
-const prisma = new PrismaClient()
-
-class DeclineStepServices{
-    //Função para persistencia de dados das inconsistencias e motivos da recusa da entrega
-public async  declineDelivery(motivoCompleto:string,entregaId:number){
-    try{
-      const reprovarEntrega =await prisma.entregaDesaprovada.create({
+class DeclineStepServices {
+  //Função para persistencia de dados das inconsistencias e motivos da recusa da entrega
+  public async declineDelivery(motivoCompleto: string, entregaId: number) {
+    try {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const reprovarEntrega = await prisma.entregaDesaprovada.create({
         data: {
-          motivo: motivoCompleto ,
+          motivo: motivoCompleto,
           testeQualidadeId: null,
-          entregaId:entregaId
+          entregaId: entregaId,
         },
-      })
-    }catch(exception){
-        console.log(`Uma exceção ocorreu: ${exception}`)
-        return {}
+      });
+    } catch (exception) {
+      console.log(`Uma exceção ocorreu: ${exception}`);
+      return {};
     }
   }
-  
-  
-  
-public async  findIdStatusDelivery(entregaId:number){
-    try{
+
+  public async findIdStatusDelivery(entregaId: number) {
+    try {
       const statusEntrega = await prisma.statusEntrega.findMany({
         select: {
           id: true,
@@ -33,21 +32,22 @@ public async  findIdStatusDelivery(entregaId:number){
         },
       });
       if (statusEntrega.length === 0) {
-        throw new Error(`Nenhum resultado encontrado para entregaId: ${entregaId}`);
+        throw new Error(
+          `Nenhum resultado encontrado para entregaId: ${entregaId}`
+        );
       }
       const idStatusEntrega = statusEntrega[0]?.id;
       // return JSON.stringify({ id: idStatusEntrega });
       return { id: idStatusEntrega };
-  }catch(exception){
-    console.log(`Uma exceção ocorreu: ${exception}`)
-    return {}
+    } catch (exception) {
+      console.log(`Uma exceção ocorreu: ${exception}`);
+      return {};
+    }
   }
-  }
-  
-  
+
   //Função para alterar o status da entrega para desaprovado
-  public async declineStatusDelivery(idStatusEntrega:number){
-    try{
+  public async declineStatusDelivery(idStatusEntrega: number) {
+    try {
       const alterarStatusEntrega = await prisma.statusEntrega.update({
         where: {
           id: idStatusEntrega,
@@ -55,13 +55,12 @@ public async  findIdStatusDelivery(entregaId:number){
         data: {
           aprovado: false,
         },
-      })
-    }catch(exception){
-        console.log(`Uma exceção ocorreu: ${exception}`)
-        return {}
+      });
+    } catch (exception) {
+      console.log(`Uma exceção ocorreu: ${exception}`);
+      return {};
     }
   }
 }
-
 
 export default new DeclineStepServices();

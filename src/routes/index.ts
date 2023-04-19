@@ -17,11 +17,10 @@ router.use("/entregas", entregas);
 router.use("/conferencia/quantitativa", quantitativeRoutes);
 router.use("/conferencia/qualitativa", qualitativeStageRoutes);
 router.use("/cadastrar/material", EntradaMaterial);
-router.use("/cadastrar/produto",cadastroProdutoRoutes );
-router.use("/cadastrar/fornecedor",cadastroFornecedorRoutes );
-router.use("/recusar/entradaMateriais",recusarEntradaRoutes );
-router.use("/recusar/qualitativa",recusarQualitativaRoutes );
-router.use("/recusar/quantitativa",recusarQuantitativaRoutes );
-
+router.use("/cadastrar/produto", cadastroProdutoRoutes);
+router.use("/cadastrar/fornecedor", cadastroFornecedorRoutes);
+router.use("/recusar/entradaMateriais", recusarEntradaRoutes);
+router.use("/recusar/qualitativa", recusarQualitativaRoutes);
+router.use("/recusar/quantitativa", recusarQuantitativaRoutes);
 
 export default router;
