@@ -16,8 +16,6 @@ class EntradaMaterial {
 
     const pedido = await entradaMaterial.PesquisaEntradaMaterial(data);
 
-    res.send(pedido);
-
     const aprovado = entradaMaterial.VerificacaoEntradaMaterial(data, pedido);
 
     if (await aprovado) {
@@ -27,6 +25,8 @@ class EntradaMaterial {
         1,
         "ENTRADA DE MATERIAL"
       );
+      res.sendStatus(200);
+      res.send(aprovado);
     } else {
       entradaMaterial.cadastroStatusEntrega(
         false,
@@ -34,6 +34,8 @@ class EntradaMaterial {
         1,
         "ENTRADA DE MATERIAL"
       );
+      res.sendStatus(400);
+      res.send(aprovado);
     }
   }
 }

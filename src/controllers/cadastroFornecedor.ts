@@ -10,6 +10,7 @@ class CadastroFornecedor {
     const razaoSocial = req.body.razaoSocial;
     const endereco = req.body.endereco;
     try {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const cadastrarFornecedor = await prisma.fornecedor.create({
         //Função para cadastrar Fornecedor
         data: {

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
@@ -6,6 +7,7 @@ class DeclineStepServices {
   //Função para persistencia de dados das inconsistencias e motivos da recusa da entrega
   public async declineDelivery(motivoCompleto: string, entregaId: number) {
     try {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const reprovarEntrega = await prisma.entregaDesaprovada.create({
         data: {
           motivo: motivoCompleto,
