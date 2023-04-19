@@ -43,6 +43,26 @@ class EntregaController {
         where: {
           id: parseInt(id),
         },
+        include: {
+          EntregaProduto: {
+            include: {
+              Produto: {
+                select: {
+                  QualidadeProduto: {
+                    include: {
+                      TesteQualidade: true,
+                    },
+                  },
+                },
+              },
+            },
+          },
+          Fornecedor: {
+            select: {
+              nomeFantasia: true,
+            },
+          },
+        },
       });
       res.status(200).json(user);
     } catch {

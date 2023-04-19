@@ -65,6 +65,7 @@ model Produto {
 
 model QualidadeProduto {
   obrigatorio Boolean @default(true)
+  aprovado    Boolean @default(false)
 
   testeQualdidaeId Int
   TesteQualidade   TesteQualidade @relation(fields: [testeQualdidaeId], references: [id])
@@ -88,21 +89,23 @@ model FornecedorProduto {
 }
 
 model Entrega {
-  id               Int                       @id @default(autoincrement())
-  nfe              String                    @unique
-  numeroPedido     String                    @unique
-  tipoFrete        String
-  formaPagamento   String
-  dataEntrega      DateTime?
-  fornecedorId     Int?
-  etapaEntrega     String?
+  id             Int       @id @default(autoincrement())
+  nfe            String    @unique
+  numeroPedido   String    @unique
+  tipoFrete      String
+  formaPagamento String
+  etapaEntrega   String?
+  dataEntrega    DateTime?
+
+  fornecedorId Int?
+  Fornecedor   Fornecedor? @relation(fields: [fornecedorId], references: [id])
+
   transportadoraId Int?
   Transportadora   TransportadoraFornecedor? @relation(fields: [transportadoraId], references: [id])
 
   StatusEntrega      StatusEntrega[]
   EntregaProduto     EntregaProduto[]
   EntregaDesaprovada EntregaDesaprovada[]
-  Fornecedor         Fornecedor?          @relation(fields: [fornecedorId], references: [id])
 
   @@map("entregas")
 }
