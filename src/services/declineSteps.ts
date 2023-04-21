@@ -6,6 +6,7 @@ class DeclineStepServices {
   //Função para persistencia de dados das inconsistencias e motivos da recusa da entrega
   public async declineDelivery(motivoCompleto: string, entregaId: number) {
     try {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const reprovarEntrega = await prisma.entregaDesaprovada.create({
         data: {
           motivo: motivoCompleto,
@@ -46,6 +47,7 @@ class DeclineStepServices {
   //Função para alterar o status da entrega para desaprovado
   public async declineStatusDelivery(idStatusEntrega: number) {
     try {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const alterarStatusEntrega = await prisma.statusEntrega.update({
         where: {
           id: idStatusEntrega,

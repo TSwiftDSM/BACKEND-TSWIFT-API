@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-inferrable-types */
+/* eslint-disable @typescript-eslint/consistent-type-definitions */
 import { Request, Response } from "express";
 import DeclineStepsServices from "../services/declineSteps";
 

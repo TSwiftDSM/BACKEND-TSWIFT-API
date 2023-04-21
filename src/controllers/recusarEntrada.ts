@@ -8,7 +8,7 @@ type StatusDelivery = {
 class RecusarEntradaMateriasController {
   //Criação da função post
   async post(req: Request, res: Response) {
-    let inconsistencia = req.body.inconsistencia; //Pegar o valor que vem do front para a variavel inconsistencia
+    const inconsistencia = req.body.inconsistencia; //Pegar o valor que vem do front para a variavel inconsistencia
     if (inconsistencia == "Selecione") {
       //if para o caso de um valor invalido para o banco de dados
       res.status(400).send("Campos obrigatórios não preenchidos");

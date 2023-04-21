@@ -36,6 +36,7 @@ async function alterarStatusEntrega(
   usuarioId: number
 ) {
   try {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const alterarStatusEntrega = await prisma.statusEntrega.update({
       where: {
         id: idStatusEntrega,
@@ -55,7 +56,7 @@ class ForcarAceitacaoController {
   async post(req: Request, res: Response) {
     const entregaId = parseInt(req.params.entregaId); // pega a entregaId pelo parametro da url
     const usuarioId = parseInt(req.params.usuarioId); // pega a usuarioId pelo parametro da url
-    const idStatusEntrega = await buscarIdStatusEntrega(entregaId);  //busca o id do statusEntrega
+    const idStatusEntrega = await buscarIdStatusEntrega(entregaId); //busca o id do statusEntrega
     const idObj = JSON.parse(JSON.stringify(idStatusEntrega)) as StatusEntrega; // pegar o id da função buscarIdStatusEntrega pelo atributo id
     const idInt = idObj.id; // transforma o id em inteiro
     await alterarStatusEntrega(idInt, usuarioId); // ele altera o status de reprovado para aprovado de acordo com o id do status

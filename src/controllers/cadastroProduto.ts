@@ -5,6 +5,7 @@ const prisma = new PrismaClient();
 
 async function cadastrarProduto(nome: string, unidadeMedida: string) {
   try {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const cadastrarProduto = await prisma.produto.create({
       data: {
         nomeProduto: nome,
