@@ -6,24 +6,17 @@ const entradaMaterial = new EntradaMaterialServices();
 class EntradaMaterial {
   async post(req: Request, res: Response) {
     //
-    let data;
-    if (typeof req.query.data === "string") {
-      data = JSON.parse(req.query.data);
-    } else {
-      // Transforma o que veio de Front em um Json
-      data = req.body.data;
-    }
+  
+    const pedido = await entradaMaterial.PesquisaEntradaMaterial(req);
 
-    const pedido = await entradaMaterial.PesquisaEntradaMaterial(data);
-
-    const aprovado = await entradaMaterial.VerificacaoEntradaMaterial(data, pedido);
+    const aprovado = await entradaMaterial.VerificacaoEntradaMaterial(req, pedido);
 
     let retorno
 
     if (await aprovado) {
       await entradaMaterial.cadastroStatusEntrega(
         true,
-        data.idEntrega,
+        req.body.idEntrega,
         1,
         "ENTRADA DE MATERIAL"
       );
@@ -31,7 +24,7 @@ class EntradaMaterial {
     } else {
       await entradaMaterial.cadastroStatusEntrega(
         false,
-        data.idEntrega,
+        req.body.idEntrega,
         1,
         "ENTRADA DE MATERIAL"
       );
