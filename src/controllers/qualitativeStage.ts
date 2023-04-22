@@ -38,10 +38,11 @@ class QualitativeStageController {
   }
 
   async get(req: Request, res: Response) {
-    const idEntrega = parseInt(req.body.idEntrega);
+    const idEntrega = req.params.id;
 
-    const deliveryProduct =
-      cadastroStatusEntrega.SelecionarEntregaProduto(idEntrega);
+    const deliveryProduct = cadastroStatusEntrega.SelecionarEntregaProduto(
+      parseInt(idEntrega)
+    );
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const produtos: Array<any> = [];
