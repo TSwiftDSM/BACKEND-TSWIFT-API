@@ -129,7 +129,6 @@ class QuantitativeController {
 
   async post(req: Request, res: Response) {
     const id_entrega = Number(req.params.deliveryId);
-    console.log(id_entrega)
     const req_json: reqObject = req.body;
     const recusado: boolean = await testeRecusaQuantitativa(
       req_json.update_objects,
