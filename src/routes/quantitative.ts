@@ -5,6 +5,6 @@ import { QuantitativeController } from "../controllers";
 const routes = Router();
 
 routes.get("/:deliveryId", QuantitativeController.get);
-routes.post("/", QuantitativeController.post);
+routes.post("/:deliveryId", QuantitativeController.post);
 
 export default routes;

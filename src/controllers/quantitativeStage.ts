@@ -51,7 +51,6 @@ async function testeRecusaQuantitativa(
         );
         return true;
       } catch (exception) {
-        console.log("Problema ao registrar recusa");
         return false;
       }
     }
@@ -84,7 +83,7 @@ async function getProducts(id: number): Promise<object> {
   }
 }
 
-async function updateQuantitative(body: reqObject): Promise<boolean> {
+async function updateQuantitative(body: reqObject, id_entrega: number): Promise<boolean> {
   const update_data: Array<dataObject> = body.update_objects;
 
   for (let cont = 0; cont <= update_data.length - 1; cont++) {
@@ -104,7 +103,7 @@ async function updateQuantitative(body: reqObject): Promise<boolean> {
         data: {
           etapaEntrega: "Quantitativa",
           aprovado: true,
-          entregaId: body.id_entrega,
+          entregaId: id_entrega,
           usuarioId: body.id_usuario,
         },
       });
@@ -128,15 +127,17 @@ class QuantitativeController {
   }
 
   async post(req: Request, res: Response) {
-    const req_json: reqObject = req.body.data;
+    const id_entrega = Number(req.params.deliveryId);
+    console.log(id_entrega)
+    const req_json: reqObject = req.body;
     const recusado: boolean = await testeRecusaQuantitativa(
       req_json.update_objects,
-      req_json.id_entrega
+      id_entrega
     );
     if (recusado == true) {
       res.send("Etapa Recusada");
     } else {
-      const status_update: boolean = await updateQuantitative(req_json);
+      const status_update: boolean = await updateQuantitative(req_json, id_entrega);
       if (status_update == false) {
         res.send("Um erro ocorreu");
       } else {
