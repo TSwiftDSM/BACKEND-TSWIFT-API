@@ -9,7 +9,7 @@ export default class EntradaMaterialServices {
     usuarioId: number,
     etapaEntrega: string
   ) {
-    const teste = await prisma.statusEntrega.create({
+    await prisma.statusEntrega.create({
       data: {
         aprovado: aprovado,
         entregaId: entregaId,
@@ -17,7 +17,6 @@ export default class EntradaMaterialServices {
         etapaEntrega: etapaEntrega,
       },
     });
-    console.log(teste);
   }
 
   public async VerificacaoEntradaMaterial(data: any, pedido: any) {
@@ -42,7 +41,7 @@ export default class EntradaMaterialServices {
     //
     return await prisma.entrega.findFirst({
       where: {
-        id: data.idEntrega,
+        id: data.idEntrega
       },
       select: {
         numeroPedido: true,

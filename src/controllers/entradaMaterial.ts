@@ -16,27 +16,29 @@ class EntradaMaterial {
 
     const pedido = await entradaMaterial.PesquisaEntradaMaterial(data);
 
-    const aprovado = entradaMaterial.VerificacaoEntradaMaterial(data, pedido);
+    const aprovado = await entradaMaterial.VerificacaoEntradaMaterial(data, pedido);
+
+    let retorno
 
     if (await aprovado) {
-      entradaMaterial.cadastroStatusEntrega(
+      await entradaMaterial.cadastroStatusEntrega(
         true,
         data.idEntrega,
         1,
         "ENTRADA DE MATERIAL"
       );
-      res.sendStatus(200);
-      res.send(aprovado);
+      retorno = 'APROVADO'
     } else {
-      entradaMaterial.cadastroStatusEntrega(
+      await entradaMaterial.cadastroStatusEntrega(
         false,
         data.idEntrega,
         1,
         "ENTRADA DE MATERIAL"
       );
-      res.sendStatus(400);
-      res.send(aprovado);
+      retorno = 'REPROVADO'
+      
     }
+    res.send(retorno);
   }
 }
 
