@@ -48,6 +48,7 @@ class DeclineStepServices {
   //Função para alterar o status da entrega para desaprovado
   public async declineStatusDelivery(idStatusEntrega: number) {
     try {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const alterarStatusEntrega = await prisma.statusEntrega.update({
         where: {
           id: idStatusEntrega,

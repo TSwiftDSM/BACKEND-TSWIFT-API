@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/consistent-type-definitions */
 import { Request, Response } from "express";
 import { PrismaClient } from "@prisma/client";
 

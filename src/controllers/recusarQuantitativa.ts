@@ -15,6 +15,7 @@ type StatusDelivery = {
 class RecusarQuantitativaController {
   async post(req: Request, res: Response) {
     const objeto: Array<Teste> = req.body.data;
+    // eslint-disable-next-line @typescript-eslint/no-inferrable-types
     let nomesTestes: string = "";
     for (const item of objeto) {
       if ("nomeTeste" in item && "obtido" in item && item.obtido) {

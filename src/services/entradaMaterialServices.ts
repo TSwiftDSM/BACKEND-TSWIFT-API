@@ -9,7 +9,7 @@ export default class EntradaMaterialServices {
     usuarioId: number,
     etapaEntrega: string
   ) {
-    const teste = await prisma.statusEntrega.create({
+    await prisma.statusEntrega.create({
       data: {
         aprovado: aprovado,
         entregaId: entregaId,
@@ -17,20 +17,19 @@ export default class EntradaMaterialServices {
         etapaEntrega: etapaEntrega,
       },
     });
-    console.log(teste);
   }
 
   public async VerificacaoEntradaMaterial(data: any, pedido: any) {
     let aprovado = false;
-    if (data.laudo) {
+    if (data.body.laudo) {
       if (
-        data.numeroPedido == pedido.numeroPedido &&
-        data.notaFiscal == pedido.nfe &&
-        data.fornecedor == pedido.Fornecedor.nomeFantasia &&
-        data.transportadora ==
+        data.body.numeroPedido == pedido.numeroPedido &&
+        data.body.notaFiscal == pedido.nfe &&
+        data.body.fornecedor == pedido.Fornecedor.nomeFantasia &&
+        data.body.transportadora ==
           pedido.Transportadora.FornecedorTransportadora.nomeFantasia &&
-        data.tipoFrete == pedido.tipoFrete &&
-        data.condicaoPagamento == pedido.formaPagamento
+        data.body.tipoFrete == pedido.tipoFrete &&
+        data.body.condicaoPagamento == pedido.formaPagamento
       ) {
         aprovado = true;
       }
@@ -42,7 +41,7 @@ export default class EntradaMaterialServices {
     //
     return await prisma.entrega.findFirst({
       where: {
-        id: data.idEntrega,
+        id: data.body.idEntrega
       },
       select: {
         numeroPedido: true,
