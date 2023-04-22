@@ -8,14 +8,7 @@ const cadastroStatusEntrega = new CadastroStatusEntrega();
 
 class QualitativeStageController {
   async post(req: Request, res: Response) {
-    let data;
-    // Pega o Objeto que vem do Front e verrifica se ele é uma String
-    if (typeof req.query.data === "string") {
-      data = JSON.parse(req.query.data);
-    } else {
-      // Transforma o que veio de Front em um Json
-      data = req.body.data;
-    }
+    const data = req.body.qualidadeProdutos;
 
     const aprovado = await cadastroStatusEntrega.VerificandoRecusa(data);
 
@@ -30,8 +23,7 @@ class QualitativeStageController {
         1,
         "QUALITATIVA"
       );
-      res.sendStatus(401);
-      res.send(data);
+      res.status(201).send("Entrega Recusada");
     } else {
       //Caso não ele cadastra que foi aprovado
       cadastroStatusEntrega.cadastroStatusEntrega(
@@ -41,8 +33,7 @@ class QualitativeStageController {
         "QUALITATIVA"
       );
       cadastroStatusEntrega.cadastroRecusa(data);
-      res.status(201);
-      res.send(data);
+      res.status(201).send("Entrega Aprovada");
     }
   }
 
