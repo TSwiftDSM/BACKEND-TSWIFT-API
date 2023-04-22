@@ -6,12 +6,15 @@ const entradaMaterial = new EntradaMaterialServices();
 class EntradaMaterial {
   async post(req: Request, res: Response) {
     //
-  
+
     const pedido = await entradaMaterial.PesquisaEntradaMaterial(req);
 
-    const aprovado = await entradaMaterial.VerificacaoEntradaMaterial(req, pedido);
+    const aprovado = await entradaMaterial.VerificacaoEntradaMaterial(
+      req,
+      pedido
+    );
 
-    let retorno
+    let retorno;
 
     if (await aprovado) {
       await entradaMaterial.cadastroStatusEntrega(
@@ -20,7 +23,7 @@ class EntradaMaterial {
         1,
         "ENTRADA DE MATERIAL"
       );
-      retorno = 'APROVADO'
+      retorno = "APROVADO";
     } else {
       await entradaMaterial.cadastroStatusEntrega(
         false,
@@ -28,8 +31,7 @@ class EntradaMaterial {
         1,
         "ENTRADA DE MATERIAL"
       );
-      retorno = 'REPROVADO'
-      
+      retorno = "REPROVADO";
     }
     res.send(retorno);
   }

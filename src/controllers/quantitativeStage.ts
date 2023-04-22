@@ -84,7 +84,10 @@ async function getProducts(id: number): Promise<object> {
   }
 }
 
-async function updateQuantitative(body: reqObject, id_entrega: number): Promise<boolean> {
+async function updateQuantitative(
+  body: reqObject,
+  id_entrega: number
+): Promise<boolean> {
   const update_data: Array<dataObject> = body.update_objects;
 
   for (let cont = 0; cont <= update_data.length - 1; cont++) {
@@ -137,7 +140,10 @@ class QuantitativeController {
     if (recusado == true) {
       res.send("Etapa Recusada");
     } else {
-      const status_update: boolean = await updateQuantitative(req_json, id_entrega);
+      const status_update: boolean = await updateQuantitative(
+        req_json,
+        id_entrega
+      );
       if (status_update == false) {
         res.send("Um erro ocorreu");
       } else {

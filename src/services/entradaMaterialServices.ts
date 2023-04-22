@@ -41,7 +41,7 @@ export default class EntradaMaterialServices {
     //
     return await prisma.entrega.findFirst({
       where: {
-        id: data.body.idEntrega
+        id: data.body.idEntrega,
       },
       select: {
         numeroPedido: true,
