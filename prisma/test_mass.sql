@@ -1,29 +1,107 @@
-INSERT INTO testesQualidades VALUES(1, 'TESTE QUALIDADE 1');
-INSERT INTO testesQualidades VALUES(2, 'TESTE QUALIDADE 2');
+INSERT INTO testesQualidades VALUES(1, 'TESTE DE EMBALAGEM');
+INSERT INTO testesQualidades VALUES(2, 'TESTE UMIDADE');
+INSERT INTO testesQualidades VALUES(3, 'TESTE DE QUÍMICA');
+INSERT INTO testesQualidades VALUES(4, 'TESTE DE FUNGOS');
 
-INSERT INTO produtos VALUES(1,'PRODUTO 1', 'KG');
-INSERT INTO produtos VALUES(2,'PRODUTO 2', 'KG');
+INSERT INTO produtos VALUES(1,'ARROZ', 'KG');
+INSERT INTO produtos VALUES(2,'FEIJÃO', 'KG');
+INSERT INTO produtos VALUES(3,'SOJA', 'KG');
+INSERT INTO produtos VALUES(4,'ÓLEO', 'LITRO');
 
-INSERT INTO fornecedores VALUES(1,'Fornecedor1','1', 'Fornecedor1', 'Rua dos Bobos', true, true);
-INSERT INTO fornecedores VALUES(2,'Fornecedor2','2', 'Fornecedor2', 'Rua dos Bobos', true, true);
 
-INSERT INTO qualidadeProdutos VALUES(1, 1, 1);
-INSERT INTO qualidadeProdutos VALUES(1, 2, 1);
-INSERT INTO qualidadeProdutos VALUES(1, 1, 2);
+INSERT INTO fornecedores VALUES(1,'Fazenda do Sol Nascente','06.746.628/0001-17', 'SOL NASCENTE', 'Jardim Independente I', true, true);
+INSERT INTO fornecedores VALUES(2,'Fazenda LTDA da Soja','86.384.428/0001-09', 'LTDA SOJA', 'Rua Sargento Vasconcelos', true, true);
+INSERT INTO fornecedores VALUES(3,'Fazenda LTDA Girassol','82.476.614/0001-09', 'LTDA SOJA', 'Rua Galdino José de Bessa', true, true);
 
-INSERT INTO transportadorasFornecedores VALUES(1,1, 1);
-INSERT INTO transportadorasFornecedores VALUES(2,2,2);
-
-INSERT INTO entregas VALUES(1,'1123entregas','123', 'CIF' , '6X', 1,curdate(), 1, 1);
-INSERT INTO entregas VALUES(2,'11241','12341', 'CIF', '6X', 2,curdate(), 1, 2);
-
-INSERT INTO entregaProdutos VALUES(1,20, 50, 20, 'CAMINHAO', 1,1);
-INSERT INTO entregaProdutos VALUES(2,100, 50, 40, 'CAMINHAO',2,1);
-INSERT INTO entregaProdutos VALUES(3, 50, 50, 30, 'CAMINHAO', 2,2);
+--
 
 INSERT INTO fornecedorProdutos VALUES(1,1);
 INSERT INTO fornecedorProdutos VALUES(1,2);
+INSERT INTO fornecedorProdutos VALUES(1,3);
+INSERT INTO fornecedorProdutos VALUES(1,4);
+
+--
+
 INSERT INTO fornecedorProdutos VALUES(2,2);
+INSERT INTO fornecedorProdutos VALUES(2,3);
+
+--
+
+INSERT INTO fornecedorProdutos VALUES(3,4);
+INSERT INTO fornecedorProdutos VALUES(3,3);
+INSERT INTO fornecedorProdutos VALUES(3,2);
+INSERT INTO fornecedorProdutos VALUES(3,1);
+
+-- ARROZ
+
+INSERT INTO qualidadeProdutos VALUES(0, 1, 1);
+INSERT INTO qualidadeProdutos VALUES(1, 2, 1);
+INSERT INTO qualidadeProdutos VALUES(1, 4, 1);
+
+-- FEIJÃO
+
+INSERT INTO qualidadeProdutos VALUES(0, 1, 2);
+INSERT INTO qualidadeProdutos VALUES(1, 3, 2);
+
+-- SOJA
+
+INSERT INTO qualidadeProdutos VALUES(1, 1, 3);
+INSERT INTO qualidadeProdutos VALUES(1, 2, 3);
+INSERT INTO qualidadeProdutos VALUES(1, 3, 3);
+
+-- ÓLEO
+
+INSERT INTO qualidadeProdutos VALUES(1, 1, 4);
+
+-- 
+
+INSERT INTO transportadorasFornecedores VALUES(1,1, 1);
+INSERT INTO transportadorasFornecedores VALUES(2,2,2);
+INSERT INTO transportadorasFornecedores VALUES(3,3,3);
+
+-- ENTREGA 1
+
+INSERT INTO entregas VALUES(1,'12','1', 'CIF' , '6X', '',curdate(), 1, 1);
+
+INSERT INTO entregaProdutos VALUES(1,NULL, 50, NULL, NULL, 1,1);
+INSERT INTO entregaProdutos VALUES(2,NULL, 50, NULL, NULL,2,1);
+INSERT INTO entregaProdutos VALUES(3,NULL, 50, NULL, NULL,4,1);
+
+-- ENTREGA 2
+
+INSERT INTO entregas VALUES(2,'13','2', 'CIF', '6X', '',curdate(), 2, 2);
+
+INSERT INTO entregaProdutos VALUES(4, NULL, 50, NULL, NULL, 3,2);
+
+-- ENTREGA 3
+
+INSERT INTO entregas VALUES(3,'14','3', 'CIF' , '6X', '',curdate(), 3, 3);
+
+INSERT INTO entregaProdutos VALUES(5, NULL, 50, NULL, NULL, 3,3);
+INSERT INTO entregaProdutos VALUES(6, NULL, 70, NULL, NULL, 2,3);
+
+-- ENTREGA 4
+
+INSERT INTO entregas VALUES(4,'15','4', 'CIF', '12X', '',curdate(), 3, 3);
+
+INSERT INTO entregaProdutos VALUES(7, NULL, 50, NULL, NULL, 1,4);
+INSERT INTO entregaProdutos VALUES(8, NULL, 70, NULL, NULL, 2,4);
+INSERT INTO entregaProdutos VALUES(9, NULL, 60, NULL, NULL, 3,4);
+INSERT INTO entregaProdutos VALUES(10, NULL, 40, NULL, NULL, 4,4);
+
+-- ENTREGA 5
+
+INSERT INTO entregas VALUES(5,'16','5', 'CIF' , '6X', '',curdate(), 1, 1);
+INSERT INTO entregaProdutos VALUES(11,NULL, 50, NULL, NULL,2,5);
+INSERT INTO entregaProdutos VALUES(12,NULL, 10, NULL, NULL,4,5);
+
+-- ENTREGA 6
+
+INSERT INTO entregas VALUES(6,'17','6', 'CIF', '6X', '',curdate(), 2, 2);
+INSERT INTO entregaProdutos VALUES(13,NULL, 50, NULL, NULL,2,6);
+INSERT INTO entregaProdutos VALUES(14,NULL, 10, NULL, NULL,3,6);
+
+-- USUARIOS
 
 INSERT INTO tiposUsuarios VALUES(1,'ADM');
 INSERT INTO tiposUsuarios VALUES(2,'GERENTE');
