@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { PrismaClient } from "@prisma/client";
+import { Etapas } from "../data/EnumEtapa";
 
 const prisma = new PrismaClient();
 
@@ -23,7 +24,7 @@ class DeclineStepServices {
 
   public async findIdStatusDelivery(entregaId: number) {
     try {
-      const statusEntrega = await prisma.statusEntrega.findMany({
+      let statusEntrega = await prisma.statusEntrega.findMany({
         select: {
           id: true,
         },
@@ -32,10 +33,24 @@ class DeclineStepServices {
         },
       });
       if (statusEntrega.length === 0) {
-        throw new Error(
-          `Nenhum resultado encontrado para entregaId: ${entregaId}`
-        );
+        await prisma.statusEntrega.create({
+          data: {
+            entregaId: entregaId,
+            usuarioId: 1,
+            etapaEntrega: Etapas.ETAPA1,
+            aprovado: false
+          }
+        });
+        statusEntrega = await prisma.statusEntrega.findMany({
+          select: {
+            id: true,
+          },
+          where: {
+            entregaId: entregaId,
+          },
+        });
       }
+
       const idStatusEntrega = statusEntrega[0]?.id;
       // return JSON.stringify({ id: idStatusEntrega });
       return { id: idStatusEntrega };
