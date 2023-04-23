@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/consistent-type-definitions */
 import { Request, Response } from "express";
 import { PrismaClient } from "@prisma/client";
+import { Etapas } from "../data/EnumEtapa";
 
 const prisma = new PrismaClient();
 
@@ -90,6 +91,15 @@ async function updateQuantitative(
 ): Promise<boolean> {
   const update_data: Array<dataObject> = body.update_objects;
 
+  await prisma.entrega.update({
+    data: {
+      etapaEntrega: Etapas.ETAPA2
+    },
+    where: {
+      id: id_entrega
+    }
+  });
+
   for (let cont = 0; cont <= update_data.length - 1; cont++) {
     try {
       await prisma.entregaProduto.update({
@@ -105,12 +115,13 @@ async function updateQuantitative(
 
       await prisma.statusEntrega.create({
         data: {
-          etapaEntrega: "Quantitativa",
+          etapaEntrega: Etapas.ETAPA2,
           aprovado: true,
           entregaId: id_entrega,
           usuarioId: body.id_usuario,
         },
       });
+     
     } catch (exception) {
       console.log(`Um erro aconteceu: ${exception}`);
       return false;

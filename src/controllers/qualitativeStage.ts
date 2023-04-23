@@ -3,6 +3,7 @@
 import { Request, Response } from "express";
 import { number, string } from "joi";
 import { CadastroStatusEntrega } from "../services/qualitativeStageServices";
+import { Etapas } from "../data/EnumEtapa";
 
 const cadastroStatusEntrega = new CadastroStatusEntrega();
 
@@ -21,7 +22,7 @@ class QualitativeStageController {
         false,
         parseInt(data[0].idEntrega),
         1,
-        "QUALITATIVA"
+        Etapas.ETAPA3
       );
       res.status(201).send("Entrega Recusada");
     } else {
@@ -30,7 +31,7 @@ class QualitativeStageController {
         true,
         parseInt(data[0].idEntrega),
         1,
-        "QUALITATIVA"
+        Etapas.ETAPA3
       );
       cadastroStatusEntrega.cadastroRecusa(data);
       res.status(201).send("Entrega Aprovada");

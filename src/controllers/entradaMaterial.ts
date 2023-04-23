@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import EntradaMaterialServices from "../services/entradaMaterialServices";
+import { Etapas } from "../data/EnumEtapa";
 
 const entradaMaterial = new EntradaMaterialServices();
 
@@ -21,7 +22,7 @@ class EntradaMaterial {
         true,
         req.body.idEntrega,
         1,
-        "ENTRADA DE MATERIAL"
+        Etapas.ETAPA1
       );
       retorno = "APROVADO";
     } else {
@@ -29,7 +30,7 @@ class EntradaMaterial {
         false,
         req.body.idEntrega,
         1,
-        "ENTRADA DE MATERIAL"
+        Etapas.ETAPA1
       );
       retorno = "REPROVADO";
     }

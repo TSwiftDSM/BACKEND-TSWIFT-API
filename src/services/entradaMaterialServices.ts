@@ -17,6 +17,14 @@ export default class EntradaMaterialServices {
         etapaEntrega: etapaEntrega,
       },
     });
+    await prisma.entrega.update({
+      data: {
+        etapaEntrega: etapaEntrega
+      },
+      where: {
+        id: entregaId
+      }
+    });
   }
 
   public async VerificacaoEntradaMaterial(data: any, pedido: any) {

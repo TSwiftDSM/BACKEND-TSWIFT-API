@@ -64,6 +64,14 @@ export class CadastroStatusEntrega {
         etapaEntrega: etapaEntrega,
       },
     });
+    await prisma.entrega.update({
+      data: {
+        etapaEntrega: etapaEntrega
+      },
+      where: {
+        id: entregaId
+      }
+    });
     console.log(teste);
   }
 
