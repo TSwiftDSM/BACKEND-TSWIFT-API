@@ -62,6 +62,11 @@ class EntregaController {
               nomeFantasia: true,
             },
           },
+          StatusEntrega: {
+            where: {
+              aprovado: false,
+            },
+          },
         },
       });
       res.status(200).json(user);
