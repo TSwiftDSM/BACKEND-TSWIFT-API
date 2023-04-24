@@ -54,6 +54,20 @@ https://youtu.be/6gblBDUkuOE
 |US_13|Eu, como gerente, preciso de uma interface onde posso inserir regras de recebimento| Interface de cadastro de regras | S4 |
 |US_14|Eu, como gerente, preciso realizar recebimento forçado caso seja recusada a entrega conforme as regras cadastradas| Botão na interface do gerente | S2 |
 
+#
+
+# :white_check_mark: DoD e DoR:
+|Artefato|Definição|Critério|
+|--------|---------|--------|
+|Mockup| Identifica funcionalidades antes de começar a codificá-las| DoD |
+|Modelo Lógico do Banco de dados | É usado como a base de dados para criação do modelo físico| DoD|
+|Critério de Aceitação| lista de requisitos claros e específicos que devem ser atendidos | DoD|
+|Teste de Aceitação| Testes que devem ser realizados para garantir que ela atenda aos critérios| DoD|
+| Modelo Físico do Banco de dados | É a representação da estrutura de dados em um banco | DoR |
+|Protótipo Navegável| Navegação das Interfaces baseadas no Mockup| DoR|
+
+
+
 # :busts_in_silhouette: Equipe:
 || Nome | Github |
 |--------|------|--------|
