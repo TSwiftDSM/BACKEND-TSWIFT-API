@@ -4,7 +4,7 @@ Baseado nos requisitos apresentados pelo cliente a TSwift desenvolveu o projeto 
 
 ## Timeline de entregas
 
-
+<img src="/doc/img/timeline.png">
 
 # :bookmark_tabs: Sobre a API
 ### :black_flag: Sprint 1:
