@@ -21,6 +21,7 @@ async function buscarIdStatusEntrega(entregaId: number) {
       throw new Error(
         `Nenhum resultado encontrado para entregaId: ${entregaId}`
       );
+
     }
     const idStatusEntrega = statusEntrega[0]?.id;
     // return JSON.stringify({ id: idStatusEntrega });

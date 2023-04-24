@@ -45,11 +45,11 @@ export default class EntradaMaterialServices {
     return aprovado;
   }
 
-  public async PesquisaEntradaMaterial(data: any) {
+  public async PesquisaEntradaMaterial(data: number) {
     //
     return await prisma.entrega.findFirst({
       where: {
-        id: data.body.idEntrega,
+        id: data,
       },
       select: {
         numeroPedido: true,
