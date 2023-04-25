@@ -19,11 +19,11 @@ export default class EntradaMaterialServices {
     });
     await prisma.entrega.update({
       data: {
-        etapaEntrega: etapaEntrega
+        etapaEntrega: etapaEntrega,
       },
       where: {
-        id: entregaId
-      }
+        id: entregaId,
+      },
     });
   }
 

@@ -93,11 +93,11 @@ async function updateQuantitative(
 
   await prisma.entrega.update({
     data: {
-      etapaEntrega: Etapas.ETAPA2
+      etapaEntrega: Etapas.ETAPA2,
     },
     where: {
-      id: id_entrega
-    }
+      id: id_entrega,
+    },
   });
 
   for (let cont = 0; cont <= update_data.length - 1; cont++) {
@@ -121,7 +121,6 @@ async function updateQuantitative(
           usuarioId: body.id_usuario,
         },
       });
-     
     } catch (exception) {
       console.log(`Um erro aconteceu: ${exception}`);
       return false;

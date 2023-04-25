@@ -80,7 +80,7 @@ class DeclineStepServices {
 
   public async updateDeliveryStep(idEntrega: number) {
     try {
-      prisma.entrega.update({
+      await prisma.entrega.update({
         where: {
           id: idEntrega,
         },

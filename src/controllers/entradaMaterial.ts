@@ -5,16 +5,15 @@ import { Etapas } from "../data/EnumEtapa";
 const entradaMaterial = new EntradaMaterialServices();
 
 class EntradaMaterial {
-
   async get(req: Request, res: Response) {
-    const idEntrega =  parseInt(req.params.idEntrega)
+    const idEntrega = parseInt(req.params.idEntrega);
     const pedido = await entradaMaterial.PesquisaEntradaMaterial(idEntrega);
-    res.send(pedido)
+    res.send(pedido);
   }
 
   async post(req: Request, res: Response) {
     //
-    const idEntrega = req.body.idEntrega
+    const idEntrega = req.body.idEntrega;
     const pedido = await entradaMaterial.PesquisaEntradaMaterial(idEntrega);
 
     const aprovado = await entradaMaterial.VerificacaoEntradaMaterial(
