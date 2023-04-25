@@ -29,6 +29,7 @@ class RecusarEntradaMateriasController {
     const idInt = idObj.id;
 
     await DeclineStepsServices.declineStatusDelivery(idInt); // ele altera o status de aprovado de acordo com o id do status
+    await DeclineStepsServices.updateDeliveryStep(entregaId);
 
     res.send("Entrega Recusada").status(200);
   }
