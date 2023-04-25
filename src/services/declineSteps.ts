@@ -78,14 +78,14 @@ class DeclineStepServices {
     }
   }
 
-  public async updateDeliveryStep(idEntrega: number) {
+  public async updateDeliveryStep(idEntrega: number, etapa: string) {
     try {
       await prisma.entrega.update({
         where: {
           id: idEntrega,
         },
         data: {
-          etapaEntrega: Etapas.ETAPA1,
+          etapaEntrega: etapa,
         },
       });
     } catch {

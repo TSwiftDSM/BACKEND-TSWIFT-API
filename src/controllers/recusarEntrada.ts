@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import DeclineStepsServices from "../services/declineSteps";
+import { Etapas } from "../data/EnumEtapa";
 
 type StatusDelivery = {
   id: number;
@@ -29,7 +30,7 @@ class RecusarEntradaMateriasController {
     const idInt = idObj.id;
 
     await DeclineStepsServices.declineStatusDelivery(idInt); // ele altera o status de aprovado de acordo com o id do status
-    await DeclineStepsServices.updateDeliveryStep(entregaId);
+    await DeclineStepsServices.updateDeliveryStep(entregaId, Etapas.ETAPA1);
 
     res.send("Entrega Recusada").status(200);
   }
