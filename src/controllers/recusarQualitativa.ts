@@ -2,6 +2,7 @@
 /* eslint-disable @typescript-eslint/consistent-type-definitions */
 import { Request, Response } from "express";
 import DeclineStepsServices from "../services/declineSteps";
+import { Etapas } from "../data/EnumEtapa";
 
 interface Teste {
   nomeTeste: string;
@@ -50,6 +51,7 @@ class RecusarQualitativaController {
     ) as StatusDelivery; // pegar o id da função findIdStatusDelivery pelo atributo id
     const idInt = idObj.id;
     await DeclineStepsServices.declineStatusDelivery(idInt); // ele altera o status de aprovado de acordo com o id do status
+    await DeclineStepsServices.updateDeliveryStep(entregaId, Etapas.ETAPA3);
     res.send("Entrega Recusada").status(200);
   }
 }

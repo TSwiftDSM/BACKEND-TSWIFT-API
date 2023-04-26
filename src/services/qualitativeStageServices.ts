@@ -66,11 +66,11 @@ export class CadastroStatusEntrega {
     });
     await prisma.entrega.update({
       data: {
-        etapaEntrega: etapaEntrega
+        etapaEntrega: etapaEntrega,
       },
       where: {
-        id: entregaId
-      }
+        id: entregaId,
+      },
     });
     console.log(teste);
   }
@@ -148,7 +148,6 @@ export class CadastroStatusEntrega {
           //Caso não seja obrigatório apenas adiciona o elemento "Obrigatorio" como false
           testeProduto.Obrigatorio = false;
         }
-        
       } else {
         testeProduto.Obrigatorio = true;
       }

@@ -11,12 +11,12 @@ class PesquisaEtapa {
 
     const etapas = await prisma.statusEntrega.findMany({
       where: {
-        entregaId: idEntrega
-        },
-        select: {
-            etapaEntrega: true,
-            aprovado: true  
-        }
+        entregaId: idEntrega,
+      },
+      select: {
+        etapaEntrega: true,
+        aprovado: true,
+      },
     });
     res.send(etapas);
   }

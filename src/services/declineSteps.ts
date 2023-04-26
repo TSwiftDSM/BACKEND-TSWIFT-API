@@ -38,8 +38,8 @@ class DeclineStepServices {
             entregaId: entregaId,
             usuarioId: 1,
             etapaEntrega: Etapas.ETAPA1,
-            aprovado: false
-          }
+            aprovado: false,
+          },
         });
         statusEntrega = await prisma.statusEntrega.findMany({
           select: {
@@ -75,6 +75,21 @@ class DeclineStepServices {
     } catch (exception) {
       console.log(`Uma exceção ocorreu: ${exception}`);
       return {};
+    }
+  }
+
+  public async updateDeliveryStep(idEntrega: number, etapa: string) {
+    try {
+      await prisma.entrega.update({
+        where: {
+          id: idEntrega,
+        },
+        data: {
+          etapaEntrega: etapa,
+        },
+      });
+    } catch {
+      return;
     }
   }
 }
