@@ -7,8 +7,10 @@ import { FornecedorSchema } from "../schemas";
 const routes = Router();
 
 routes.get("/", Fornecedor.get);
-routes.post("/", schemaValidator(FornecedorSchema.joi), Fornecedor.post)
-routes.delete("/:id", Fornecedor.delete)
-routes.put("/:id", schemaValidator(FornecedorSchema.joi), Fornecedor.update)
+routes.get("/porId/:id", Fornecedor.getPorId);
+routes.get("/porNome/:nomeFantasia", Fornecedor.getPorNome);
+routes.post("/", schemaValidator(FornecedorSchema.joi), Fornecedor.post);
+routes.delete("/:id", Fornecedor.delete);
+routes.put("/:id", schemaValidator(FornecedorSchema.joi), Fornecedor.update);
 
 export default routes;

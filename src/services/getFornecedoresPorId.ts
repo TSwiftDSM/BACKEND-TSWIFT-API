@@ -2,12 +2,13 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-class GetFornecedor {
-  async get() {
+class GetFornecedorPorID {
+  async getPorId(id: number) {
     try {
       const fornecedores = await prisma.fornecedor.findMany({
         where: {
           fornecedor: true,
+          id: id,
         },
         select: {
           id: true,
@@ -28,4 +29,4 @@ class GetFornecedor {
   }
 }
 
-export default new GetFornecedor();
+export default new GetFornecedorPorID();
