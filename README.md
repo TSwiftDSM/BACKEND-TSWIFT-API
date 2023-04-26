@@ -69,14 +69,14 @@ https://youtu.be/6gblBDUkuOE
 
 
 # :busts_in_silhouette: Equipe:
-|| Nome | Github |
-|--------|------|--------|
-<a href="https://github.com/ymosena"><img src="https://avatars.githubusercontent.com/u/111094893?v=4" align="center" height="50" width="50"></a>| Yasmin Mosena|https://github.com/ymosena|
-<a href="https://github.com/JacklesKerley"><img src="https://avatars.githubusercontent.com/u/100358141?v=4" align="center" height="50" width="50"></a>|Jackles Kerley|https://github.com/JacklesKerley|
-<a href="https://github.com/Vitaog"><img src="https://avatars.githubusercontent.com/u/86271800?v=4" align="center" height="50" width="50"></a>|Vitor Garcez|https://github.com/Vitaog|
-<a href="https://github.com/dosantos-ogabriel"><img src="https://avatars.githubusercontent.com/u/92482112?v=4" align="center" height="50" width="50"></a>|Gabriel Santos|https://github.com/dosantos-ogabriel|
-<a href="https://github.com/otavioabreu27"><img src="https://avatars.githubusercontent.com/u/54289303?v=4" align="center" height="50" width="50"></a>|Otávio Abreu|https://github.com/otavioabreu27|
-<a href="https://github.com/Miguel-C1"><img src ="https://avatars.githubusercontent.com/u/104818982?v=4" align="center" height="50" width="50"></a>|Miguel Soares|https://github.com/Miguel-C1|
-<a href="https://github.com/dmssjk"><img src="https://avatars.githubusercontent.com/u/106353031?v=4" align="center" height="50" width="50"></a>|Daniel Machado|https://github.com/dmssjk|
+|| Nome | Github | Função |
+|--------|------|--------|-|
+<a href="https://github.com/ymosena"><img src="https://avatars.githubusercontent.com/u/111094893?v=4" align="center" height="50" width="50"></a>| Yasmin Mosena|https://github.com/ymosena| Scrum Master |
+<a href="https://github.com/JacklesKerley"><img src="https://avatars.githubusercontent.com/u/100358141?v=4" align="center" height="50" width="50"></a>|Jackles Kerley|https://github.com/JacklesKerley| Product Owner |
+<a href="https://github.com/Vitaog"><img src="https://avatars.githubusercontent.com/u/86271800?v=4" align="center" height="50" width="50"></a>|Vitor Garcez|https://github.com/Vitaog| Desenvolvedor |
+<a href="https://github.com/dosantos-ogabriel"><img src="https://avatars.githubusercontent.com/u/92482112?v=4" align="center" height="50" width="50"></a>|Gabriel Santos|https://github.com/dosantos-ogabriel| Desenvolvedor |
+<a href="https://github.com/otavioabreu27"><img src="https://avatars.githubusercontent.com/u/54289303?v=4" align="center" height="50" width="50"></a>|Otávio Abreu|https://github.com/otavioabreu27| Desenvolvedor |
+<a href="https://github.com/Miguel-C1"><img src ="https://avatars.githubusercontent.com/u/104818982?v=4" align="center" height="50" width="50"></a>|Miguel Soares|https://github.com/Miguel-C1| Desenvolvedor |
+<a href="https://github.com/dmssjk"><img src="https://avatars.githubusercontent.com/u/106353031?v=4" align="center" height="50" width="50"></a>|Daniel Machado|https://github.com/dmssjk| Desenvolvedor |
 
 
