@@ -6,14 +6,14 @@ class PostFornecedor {
   async post(data: any) {
     try {
       const novoFornecedor = await prisma.fornecedor.create({
-          data: {
-              nomeFantasia: data.nomeFantasia,
-              fornecedorCNPJ: data.fornecedorCNPJ,
-              razaoSocial: data.razaoSocial,
-              endereco: data.endereco,
-              transportadora: data.transporadora,
-              fornecedor: data.fornecedor
-        }
+        data: {
+          nomeFantasia: data.nomeFantasia,
+          fornecedorCNPJ: data.fornecedorCNPJ,
+          razaoSocial: data.razaoSocial,
+          endereco: data.endereco,
+          transportadora: data.transporadora,
+          fornecedor: data.fornecedor,
+        },
       });
       return novoFornecedor;
     } catch (error: any) {

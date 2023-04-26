@@ -9,6 +9,12 @@ const routes = Router();
 routes.get("/", Fornecedor.get);
 routes.get("/porId/:id", Fornecedor.getPorId);
 routes.get("/porNome/:nomeFantasia", Fornecedor.getPorNome);
+routes.get("/porId/:id/transportadora", Fornecedor.getTransportadoraPorId);
+routes.get(
+  "/porNome/:nomeFantasia/transportadora",
+  Fornecedor.getTransporadoraPorNome
+);
+routes.get("/transportadora", Fornecedor.getTransportadora);
 routes.post("/", schemaValidator(FornecedorSchema.joi), Fornecedor.post);
 routes.delete("/:id", Fornecedor.delete);
 routes.put("/:id", schemaValidator(FornecedorSchema.joi), Fornecedor.update);

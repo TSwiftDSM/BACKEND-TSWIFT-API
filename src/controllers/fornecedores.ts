@@ -6,9 +6,42 @@ import deleteFornecedores from "../services/deleteFornecedores";
 import updateFornecedor from "../services/updateFornecedor";
 import getFornecedoresPorId from "../services/getFornecedoresPorId";
 import getFornecedoresPorNome from "../services/getFornecedoresPorNome";
+import getTransportadora from "../services/getTransportadora";
+import getTransportadoraPorId from "../services/getTransportadoraPorId";
+import getTransportadoraPorNome from "../services/getTransportadoraPorNome";
 
 class FornecedorController {
-  //
+  async getTransportadora(req: Request, res: Response) {
+    try {
+      const transporadoras = await getTransportadora.get();
+      return res.sendStatus(200).json(transporadoras);
+    } catch {
+      res.send("Erro ao retornar dados");
+    }
+  }
+  async getTransportadoraPorId(req: Request, res: Response) {
+    try {
+      const { id } = req.params;
+      const transporadoras = await getTransportadoraPorId.getPorId(
+        parseInt(id)
+      );
+      return res.sendStatus(200).json(transporadoras);
+    } catch {
+      res.send("Erro ao retornar dados");
+    }
+  }
+
+  async getTransporadoraPorNome(req: Request, res: Response) {
+    try {
+      const { nomeFantasia } = req.params;
+      const transporadora = await getTransportadoraPorNome.getPorNome(
+        nomeFantasia
+      );
+      return res.sendStatus(200).json(transporadora);
+    } catch {
+      res.send("Erro ao retornar dados");
+    }
+  }
 
   async getPorId(req: Request, res: Response) {
     try {
