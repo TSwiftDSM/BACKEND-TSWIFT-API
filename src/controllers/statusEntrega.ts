@@ -16,7 +16,33 @@ class ControllerStatusEntrega {
 
     async post(req: Request, res: Response){
         const body_params = req.body;
-        
+        const respCode = await ServiceStatusEntrega.postStatusEntrega(body_params);
+        res.sendStatus(respCode);
+    }
+
+    async put(req: Request, res: Response){
+        const url_params = req.params;
+        const body_params = req.body;
+        if (url_params.idStatusEntrega){
+            const respCode = await ServiceStatusEntrega.putStatusEntrega(
+                body_params, Number(url_params.idStatusEntrega)
+            );
+            res.send(respCode);
+        } else {
+            res.send(400);
+        }
+    }
+
+    async delete(req: Request, res: Response){
+        const url_params = req.params;
+        if (url_params.idStatusEntrega){
+            const respCode = await ServiceStatusEntrega.deleteStatusEntrega(
+                Number(url_params.idStatusEntrega)
+            );
+            res.send(respCode);
+        } else {
+            res.send(400);
+        }
     }
 };
 
