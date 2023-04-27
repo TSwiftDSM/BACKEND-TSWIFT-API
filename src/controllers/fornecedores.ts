@@ -102,7 +102,7 @@ class FornecedorController {
       );
       res.status(201).json(fornecedorAtualizado);
     } catch {
-      res.send("Erro ao Alterar Fornecedore");
+      res.send("Erro ao Alterar Fornecedor");
     }
   }
 }
