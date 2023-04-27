@@ -1,14 +1,15 @@
 import { Request, Response } from "express";
+import getTransportadora from "../services/fornecedores/getTransportadora";
+import getTransportadoraPorId from "../services/fornecedores/getTransportadoraPorId";
+import getTransportadoraPorNome from "../services/fornecedores/getTransportadoraPorNome";
+import getFornecedoresPorId from "../services/fornecedores/getFornecedoresPorId";
+import getFornecedoresPorNome from "../services/fornecedores/getFornecedoresPorNome";
+import getFornecedores from "../services/fornecedores/getFornecedores";
+import postFornecedor from "../services/fornecedores/postFornecedor";
+import deleteFornecedores from "../services/fornecedores/deleteFornecedores";
+import updateFornecedor from "../services/fornecedores/updateFornecedor";
 
-import getFornecedores from "../services/getFornecedores";
-import postFornecedor from "../services/postFornecedor";
-import deleteFornecedores from "../services/deleteFornecedores";
-import updateFornecedor from "../services/updateFornecedor";
-import getFornecedoresPorId from "../services/getFornecedoresPorId";
-import getFornecedoresPorNome from "../services/getFornecedoresPorNome";
-import getTransportadora from "../services/getTransportadora";
-import getTransportadoraPorId from "../services/getTransportadoraPorId";
-import getTransportadoraPorNome from "../services/getTransportadoraPorNome";
+
 
 class FornecedorController {
   async getTransportadora(req: Request, res: Response) {
