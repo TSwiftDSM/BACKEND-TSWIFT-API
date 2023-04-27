@@ -10,6 +10,15 @@ class TesteQualidade {
             res.send("Erro ao retornar dados");
         }
     }
+    async getPorId(req: Request, res: Response) {
+        try {
+            const { id } = req.params
+            const testeQualidade = await testeQualidadeServices.getPorId(parseInt(id))
+            res.send(200).json(testeQualidade)
+        } catch {
+            res.send("Erro ao retornar dados");
+        }
+    }
     async post(req: Request, res: Response) {
         try {
             const data = req.body;

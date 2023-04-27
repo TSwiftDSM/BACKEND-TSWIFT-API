@@ -3,7 +3,20 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 class TesteQualidadeServices {
-
+    async getPorId(id: number) {
+        try {
+            const testeQualidade = await prisma.testeQualidade.findUnique({
+                where: {
+                    id: id
+                }
+            });
+            if (!testeQualidade) {
+                throw new Error("Nenhum Teste Qualidade encontrado");
+            }
+        } catch (e: any) {
+            console.log(e.message);
+        }
+    }
     async get() {
         try {
             const testeQualidades = await prisma.testeQualidade.findMany();
