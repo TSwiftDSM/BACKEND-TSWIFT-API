@@ -27,9 +27,9 @@ class ControllerStatusEntrega {
             const respCode = await ServiceStatusEntrega.putStatusEntrega(
                 body_params, Number(url_params.idStatusEntrega)
             );
-            res.send(respCode);
+            res.sendStatus(respCode);
         } else {
-            res.send(400);
+            res.sendStatus(400);
         }
     }
 
@@ -39,9 +39,9 @@ class ControllerStatusEntrega {
             const respCode = await ServiceStatusEntrega.deleteStatusEntrega(
                 Number(url_params.idStatusEntrega)
             );
-            res.send(respCode);
+            res.sendStatus(respCode);
         } else {
-            res.send(400);
+            res.sendStatus(400);
         }
     }
 };
