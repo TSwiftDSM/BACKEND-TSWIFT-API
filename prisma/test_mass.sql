@@ -60,8 +60,9 @@ INSERT INTO transportadorasFornecedores VALUES(2,2,2);
 INSERT INTO transportadorasFornecedores VALUES(3,3,3);
 
 -- ENTREGA 1
+select * from entregas;
 
-INSERT INTO entregas VALUES(1,'12','1', 'CIF' , '6X', '',curdate(), 1, 1);
+INSERT INTO entregas VALUES(1,'12','1', 'CIF' , '6X', curdate(), 1, 1, 1);
 
 INSERT INTO entregaProdutos VALUES(1,NULL, 50, NULL, NULL, 1,1);
 INSERT INTO entregaProdutos VALUES(2,NULL, 50, NULL, NULL,2,1);
@@ -69,20 +70,20 @@ INSERT INTO entregaProdutos VALUES(3,NULL, 50, NULL, NULL,4,1);
 
 -- ENTREGA 2
 
-INSERT INTO entregas VALUES(2,'13','2', 'CIF', '6X', '',curdate(), 2, 2);
+INSERT INTO entregas VALUES(2,'13','2', 'CIF', '6X', curdate(), 2, 2, 2);
 
 INSERT INTO entregaProdutos VALUES(4, NULL, 50, NULL, NULL, 3,2);
 
 -- ENTREGA 3
 
-INSERT INTO entregas VALUES(3,'14','3', 'CIF' , '6X', '',curdate(), 3, 3);
+INSERT INTO entregas VALUES(3,'14','3', 'CIF' , '6X', curdate(), 3, 3, 3);
 
 INSERT INTO entregaProdutos VALUES(5, NULL, 50, NULL, NULL, 3,3);
 INSERT INTO entregaProdutos VALUES(6, NULL, 70, NULL, NULL, 2,3);
 
 -- ENTREGA 4
 
-INSERT INTO entregas VALUES(4,'15','4', 'CIF', '12X', '',curdate(), 3, 3);
+INSERT INTO entregas VALUES(4,'15','4', 'CIF', '12X', curdate(), 3, 3, 3);
 
 INSERT INTO entregaProdutos VALUES(7, NULL, 50, NULL, NULL, 1,4);
 INSERT INTO entregaProdutos VALUES(8, NULL, 70, NULL, NULL, 2,4);
@@ -91,15 +92,19 @@ INSERT INTO entregaProdutos VALUES(10, NULL, 40, NULL, NULL, 4,4);
 
 -- ENTREGA 5
 
-INSERT INTO entregas VALUES(5,'16','5', 'CIF' , '6X', '',curdate(), 1, 1);
+INSERT INTO entregas VALUES(5,'16','5', 'CIF' , '6X',curdate(), 1, 1, 1);
 INSERT INTO entregaProdutos VALUES(11,NULL, 50, NULL, NULL,2,5);
 INSERT INTO entregaProdutos VALUES(12,NULL, 10, NULL, NULL,4,5);
 
 -- ENTREGA 6
 
-INSERT INTO entregas VALUES(6,'17','6', 'CIF', '6X', '',curdate(), 2, 2);
+INSERT INTO entregas VALUES(6,'17','6', 'CIF', '6X', curdate(), 2, 2, 2);
 INSERT INTO entregaProdutos VALUES(13,NULL, 50, NULL, NULL,2,6);
 INSERT INTO entregaProdutos VALUES(14,NULL, 10, NULL, NULL,3,6);
+
+-- statusEntrega
+INSERT INTO statusEntregas VALUES (1, 'QUALITATIVA', 1, 1, 1);
+INSERT INTO statusEntregas VALUES (2, 'QUANTITATIVA', 1, 1, 1);
 
 -- USUARIOS
 
