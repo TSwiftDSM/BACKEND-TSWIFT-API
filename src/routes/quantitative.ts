@@ -1,5 +1,4 @@
 import { Router } from "express";
-
 import { QuantitativeController } from "../controllers";
 
 const routes = Router();
