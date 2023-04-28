@@ -2,6 +2,13 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
+// POST
+interface ObjPostEntregaDesaprovada {
+    id: string,
+    motivo: string,
+    testeQualidadeId: string,
+    entregaId: string   
+}
 class ServiceEntregaDesaprovada {
     async getEntregaDesaprovadaUnique(id: number) {
         try {
@@ -24,6 +31,23 @@ class ServiceEntregaDesaprovada {
             return resp;
         } catch(exception) {
             console.log(exception);
+            return 400;
+        }
+    }
+
+    async postEntregaDesaprovada(body: any) {
+        try {
+            await prisma.entregaDesaprovada.create({
+                data:{
+                    motivo: body.motivo,
+                    testeQualidadeId: Number(body.testeQualidadeId),
+                    entregaId: Number(body.entregaId)
+                } 
+            })
+
+            return 201;
+        } catch(exception) {
+            console.log(exception)
             return 400;
         }
     }
