@@ -13,3 +13,4 @@ export { default as Fornecedor } from "./fornecedores";
 export { default as UsuarioController } from "./usuario";
 export { default as ControllerStatusEntrega } from "./statusEntrega";
 export { default as ControllerQualidadeProduto } from "./qualidadeProduto";
+export { default as ControllerEntregaDesaprovada } from "./entregaDesaprovada";
