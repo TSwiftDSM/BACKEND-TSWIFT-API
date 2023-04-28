@@ -51,6 +51,26 @@ class ServiceEntregaDesaprovada {
             return 400;
         }
     }
+
+    async putEntregaDesaprovada(id: number, body: any) {
+        try {
+            await prisma.entregaDesaprovada.update({
+                where:{
+                    id: id
+                },
+                data: {
+                    motivo: body.motivo,
+                    testeQualidadeId: body.testeQualidadeId,
+                    entregaId: body.entregaId
+                }
+            });
+
+            return 200;
+        } catch(exception){
+            console.log(exception);
+            return 400;
+        }
+    }
 }
 
 export default new ServiceEntregaDesaprovada();

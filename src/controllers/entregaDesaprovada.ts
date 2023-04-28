@@ -24,6 +24,22 @@ class ControllerEntregaDesaprovada{
 
         res.sendStatus(resp_code);
     }
+
+    async put (req: Request, res: Response){
+        if (req.params.idEntregaDesaprovada){
+            const url_params = Number(req.params.idEntregaDesaprovada);
+            const body = req.body;
+            const resp_code = await ServiceEntregaDesaprovada.putEntregaDesaprovada(
+                url_params,
+                body
+            );
+            
+            res.sendStatus(resp_code);
+        } else {
+            console.log('Missing ID in url params');
+            res.sendStatus(400);
+        }
+    }
 }
 
 
