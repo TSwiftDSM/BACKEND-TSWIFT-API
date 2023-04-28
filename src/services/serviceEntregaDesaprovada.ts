@@ -71,6 +71,22 @@ class ServiceEntregaDesaprovada {
             return 400;
         }
     }
+
+    async deleteEntregaDesaprovada(id: number) {
+        try {
+            await prisma.entregaDesaprovada.delete({
+                where:{
+                    id: id
+                }
+            });
+            
+            return 200;
+        } catch(exception) {
+            console.log(exception);
+            return 400;
+        }
+    }
+    
 }
 
 export default new ServiceEntregaDesaprovada();

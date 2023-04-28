@@ -36,8 +36,20 @@ class ControllerEntregaDesaprovada{
             
             res.sendStatus(resp_code);
         } else {
-            console.log('Missing ID in url params');
-            res.sendStatus(400);
+            res.status(400).send('Missing ID in url params');
+        }
+    }
+
+    async delete (req: Request, res: Response){
+        if (req.params.idEntregaDesaprovada){
+            const url_params = Number(req.params.idEntregaDesaprovada);
+            const resp_code = await ServiceEntregaDesaprovada.deleteEntregaDesaprovada(
+                url_params
+            );
+
+            res.sendStatus(resp_code);
+        } else {
+            res.status(400).send('Missing ID in url params');
         }
     }
 }
