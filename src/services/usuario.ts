@@ -2,8 +2,39 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
+type data = {
+  nome: string;
+  login: string;
+  senha: string;
+  cpf: string;
+  dataNascimento: Date;
+  tipoUsuarioId: number;
+};
+
 class UsuarioServices {
-  async get(tipoUsuarioId: number) {
+  async getTodosUsuarios() {
+    try {
+      const usuarios = await prisma.usuario.findMany({
+        select: {
+          id: true,
+          nome: true,
+          login: true,
+          senha: true,
+          cpf: true,
+          dataNascimento: true,
+          tipoUsuarioId: true,
+        },
+      });
+      if (usuarios.length === 0) {
+        throw new Error("Nenhum usuário encontrado");
+      }
+      return usuarios;
+    } catch (e: any) {
+      console.log(e.message);
+    }
+  }
+
+  async getPorTipoUsuario(tipoUsuarioId: number) {
     try {
       const usuarios = await prisma.usuario.findMany({
         where: {
@@ -28,10 +59,17 @@ class UsuarioServices {
     }
   }
 
-  async post(data: any) {
+  async post(data: data) {
     try {
       const novoUsuario = await prisma.usuario.create({
-        data: data,
+        data: {
+          nome: data.nome,
+          login: data.login,
+          senha: data.senha,
+          cpf: data.cpf,
+          dataNascimento: new Date(data.dataNascimento),
+          tipoUsuarioId: data.tipoUsuarioId,
+        },
       });
       return novoUsuario;
     } catch (error: any) {
@@ -65,13 +103,20 @@ class UsuarioServices {
     }
   }
 
-  async update(idUsuario: number, data: any) {
+  async update(idUsuario: number, data: data) {
     try {
       const atualizarUsuario = await prisma.usuario.update({
         where: {
           id: idUsuario,
         },
-        data: data,
+        data: {
+          nome: data.nome,
+          login: data.login,
+          senha: data.senha,
+          cpf: data.cpf,
+          dataNascimento: new Date(data.dataNascimento),
+          tipoUsuarioId: data.tipoUsuarioId,
+        },
       });
       return atualizarUsuario;
     } catch (error: any) {

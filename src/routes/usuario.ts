@@ -3,10 +3,11 @@ import { UsuarioController } from "../controllers";
 
 const routes = Router();
 
-routes.get("/get", UsuarioController.get);
-routes.get("/getPorId/:idUsuario", UsuarioController.getPorId);
-routes.delete("/deletar/:idUsuario", UsuarioController.delete);
-routes.put("/atualizar/:idUsuario", UsuarioController.update);
-routes.post("/cadastrar/", UsuarioController.post);
+routes.get("/", UsuarioController.get);
+routes.get("/tipoUsuario/:tipoUsuarioId", UsuarioController.getPorTipoUsuario);
+routes.get("/id/:idUsuario", UsuarioController.getPorId);
+routes.delete("/:idUsuario", UsuarioController.delete);
+routes.put("/:idUsuario", UsuarioController.update);
+routes.post("/", UsuarioController.post);
 
 export default routes;
