@@ -25,6 +25,17 @@ class UsuarioController {
     }
   }
 
+  async getPorNome(req: Request, res: Response) {
+    // GET para pegar os usuários de acordo com o nome
+    try {
+      const nome = req.query.nome;
+      const usuarios = await UsuarioServices.getPorNome(String(nome));
+      return res.status(200).json(usuarios);
+    } catch {
+      res.send("Erro ao retornar dados");
+    }
+  }
+
   async post(req: Request, res: Response) {
     // POST para cadastrar Usuário
     try {
