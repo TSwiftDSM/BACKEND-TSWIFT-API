@@ -59,6 +59,33 @@ class UsuarioServices {
     }
   }
 
+  async getPorNome(nome: string) {
+    try {
+      const usuario = await prisma.usuario.findMany({
+        where: {
+          nome: {
+            startsWith: nome,
+          },
+        },
+        select: {
+          id: true,
+          nome: true,
+          login: true,
+          senha: true,
+          cpf: true,
+          dataNascimento: true,
+          tipoUsuarioId: true,
+        },
+      });
+      if (usuario.length === 0) {
+        throw new Error("Nenhum usuário encontrado");
+      }
+      return usuario;
+    } catch (e: any) {
+      console.log(e.message);
+    }
+  }
+
   async post(data: data) {
     try {
       const novoUsuario = await prisma.usuario.create({
