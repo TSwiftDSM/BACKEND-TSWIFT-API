@@ -19,6 +19,34 @@ class ControllerQualidadeProduto{
         const resp_code = await ServiceQualidadeProduto.postQualidadeProduto(body);
         res.sendStatus(resp_code);
     }
+
+    async put (req: Request, res: Response) {
+        if(req.query.p && req.query.q){
+            const query_params = req.query
+            const body = req.body;
+            const resp_code = await ServiceQualidadeProduto.putQualidadeProduto(
+                query_params,
+                body
+            );
+            res.sendStatus(resp_code);
+        } else {
+            console.log("Missing querry argument")
+            res.sendStatus(400);
+        }
+    }
+
+    async delete(req: Request, res: Response) {
+        if(req.query.p && req.query.q){
+            const query_params = req.query
+            const resp_code = await ServiceQualidadeProduto.deleteQualidadeProduto(
+                query_params
+            );
+            res.sendStatus(resp_code);
+        } else {
+            console.log("Missing querry argument")
+            res.sendStatus(400);
+        }
+    }
 }
 
 export default new ControllerQualidadeProduto();

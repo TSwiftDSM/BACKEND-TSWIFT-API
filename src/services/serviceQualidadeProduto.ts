@@ -2,7 +2,12 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
+// Formatos do Objeto PUT
+interface putBodyObj {
+    obrigatorio: boolean
+}
 
+// Formato de Objeto Padrão
 interface objQualidadeProduto {
     obrigatorio: boolean,
     produtoId: number,
@@ -61,6 +66,45 @@ class ServiceQualidadeProduto {
             });
 
             return 201;
+        } catch(exception) {
+            console.log(exception);
+            return 400;
+        }
+    }
+
+    public async putQualidadeProduto(query: any, body: putBodyObj){
+        try{
+            await prisma.qualidadeProduto.update({
+                where: {
+                    testeQualidadeId_produtoId:{
+                        testeQualidadeId: Number(query.q),
+                        produtoId: Number(query.p)
+                    }
+                },
+                data: {
+                  obrigatorio: body.obrigatorio,
+                },
+            });
+
+            return 200;
+        } catch(exception) {
+            console.log(exception);
+            return 400;
+        };
+    }
+
+    public async deleteQualidadeProduto(query: any){
+        try{
+            await prisma.qualidadeProduto.delete({
+                where: {
+                    testeQualidadeId_produtoId:{
+                        testeQualidadeId: Number(query.q),
+                        produtoId: Number(query.p)
+                    }
+                }
+            });
+            
+            return 200;
         } catch(exception) {
             console.log(exception);
             return 400;
