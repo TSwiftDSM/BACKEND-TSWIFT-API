@@ -11,5 +11,4 @@ routes.put("/", ControllerEntregaDesaprovada.put);
 routes.delete("/:idEntregaDesaprovada", ControllerEntregaDesaprovada.delete);
 routes.delete("/", ControllerEntregaDesaprovada.delete);
 
-
 export default routes;
