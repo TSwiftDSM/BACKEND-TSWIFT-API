@@ -11,7 +11,9 @@ import { default as recusarQualitativaRoutes } from "./recusarQualitativa";
 import { default as recusarQuantitativaRoutes } from "./recusarQuantitativa";
 import { default as forcarAceitacaoRoutes } from "./forcarAceitacao";
 import { default as fornecedor } from "./fornecedores";
+import { default as testeQualidade } from "./testeQualidade";
 import { default as entregaProduto } from "./entregaProduto"
+
 
 const router = Router();
 
@@ -27,6 +29,8 @@ router.use("/recusar/qualitativa", recusarQualitativaRoutes);
 router.use("/recusar/quantitativa", recusarQuantitativaRoutes);
 router.use("/alterar/forcarAceitacao", forcarAceitacaoRoutes);
 router.use("/fornecedores", fornecedor);
+router.use("/testeQualidade", testeQualidade)
 router.use("/entregaProduto", entregaProduto)
+
 
 export default router;

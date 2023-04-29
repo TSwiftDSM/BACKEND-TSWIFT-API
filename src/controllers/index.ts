@@ -10,4 +10,6 @@ export { default as RecusarQualitativaController } from "./recusarQualitativa";
 export { default as RecusarQuantitativaController } from "./recusarQuantitativa";
 export { default as ForcarAceitacaoController } from "./forcarAceitacao";
 export { default as Fornecedor } from "./fornecedores";
+export { default as TesteQualidade } from "./testeQualidade";  
 export { default as EntregaProduto } from "./entregaProduto";
+

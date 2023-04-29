@@ -153,6 +153,7 @@ model Usuario {
   login          String
   senha          String
   cpf            String
+  matricula      String   @unique
   dataNascimento DateTime
 
   tipoUsuarioId Int?
