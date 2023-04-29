@@ -12,8 +12,6 @@ import { default as recusarQuantitativaRoutes } from "./recusarQuantitativa";
 import { default as forcarAceitacaoRoutes } from "./forcarAceitacao";
 import { default as fornecedor } from "./fornecedores";
 import { default as testeQualidade } from "./testeQualidade";
-
-
 const router = Router();
 
 router.use("/menu", Menu);
