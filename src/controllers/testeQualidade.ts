@@ -5,7 +5,7 @@ class TesteQualidade {
     async get(req: Request, res: Response) {
         try {
             const testeQualidades = await testeQualidadeServices.get()
-            res.sendStatus(200).json(testeQualidades)
+            res.status(200).json(testeQualidades)
         } catch {
             res.send("Erro ao retornar dados");
         }
@@ -14,7 +14,7 @@ class TesteQualidade {
         try {
             const { id } = req.params
             const testeQualidade = await testeQualidadeServices.getPorId(parseInt(id))
-            res.send(200).json(testeQualidade)
+            res.status(200).json(testeQualidade)
         } catch {
             res.send("Erro ao retornar dados");
         }
@@ -26,7 +26,6 @@ class TesteQualidade {
             return res.status(201).json(testeQualidade);
         } catch {
             res.send("Erro ao criar Teste de Qualidade");
-
         }
     }
     async update(req: Request, res: Response) {

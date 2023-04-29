@@ -13,6 +13,7 @@ class TesteQualidadeServices {
             if (!testeQualidade) {
                 throw new Error("Nenhum Teste Qualidade encontrado");
             }
+            return testeQualidade
         } catch (e: any) {
             console.log(e.message);
         }
