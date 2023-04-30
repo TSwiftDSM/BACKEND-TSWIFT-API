@@ -7,7 +7,7 @@ class EntregaProdutoSchema {
     pesoReal: Joi.number().required(),
     especificacao: Joi.string().required(),
     produtoId: Joi.number(),
-    EntregaId: Joi.number(),
+    entregaId: Joi.number(),
   });
 }
 
