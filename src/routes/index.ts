@@ -13,7 +13,7 @@ import { default as forcarAceitacaoRoutes } from "./forcarAceitacao";
 import { default as fornecedor } from "./fornecedores";
 import { default as testeQualidade } from "./testeQualidade";
 import { default as entregaProduto } from "./entregaProduto"
-
+import { default as fornecedorProduto } from "./fornecedorProduto";
 
 const router = Router();
 
@@ -31,6 +31,6 @@ router.use("/alterar/forcarAceitacao", forcarAceitacaoRoutes);
 router.use("/fornecedores", fornecedor);
 router.use("/testeQualidade", testeQualidade)
 router.use("/entregaProduto", entregaProduto)
-
+router.use("/fornecedorProduto", fornecedorProduto)
 
 export default router;
