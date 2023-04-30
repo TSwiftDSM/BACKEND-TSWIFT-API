@@ -2,12 +2,11 @@ import { Request, Response } from "express";
 import fornecedorServices from "../services/fornecedorServices";
 
 
-
 class FornecedorController {
   async getTransportadora(req: Request, res: Response) {
     try {
       const transporadoras = await fornecedorServices.getTransportadora();
-      return res.sendStatus(200).json(transporadoras);
+      return res.status(200).json(transporadoras);
     } catch {
       res.send("Erro ao retornar dados");
     }
@@ -15,10 +14,10 @@ class FornecedorController {
   async getTransportadoraPorId(req: Request, res: Response) {
     try {
       const { id } = req.params;
-      const transporadoras = await fornecedorServices.getPorId(
+      const transporadoras = await fornecedorServices.getPorIdTransportadora(
         parseInt(id)
       );
-      return res.sendStatus(200).json(transporadoras);
+      return res.status(200).json(transporadoras);
     } catch {
       res.send("Erro ao retornar dados");
     }
@@ -27,10 +26,10 @@ class FornecedorController {
   async getTransporadoraPorNome(req: Request, res: Response) {
     try {
       const { nomeFantasia } = req.params;
-      const transporadora = await fornecedorServices.getPorNome(
+      const transporadora = await fornecedorServices.getPorNomeTransportadora(
         nomeFantasia
       );
-      return res.sendStatus(200).json(transporadora);
+      return res.status(200).json(transporadora);
     } catch {
       res.send("Erro ao retornar dados");
     }
@@ -40,7 +39,7 @@ class FornecedorController {
     try {
       const { id } = req.params;
       const fornecedores = await fornecedorServices.getPorId(parseInt(id));
-      return res.sendStatus(200).json(fornecedores);
+      return res.status(200).json(fornecedores);
     } catch {
       res.send("Erro ao retornar dados");
     }
@@ -52,7 +51,7 @@ class FornecedorController {
       const fornecedores = await fornecedorServices.getPorNome(
         nomeFantasia
       );
-      return res.sendStatus(200).json(fornecedores);
+      return res.status(200).json(fornecedores);
     } catch {
       res.send("Erro ao retornar dados");
     }
@@ -95,7 +94,7 @@ class FornecedorController {
       );
       res.status(201).json(fornecedorAtualizado);
     } catch {
-      res.send("Erro ao Alterar Fornecedore");
+      res.send("Erro ao Alterar Fornecedor");
     }
   }
 }
