@@ -16,6 +16,7 @@ import { default as usuariosRoutes } from "./usuario";
 import { default as statusEntrega } from "./statusEntrega";
 import { default as entregaDesaprovada } from "./entregaDesaprovada";
 import { default as tiposUsuariosRoutes } from "./tipoUsuario";
+import { default as transportadoraFornecedorRoutes } from "./transportadoraFornecedor";
 
 const router = Router();
 
@@ -36,5 +37,6 @@ router.use("/statusEntrega", statusEntrega);
 router.use("/qualidadeProduto", qualidadeProduto);
 router.use("/entregaDesaprovada", entregaDesaprovada);
 router.use("/tiposUsuarios", tiposUsuariosRoutes);
+router.use("/transportadorasFornecedores", transportadoraFornecedorRoutes);
 
 export default router;
