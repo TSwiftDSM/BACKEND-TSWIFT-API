@@ -9,7 +9,14 @@ class UpdateFornecedor {
         where: {
           id: id,
         },
-        data: data,
+        data: {
+          nomeFantasia: data.nomeFantasia,
+          fornecedorCNPJ: data.fornecedorCNPJ,
+          razaoSocial: data.razaoSocial,
+          endereco: data.endereco,
+          transportadora: data.transporadora,
+          fornecedor: data.fornecedor,
+        },
       });
       return fornecedorAtualizado;
     } catch (error: any) {
