@@ -1,8 +1,5 @@
 import { Request, Response } from "express";
-
 import fornecedorServices from "../services/fornecedorServices";
-
-
 
 
 class FornecedorController {
