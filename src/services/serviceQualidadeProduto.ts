@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/consistent-type-definitions */
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();

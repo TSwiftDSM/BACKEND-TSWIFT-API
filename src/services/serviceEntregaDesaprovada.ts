@@ -1,8 +1,10 @@
+/* eslint-disable @typescript-eslint/consistent-type-definitions */
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
 // POST
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 interface ObjPostEntregaDesaprovada {
   id: string;
   motivo: string;

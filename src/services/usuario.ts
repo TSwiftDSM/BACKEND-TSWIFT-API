@@ -9,6 +9,7 @@ type data = {
   cpf: string;
   dataNascimento: Date;
   tipoUsuarioId: number;
+  matricula: string;
 };
 
 class UsuarioServices {
@@ -23,6 +24,7 @@ class UsuarioServices {
           cpf: true,
           dataNascimento: true,
           tipoUsuarioId: true,
+          matricula: true,
         },
       });
       if (usuarios.length === 0) {
@@ -48,6 +50,7 @@ class UsuarioServices {
           cpf: true,
           dataNascimento: true,
           tipoUsuarioId: true,
+          matricula: true,
         },
       });
       if (usuarios.length === 0) {
@@ -75,6 +78,7 @@ class UsuarioServices {
           cpf: true,
           dataNascimento: true,
           tipoUsuarioId: true,
+          matricula: true,
         },
       });
       if (usuario.length === 0) {
@@ -96,6 +100,7 @@ class UsuarioServices {
           cpf: data.cpf,
           dataNascimento: new Date(data.dataNascimento),
           tipoUsuarioId: data.tipoUsuarioId,
+          matricula: data.matricula,
         },
       });
       return novoUsuario;
@@ -119,6 +124,7 @@ class UsuarioServices {
           cpf: true,
           dataNascimento: true,
           tipoUsuarioId: true,
+          matricula: true,
         },
       });
       if (!usuario) {
@@ -143,6 +149,7 @@ class UsuarioServices {
           cpf: data.cpf,
           dataNascimento: new Date(data.dataNascimento),
           tipoUsuarioId: data.tipoUsuarioId,
+          matricula: data.matricula,
         },
       });
       return atualizarUsuario;
