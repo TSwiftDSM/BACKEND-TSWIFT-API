@@ -89,10 +89,10 @@ model FornecedorProduto {
 
 model Entrega {
   id             Int       @id @default(autoincrement())
-  nfe            String    @unique
-  numeroPedido   String    @unique
   tipoFrete      String
   formaPagamento String
+  nfe            String?   @unique
+  numeroPedido   String?   @unique
   etapaEntrega   String?
   dataEntrega    DateTime?
 
