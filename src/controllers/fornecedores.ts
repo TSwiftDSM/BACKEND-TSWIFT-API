@@ -4,8 +4,8 @@ import fornecedorServices from "../services/fornecedorServices";
 class FornecedorController {
   async getTransportadora(req: Request, res: Response) {
     try {
-      const transporadoras = await fornecedorServices.getTransportadora();
-      return res.status(200).json(transporadoras);
+      const transportadoras = await fornecedorServices.getTransportadora();
+      return res.status(200).json(transportadoras);
     } catch {
       res.send("Erro ao retornar dados");
     }
@@ -13,22 +13,22 @@ class FornecedorController {
   async getTransportadoraPorId(req: Request, res: Response) {
     try {
       const { id } = req.params;
-      const transporadoras = await fornecedorServices.getPorIdTransportadora(
+      const transportadoras = await fornecedorServices.getPorIdTransportadora(
         parseInt(id)
       );
-      return res.status(200).json(transporadoras);
+      return res.status(200).json(transportadoras);
     } catch {
       res.send("Erro ao retornar dados");
     }
   }
 
-  async getTransporadoraPorNome(req: Request, res: Response) {
+  async getTransportadoraPorNome(req: Request, res: Response) {
     try {
       const { nomeFantasia } = req.params;
-      const transporadora = await fornecedorServices.getPorNomeTransportadora(
+      const transportadora = await fornecedorServices.getPorNomeTransportadora(
         nomeFantasia
       );
-      return res.status(200).json(transporadora);
+      return res.status(200).json(transportadora);
     } catch {
       res.send("Erro ao retornar dados");
     }

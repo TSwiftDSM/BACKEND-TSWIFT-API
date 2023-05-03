@@ -12,7 +12,7 @@ routes.get("/porNome/:nomeFantasia", Fornecedor.getPorNome);
 routes.get("/porId/:id/transportadora", Fornecedor.getTransportadoraPorId);
 routes.get(
   "/porNome/:nomeFantasia/transportadora",
-  Fornecedor.getTransporadoraPorNome
+  Fornecedor.getTransportadoraPorNome
 );
 routes.get("/transportadora", Fornecedor.getTransportadora);
 routes.post("/", schemaValidator(FornecedorSchema.joi), Fornecedor.post);

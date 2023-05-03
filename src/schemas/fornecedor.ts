@@ -6,7 +6,7 @@ class FornecedorSchema {
     fornecedorCNPJ: Joi.string().required(),
     razaoSocial: Joi.string().required(),
     endereco: Joi.string().required(),
-    transporadora: Joi.boolean(),
+    transportadora: Joi.boolean(),
     fornecedor: Joi.boolean(),
   });
 }

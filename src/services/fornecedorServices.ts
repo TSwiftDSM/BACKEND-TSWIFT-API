@@ -157,7 +157,7 @@ class Fornecedor {
           fornecedorCNPJ: data.fornecedorCNPJ,
           razaoSocial: data.razaoSocial,
           endereco: data.endereco,
-          transportadora: data.transporadora,
+          transportadora: data.transportadora,
           fornecedor: data.fornecedor,
         },
       });
