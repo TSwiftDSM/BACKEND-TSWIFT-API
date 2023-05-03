@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
 import fornecedorServices from "../services/fornecedorServices";
 
-
 class FornecedorController {
   async getTransportadora(req: Request, res: Response) {
     try {
@@ -48,9 +47,7 @@ class FornecedorController {
   async getPorNome(req: Request, res: Response) {
     try {
       const { nomeFantasia } = req.params;
-      const fornecedores = await fornecedorServices.getPorNome(
-        nomeFantasia
-      );
+      const fornecedores = await fornecedorServices.getPorNome(nomeFantasia);
       return res.status(200).json(fornecedores);
     } catch {
       res.send("Erro ao retornar dados");
