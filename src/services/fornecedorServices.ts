@@ -16,6 +16,7 @@ class Fornecedor {
           endereco: true,
           transportadora: true,
           fornecedor: true,
+          razaoSocial: true,
         },
       });
       if (fornecedores.length === 0) {
@@ -40,6 +41,7 @@ class Fornecedor {
           endereco: true,
           transportadora: true,
           fornecedor: true,
+          razaoSocial: true,
         },
       });
       if (fornecedores.length === 0) {
@@ -66,6 +68,7 @@ class Fornecedor {
           endereco: true,
           transportadora: true,
           fornecedor: true,
+          razaoSocial: true,
         },
       });
       if (fornecedores.length === 0) {
@@ -89,6 +92,7 @@ class Fornecedor {
           endereco: true,
           transportadora: true,
           fornecedor: true,
+          razaoSocial: true,
         },
       });
       if (fornecedores.length === 0) {
@@ -113,6 +117,7 @@ class Fornecedor {
           endereco: true,
           transportadora: true,
           fornecedor: true,
+          razaoSocial: true,
         },
       });
       if (fornecedores.length === 0) {
@@ -139,6 +144,7 @@ class Fornecedor {
           endereco: true,
           transportadora: true,
           fornecedor: true,
+          razaoSocial: true,
         },
       });
       if (fornecedores.length === 0) {
