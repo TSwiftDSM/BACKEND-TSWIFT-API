@@ -6,13 +6,13 @@ const prisma = new PrismaClient();
 
 class ProdutoController {
   async post(req: Request, res: Response) {
-    const nome = req.body.nome;
-    const unidadeMedida = req.body.unidadeMedida;
+    const nomeProduto = req.body.nomeProduto;
+    const unidade = req.body.unidade;
     try {
       const produto = await prisma.produto.create({
         data: {
-          nomeProduto: nome,
-          unidade: unidadeMedida,
+          nomeProduto: nomeProduto,
+          unidade: unidade,
         },
       });
       res.status(200).json(produto);
