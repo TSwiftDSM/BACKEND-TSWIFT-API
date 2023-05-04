@@ -44,6 +44,16 @@ class FornecedorController {
     }
   }
 
+  async getNomePornome(req: Request, res: Response) {
+    try {
+      const { nomeFantasia } = req.params
+      const fornecedores = await fornecedorServices.getPornomeNome(nomeFantasia);
+      return res.status(200).json(fornecedores)
+    } catch {
+      res.send("Erro ao retornar dados");
+    }
+  }
+
   async getPorNome(req: Request, res: Response) {
     try {
       const { nomeFantasia } = req.params;

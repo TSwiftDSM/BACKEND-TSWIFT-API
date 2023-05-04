@@ -52,6 +52,28 @@ class Fornecedor {
       console.log(e.message);
     }
   }
+
+  async getPornomeNome(nomeFantasia: string) {
+    try {
+      const fornecedores = await prisma.fornecedor.findMany({
+        where: {
+          fornecedor: true,
+          nomeFantasia: {
+            startsWith: nomeFantasia,
+          },
+        },
+        select: {
+          nomeFantasia: true,
+        },
+      });
+      if (fornecedores.length === 0) {
+        throw new Error("Nenhum fornecedor encontrado");
+      }
+    } catch (e: any) {
+      console.log(e.message);
+    }
+  }
+
   async getPorNome(nomeFantasia: string) {
     try {
       const fornecedores = await prisma.fornecedor.findMany({
