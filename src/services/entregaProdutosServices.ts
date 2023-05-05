@@ -49,12 +49,12 @@ class EntregasProdutosServices {
       //
       const novoEntregaProduto = await prisma.entregaProduto.create({
         data: {
-          quantidade: data.quantidade,
-          pesoPrevisto: data.pesoPrevisto,
-          pesoReal: data.pesoReal,
+          quantidade: parseInt(data.quantidade),
+          pesoPrevisto: parseFloat(data.pesoPrevisto),
+          pesoReal: parseFloat(data.pesoReal),
           especificacao: data.especificacao,
-          produtoId: data.produtoId,
-          EntregaId: data.entregaId,
+          produtoId: parseInt(data.produtoId),
+          EntregaId: parseInt(data.entregaId),
         },
       });
       return novoEntregaProduto;

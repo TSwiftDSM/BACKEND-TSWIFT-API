@@ -29,10 +29,30 @@ class EntregaController {
 
   async post(req: Request, res: Response) {
     try {
-      const data = req.body;
+      const {
+        id,
+        tipoFrete,
+        formaPagamento,
+        nfe,
+        numeroPedido,
+        etapaEntrega,
+        dataEntrega,
+        fornecedorId,
+        transportadoraId,
+      } = req.body;
 
       const entrega = await prisma.entrega.create({
-        data: data,
+        data: {
+          id,
+          tipoFrete,
+          formaPagamento,
+          nfe,
+          numeroPedido,
+          etapaEntrega,
+          dataEntrega,
+          fornecedorId: parseInt(fornecedorId),
+          transportadoraId: parseInt(transportadoraId),
+        },
       });
       res.status(201).json(entrega);
     } catch (e) {
