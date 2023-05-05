@@ -7,7 +7,7 @@ import { FornecedorSchema } from "../schemas";
 const routes = Router();
 
 routes.get("/", Fornecedor.get);
-routes.get("/nome/porNome/:nomeFantaisa", Fornecedor.getNomePornome)
+routes.get("/nome/porNome/:nomeFantaisa", Fornecedor.getNomePornome);
 routes.get("/porId/:id", Fornecedor.getPorId);
 routes.get("/porNome/:nomeFantasia", Fornecedor.getPorNome);
 routes.get("/porId/:id/transportadora", Fornecedor.getTransportadoraPorId);
