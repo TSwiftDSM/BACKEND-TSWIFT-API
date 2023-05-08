@@ -32,9 +32,9 @@ export default class EntradaMaterialServices {
     if (data.body.laudo) {
       if (
         data.body.numeroPedido == pedido.numeroPedido &&
-        data.body.fornecedor == pedido.Fornecedor.nomeFantasia &&
+        data.body.fornecedor == pedido.fornecedorId &&
         data.body.transportadora ==
-          pedido.Transportadora.FornecedorTransportadora.nomeFantasia &&
+          pedido.transportadoraId &&
         data.body.tipoFrete == pedido.tipoFrete &&
         data.body.condicaoPagamento == pedido.formaPagamento
       ) {
@@ -55,20 +55,8 @@ export default class EntradaMaterialServices {
         nfe: true,
         tipoFrete: true,
         formaPagamento: true,
-        Fornecedor: {
-          select: {
-            nomeFantasia: true,
-          },
-        },
-        Transportadora: {
-          select: {
-            FornecedorTransportadora: {
-              select: {
-                nomeFantasia: true,
-              },
-            },
-          },
-        },
+        fornecedorId: true,
+        transportadoraId: true
       },
     });
   }
