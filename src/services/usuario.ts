@@ -92,30 +92,28 @@ class UsuarioServices {
 
   async post(data: data) {
     try {
-      let matriculaInt = 0
+      let matriculaInt = 0;
       const matricula = await prisma.usuario.findFirst({
         select: {
-          matricula: true
+          matricula: true,
         },
         orderBy: {
-          matricula: 'desc'
-        }
-      })
-      if (matricula) {
-        matriculaInt = parseInt(matricula.matricula)
+          matricula: "desc",
+        },
+      });
+      if (matricula !== null && typeof matricula.matricula === "string") {
+        matriculaInt = parseInt(matricula.matricula);
       }
 
-      matriculaInt = matriculaInt + 1
-    
+      matriculaInt = matriculaInt + 1;
+
       const novoUsuario = await prisma.usuario.create({
         data: {
           nome: data.nome,
-          login: data.login,
-          senha: data.senha,
           cpf: data.cpf,
           dataNascimento: new Date(data.dataNascimento),
           tipoUsuarioId: data.tipoUsuarioId,
-          matricula: matriculaInt.toString()
+          matricula: matriculaInt.toString(),
         },
       });
       return novoUsuario;
