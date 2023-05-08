@@ -92,6 +92,21 @@ class UsuarioServices {
 
   async post(data: data) {
     try {
+      let matriculaInt = 0
+      const matricula = await prisma.usuario.findFirst({
+        select: {
+          matricula: true
+        },
+        orderBy: {
+          matricula: 'desc'
+        }
+      })
+      if (matricula) {
+        matriculaInt = parseInt(matricula.matricula)
+      }
+
+      matriculaInt = matriculaInt + 1
+    
       const novoUsuario = await prisma.usuario.create({
         data: {
           nome: data.nome,
@@ -100,7 +115,7 @@ class UsuarioServices {
           cpf: data.cpf,
           dataNascimento: new Date(data.dataNascimento),
           tipoUsuarioId: data.tipoUsuarioId,
-          matricula: data.matricula,
+          matricula: matriculaInt.toString()
         },
       });
       return novoUsuario;

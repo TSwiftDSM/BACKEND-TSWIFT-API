@@ -32,7 +32,6 @@ export default class EntradaMaterialServices {
     if (data.body.laudo) {
       if (
         data.body.numeroPedido == pedido.numeroPedido &&
-        data.body.notaFiscal == pedido.nfe &&
         data.body.fornecedor == pedido.Fornecedor.nomeFantasia &&
         data.body.transportadora ==
           pedido.Transportadora.FornecedorTransportadora.nomeFantasia &&

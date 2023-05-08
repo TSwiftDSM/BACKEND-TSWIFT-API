@@ -8,7 +8,6 @@ class UsuarioSchema {
     cpf: Joi.string().required(),
     dataNascimento: Joi.date().required(),
     tipoUsuarioId: Joi.number().required(),
-    matricula: Joi.string().required(),
   });
 }
 
