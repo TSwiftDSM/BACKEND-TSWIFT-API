@@ -32,6 +32,22 @@ export default class EntradaMaterialServices {
     if (data.body.laudo) {
       if (
         data.body.numeroPedido == pedido.numeroPedido &&
+        data.body.fornecedor == pedido.Fornecedor.nomeFantasia &&
+        data.body.transportadora == pedido.Transportadora.FornecedorTransportadora.nomeFantasia &&
+        data.body.tipoFrete == pedido.tipoFrete &&
+        data.body.condicaoPagamento == pedido.formaPagamento
+      ) {
+        aprovado = true;
+      }
+    }
+    return aprovado;
+  }
+
+  public async VerificacaoEntradaMaterialNovo(data: any, pedido: any) {
+    let aprovado = false;
+    if (data.body.laudo) {
+      if (
+        data.body.numeroPedido == pedido.numeroPedido &&
         data.body.fornecedor == pedido.fornecedorId &&
         data.body.transportadora == pedido.transportadoraId &&
         data.body.tipoFrete == pedido.tipoFrete &&
@@ -43,7 +59,7 @@ export default class EntradaMaterialServices {
     return aprovado;
   }
 
-  public async PesquisaEntradaMaterial(data: number) {
+  public async PesquisaEntradaMateriacNovo(data: number) {
     //
     return await prisma.entrega.findFirst({
       where: {
@@ -55,6 +71,34 @@ export default class EntradaMaterialServices {
         tipoFrete: true,
         formaPagamento: true,
         fornecedorId: true,
+        transportadoraId: true,
+      },
+    });
+  }
+  public async PesquisaEntradaMaterial(data: number) {
+    //
+    return await prisma.entrega.findFirst({
+      where: {
+        id: data,
+      },
+      select: {
+        numeroPedido: true,
+        nfe: true,
+        tipoFrete: true,
+        Fornecedor: {
+          select: {
+            nomeFantasia: true,
+          },
+        },
+        Transportadora: {
+          select: {
+            FornecedorTransportadora: {
+              select: {
+                nomeFantasia: true,
+              },
+            },
+          },
+        },
         transportadoraId: true,
       },
     });
