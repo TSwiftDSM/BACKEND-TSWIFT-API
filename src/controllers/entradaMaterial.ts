@@ -14,7 +14,7 @@ class EntradaMaterial {
   async post(req: Request, res: Response) {
     //
     const idEntrega = req.body.idEntrega;
-    const pedido = await entradaMaterial.PesquisaEntradaMateriacNovo(idEntrega);
+    const pedido = await entradaMaterial.PesquisaEntradaMaterial(idEntrega);
 
     const aprovado = await entradaMaterial.VerificacaoEntradaMaterial(
       req,
