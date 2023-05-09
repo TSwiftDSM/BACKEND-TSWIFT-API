@@ -12,6 +12,7 @@ interface dataObject {
   especificacao: string;
   quantidade: number;
   peso_previsto: number;
+  valorTotal: number;
 }
 
 // Objeto de entrada
@@ -43,8 +44,8 @@ async function testeRecusaQuantitativa(
 
   for (let cont = 0; cont < dataObj.length; cont++) {
     if (
-      dataObj[cont].quantidade < dataObj[cont].peso_previsto * 0.95 ||
-      dataObj[cont].quantidade > dataObj[cont].peso_previsto * 1.05
+      dataObj[cont].valorTotal < dataObj[cont].peso_previsto * 0.95 ||
+      dataObj[cont].valorTotal > dataObj[cont].peso_previsto * 1.05
     ) {
       try {
         await fetch(
