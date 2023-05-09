@@ -114,6 +114,8 @@ class UsuarioServices {
           dataNascimento: new Date(data.dataNascimento),
           tipoUsuarioId: data.tipoUsuarioId,
           matricula: matriculaInt.toString(),
+          login: data.login,
+          senha: data.senha,
         },
       });
       return novoUsuario;
