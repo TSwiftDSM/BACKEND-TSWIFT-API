@@ -33,8 +33,7 @@ export default class EntradaMaterialServices {
       if (
         data.body.numeroPedido == pedido.numeroPedido &&
         data.body.fornecedor == pedido.fornecedorId &&
-        data.body.transportadora ==
-          pedido.transportadoraId &&
+        data.body.transportadora == pedido.transportadoraId &&
         data.body.tipoFrete == pedido.tipoFrete &&
         data.body.condicaoPagamento == pedido.formaPagamento
       ) {
@@ -56,7 +55,7 @@ export default class EntradaMaterialServices {
         tipoFrete: true,
         formaPagamento: true,
         fornecedorId: true,
-        transportadoraId: true
+        transportadoraId: true,
       },
     });
   }
