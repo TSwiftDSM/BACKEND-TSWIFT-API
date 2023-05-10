@@ -19,3 +19,6 @@ export { default as ControllerQualidadeProduto } from "./qualidadeProduto";
 export { default as ControllerEntregaDesaprovada } from "./entregaDesaprovada";
 export { default as TipoUsuarioController } from "./tipoUsuario";
 export { default as TransportadoraFornecedorController } from "./transportadoraFornecedor";
+export { default as PermissaoController } from "./permissao"
+export { default as PermissaoUsuarioController } from "./permissaoUsuario"
+
