@@ -159,9 +159,30 @@ model Usuario {
   tipoUsuarioId Int?
   TipoUsuario   TipoUsuario? @relation(fields: [tipoUsuarioId], references: [id])
 
-  StatusEntrega StatusEntrega[]
+  StatusEntrega    StatusEntrega[]
+  PermissaoUsuario PermissaoUsuario[]
 
   @@map("usuarios")
+}
+
+model Permissao {
+  id               Int                @id @default(autoincrement())
+  descricao        String
+  PermissaoUsuario PermissaoUsuario[]
+
+  @@map("permissoes")
+}
+
+model PermissaoUsuario {
+  Permissao Permissao @relation(fields: [permissaoId], references: [id])
+  Usuario   Usuario   @relation(fields: [usuarioId], references: [id])
+
+  permissaoId Int
+
+  usuarioId Int
+
+  @@id([permissaoId, usuarioId])
+  @@map("permissoesusuario")
 }
 
 model StatusEntrega {
