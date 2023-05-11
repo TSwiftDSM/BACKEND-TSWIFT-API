@@ -9,7 +9,7 @@ const routes = Router();
 
 routes.get("/", EntregaController.get);
 routes.post("/", schemaValidator(EntregaSchema.joi), EntregaController.post);
-
+routes.get("/numeroPedido/:numeroPedido", EntregaController.getPorNumeropedido)
 routes.get("/:id", EntregaController.getById);
 routes.put(
   "/:id",

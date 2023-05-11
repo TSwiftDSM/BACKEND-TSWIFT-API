@@ -100,6 +100,22 @@ class EntregaController {
     }
   }
 
+  async getPorNumeropedido(req: Request, res: Response) {
+    try {
+      const { numeroPedido } = req.params
+      const entrega = await prisma.entrega.findMany({
+        where: {
+          numeroPedido: {
+            startsWith: numeroPedido
+          } 
+        }
+      });
+      res.status(200).json(entrega);
+    } catch {
+      res.status(400).send("Entrega não encontrada");
+    }
+  }
+
   async update(req: Request, res: Response) {
     try {
       const { id } = req.params;
