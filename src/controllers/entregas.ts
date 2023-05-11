@@ -108,8 +108,32 @@ class EntregaController {
           numeroPedido: {
             startsWith: numeroPedido
           } 
-        }
-      });
+        }, include: {
+            EntregaProduto: {
+              include: {
+                Produto: {
+                  select: {
+                    QualidadeProduto: {
+                      include: {
+                        TesteQualidade: true,
+                      },
+                    },
+                  },
+                },
+              },
+            },
+            Fornecedor: {
+              select: {
+                nomeFantasia: true,
+              },
+            },
+            StatusEntrega: {
+              where: {
+                aprovado: false,
+              },
+            },
+          },
+        });
       res.status(200).json(entrega);
     } catch {
       res.status(400).send("Entrega não encontrada");
