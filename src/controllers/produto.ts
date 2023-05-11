@@ -45,6 +45,22 @@ class ProdutoController {
     }
   }
 
+  async getByNome(req: Request, res: Response) {
+    try {
+        const nomeProduto = req.params.nomeProduto;
+        const produto = await prisma.produto.findMany({
+            where: {
+                nomeProduto: {
+                    startsWith: nomeProduto,
+                }
+            }
+        });
+        res.status(200).json(produto);
+    } catch(err) {
+        res.status(500).send(err);
+    }
+  }
+
   async put(req: Request, res: Response) {
     try {
       const id = req.params.id;

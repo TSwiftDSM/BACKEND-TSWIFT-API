@@ -7,6 +7,7 @@ routes.get("/", ProdutoController.get);
 routes.post("/", ProdutoController.post);
 
 routes.get("/:id", ProdutoController.getById);
+routes.get("/porNome/:nomeProduto", ProdutoController.getByNome)
 routes.put("/:id", ProdutoController.put);
 
 export default routes;
