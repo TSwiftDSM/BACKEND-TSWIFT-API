@@ -22,6 +22,7 @@ import { default as tiposUsuariosRoutes } from "./tipoUsuario";
 import { default as transportadoraFornecedorRoutes } from "./transportadoraFornecedor";
 import { default as permissao } from "./permissao";
 import { default as permissaoUsuario } from "./permissaoUsuario";
+import { default as validacaoEtapasRoutes } from "./validacaoEtapas";
 
 const router = Router();
 
@@ -46,8 +47,8 @@ router.use("/qualidadeProduto", qualidadeProduto);
 router.use("/entregaDesaprovada", entregaDesaprovada);
 router.use("/tiposUsuarios", tiposUsuariosRoutes);
 router.use("/transportadorasFornecedores", transportadoraFornecedorRoutes);
-router.use("/permissao", permissao)
-router.use("/permissaoUsuario", permissaoUsuario)
-
+router.use("/permissao", permissao);
+router.use("/permissaoUsuario", permissaoUsuario);
+router.use("/validacao", validacaoEtapasRoutes);
 
 export default router;
