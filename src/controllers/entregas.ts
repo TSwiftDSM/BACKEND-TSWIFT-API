@@ -40,7 +40,7 @@ class EntregaController {
         fornecedorId,
         transportadoraId,
       } = req.body;
-
+      
       const entrega = await prisma.entrega.create({
         data: {
           id,
@@ -49,7 +49,7 @@ class EntregaController {
           nfe,
           numeroPedido,
           etapaEntrega,
-          dataEntrega,
+          dataEntrega: new Date(dataEntrega),
           fornecedorId: parseInt(fornecedorId),
           transportadoraId: parseInt(transportadoraId),
         },

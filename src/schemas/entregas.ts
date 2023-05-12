@@ -6,6 +6,7 @@ class EntregaSchema {
     formaPagamento: Joi.string().required(),
     etapaEntrega: Joi.string(),
     fornecedorId: Joi.number(),
+    dataEntrega: Joi.date().required(),
     transportadoraId: Joi.number(),
   });
 }
