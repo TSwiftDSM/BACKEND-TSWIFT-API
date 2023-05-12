@@ -33,7 +33,8 @@ export default class EntradaMaterialServices {
       if (
         data.body.numeroPedido == pedido.numeroPedido &&
         data.body.fornecedor == pedido.Fornecedor.nomeFantasia &&
-        data.body.transportadora == pedido.Transportadora.FornecedorTransportadora.nomeFantasia &&
+        data.body.transportadora ==
+          pedido.Transportadora.FornecedorTransportadora.nomeFantasia &&
         data.body.tipoFrete == pedido.tipoFrete &&
         data.body.condicaoPagamento == pedido.formaPagamento
       ) {

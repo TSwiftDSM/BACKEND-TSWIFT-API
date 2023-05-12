@@ -29,9 +29,8 @@ class Fornecedor {
   }
   async getPorId(id: number) {
     try {
-      const fornecedores = await prisma.fornecedor.findMany({
+      const fornecedores = await prisma.fornecedor.findUnique({
         where: {
-          fornecedor: true,
           id: id,
         },
         select: {
@@ -44,7 +43,7 @@ class Fornecedor {
           razaoSocial: true,
         },
       });
-      if (fornecedores.length === 0) {
+      if (!fornecedores) {
         throw new Error("Nenhum fornecedor encontrado");
       }
       return fornecedores;

@@ -102,38 +102,39 @@ class EntregaController {
 
   async getPorNumeropedido(req: Request, res: Response) {
     try {
-      const { numeroPedido } = req.params
+      const { numeroPedido } = req.params;
       const entrega = await prisma.entrega.findMany({
         where: {
           numeroPedido: {
-            startsWith: numeroPedido
-          } 
-        }, include: {
-            EntregaProduto: {
-              include: {
-                Produto: {
-                  select: {
-                    QualidadeProduto: {
-                      include: {
-                        TesteQualidade: true,
-                      },
+            startsWith: numeroPedido,
+          },
+        },
+        include: {
+          EntregaProduto: {
+            include: {
+              Produto: {
+                select: {
+                  QualidadeProduto: {
+                    include: {
+                      TesteQualidade: true,
                     },
                   },
                 },
               },
             },
-            Fornecedor: {
-              select: {
-                nomeFantasia: true,
-              },
-            },
-            StatusEntrega: {
-              where: {
-                aprovado: false,
-              },
+          },
+          Fornecedor: {
+            select: {
+              nomeFantasia: true,
             },
           },
-        });
+          StatusEntrega: {
+            where: {
+              aprovado: false,
+            },
+          },
+        },
+      });
       res.status(200).json(entrega);
     } catch {
       res.status(400).send("Entrega não encontrada");
