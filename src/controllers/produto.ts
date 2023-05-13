@@ -65,12 +65,12 @@ class ProdutoController {
     try {
       const id = req.params.id;
       const nomeProduto = req.body.nomeProduto;
-      const unidadeMedida = req.body.unidadeMedida;
+      const unidade = req.body.unidade;
       const produto = await prisma.produto.update({
         where: { id: parseInt(id) },
         data: {
           nomeProduto: nomeProduto,
-          unidade: unidadeMedida,
+          unidade: unidade,
         },
       });
       res.json(produto);
