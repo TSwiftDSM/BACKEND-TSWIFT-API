@@ -79,6 +79,40 @@ class ProdutoController {
       res.status(500).send(err);
     }
   }
+
+  async delete(req: Request, res: Response){
+    try {
+        const id = parseInt(req.params.id);
+        await prisma.$transaction([
+            prisma.fornecedorProduto.deleteMany({
+              where: {
+                produtoId: id // o ID do registro em ModeloB correspondente que deseja excluir
+              }
+            }),
+            prisma.entregaProduto.deleteMany({
+                where: {
+                    produtoId: id
+                }
+            }),
+            prisma.qualidadeProduto.deleteMany({
+                where: {
+                    produtoId: id
+                }
+            }),
+            prisma.produto.deleteMany({
+                where: {
+                  id: id 
+                }
+              }),
+          ]);
+        res.status(200).json('Produto deletado')
+    } catch (err) {
+        console.log(err);
+        res.status(400).json(err)
+    }
+  }
 }
+
+
 
 export default new ProdutoController();
