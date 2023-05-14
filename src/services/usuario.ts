@@ -85,8 +85,8 @@ class UsuarioServices {
         throw new Error("Nenhum usuário encontrado");
       }
       return usuario;
-    } catch (e: any) {
-      console.log(e.message);
+    } catch (e) {
+      console.log(e);
     }
   }
 

@@ -28,7 +28,7 @@ class UsuarioController {
   async getPorNome(req: Request, res: Response) {
     // GET para pegar os usuários de acordo com o nome
     try {
-      const nome = req.query.nome;
+      const nome = req.params.nomeUsuario;
       const usuarios = await UsuarioServices.getPorNome(String(nome));
       return res.status(200).json(usuarios);
     } catch {
