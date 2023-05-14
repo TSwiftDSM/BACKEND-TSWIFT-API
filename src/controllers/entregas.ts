@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Request, Response } from "express";
 
 import { PrismaClient } from "@prisma/client";
@@ -34,20 +35,34 @@ class EntregaController {
         tipoFrete,
         formaPagamento,
         nfe,
-        numeroPedido,
         etapaEntrega,
         dataEntrega,
         fornecedorId,
         transportadoraId,
       } = req.body;
       
+      const numeroPedidoTeste = await prisma.entrega.findFirst({
+        select: {
+          numeroPedido: true,
+        },
+        orderBy: {
+          numeroPedido: "desc",
+        },
+      });
+
+      let numeroPedido = 0
+
+      if (numeroPedidoTeste?.numeroPedido) {
+        numeroPedido = parseInt(numeroPedidoTeste.numeroPedido) + 1
+      } 
+
       const entrega = await prisma.entrega.create({
         data: {
           id,
           tipoFrete,
           formaPagamento,
           nfe,
-          numeroPedido,
+          numeroPedido: numeroPedido.toString(),
           etapaEntrega,
           dataEntrega: new Date(dataEntrega),
           fornecedorId: parseInt(fornecedorId),

@@ -210,12 +210,11 @@ class Fornecedor {
   }
   async delete(id: number) {
     try {
-      const fornecedorDeletado = await prisma.fornecedor.delete({
+      await prisma.fornecedor.delete({
         where: {
           id: id,
         },
       });
-      return fornecedorDeletado;
     } catch (error: any) {
       console.error(error);
       throw new Error("Erro ao excluir fornecedor");
