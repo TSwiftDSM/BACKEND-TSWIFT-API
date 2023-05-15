@@ -86,10 +86,10 @@ class FornecedorController {
   async delete(req: Request, res: Response) {
     try {
       const { id } = req.params;
-      await fornecedorServices.delete(parseInt(id));
-      res.status(200).send("Fornecedor deletada");
+      const resp = await fornecedorServices.delete(parseInt(id));
+      res.status(200).send(resp)
     } catch {
-      res.send("Erro ao deletar Fornecedor");
+      res.status(400).send("Erro ao deletar Fornecedor");
     }
   }
 

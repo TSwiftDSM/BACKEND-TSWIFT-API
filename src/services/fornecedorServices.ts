@@ -209,17 +209,30 @@ class Fornecedor {
     }
   }
   async delete(id: number) {
-    try {
-      await prisma.fornecedor.delete({
-        where: {
-          id: id,
-        },
-      });
-    } catch (error: any) {
-      console.error(error);
-      throw new Error("Erro ao excluir fornecedor");
-    }
-  }
+        try {
+            const res = await prisma.$transaction([
+                prisma.fornecedorProduto.deleteMany({
+                  where: {
+                    fornecedorId: id // o ID do registro em ModeloB correspondente que deseja excluir
+                  }
+                }),
+                prisma.transportadoraFornecedor.deleteMany({
+                    where: {
+                        fornecedorId: id
+                    }
+                }),
+                prisma.fornecedor.deleteMany({
+                    where: {
+                        id: id
+                    }
+                }),
+              ]);
+            return res;
+        } catch (err) {
+            console.log(err);
+            throw new Error("Erro ao atualizar fornecedor");
+        }
+      }
 }
 
 export default new Fornecedor();
