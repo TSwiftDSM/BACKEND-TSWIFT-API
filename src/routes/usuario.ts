@@ -7,7 +7,7 @@ const routes = Router();
 
 routes.get("/", UsuarioController.get);
 routes.get("/tipoUsuario/:tipoUsuarioId", UsuarioController.getPorTipoUsuario);
-routes.get("/:nomeUsuario", UsuarioController.getPorNome);
+routes.get("/porNome/:nomeUsuario", UsuarioController.getPorNome);
 routes.get("/id/:idUsuario", UsuarioController.getPorId);
 routes.delete("/:idUsuario", UsuarioController.delete);
 routes.put(
