@@ -38,7 +38,9 @@ https://youtu.be/6gblBDUkuOE
 Durante a Sprint 3, foram implementadas no sistema funcionalidades de cadastro de colaboradores, produtos, pedidos e fornecedores, além das opções de edição e exclusão dos registros cadastrados. Também foram criadas tabelas para cada categoria de cadastro (colaboradores, produtos, pedidos e fornecedores), onde é possível visualizar todos os registros cadastrados. Na listagem, também foram incluídas opções de filtro e busca para facilitar a localização dos registros desejados.
 
 
-### :octocat: Vídeo do produto entregue na Sprint 3:
+### :octocat: Gif do protótipo entregue na Sprint 3:
+
+<img src="/doc/img/gifs3.gif">
 
 #
 
