@@ -34,25 +34,19 @@ Nessa sprint, a equipe concentrou seus esforços na criação da interface admin
 https://youtu.be/6gblBDUkuOE
 
 #
+### :black_flag: Sprint 3:
+Durante a Sprint 3, foram implementadas no sistema funcionalidades de cadastro de colaboradores, produtos, pedidos e fornecedores, além das opções de edição e exclusão dos registros cadastrados. Também foram criadas tabelas para cada categoria de cadastro (colaboradores, produtos, pedidos e fornecedores), onde é possível visualizar todos os registros cadastrados. Na listagem, também foram incluídas opções de filtro e busca para facilitar a localização dos registros desejados.
+
+
+### :octocat: Gif do protótipo entregue na Sprint 3:
+
+<img src="/doc/img/gifs3.gif">
+
+#
 
 # :memo: Product Backlog Total:
 
-| ID | UserStory | Requisitos | Sprint |
-|----|-----------|------------|--------|
-|US_01|Eu, como empresa, preciso de um software para recebimento de mercadoria| Realizar o mapeamento de entrega| S1|
-|US_02|Eu, como empresa, preciso de um software para recebimento de mercadoria| O sistema precisa ter 3 interfaces diferentes para cada perfil cadastrado, cada um com sua própria função | S1|
-|US_03|Eu, como empresa, preciso cadastrar perfil administrativo para manipular o sistema| Para todo colaborador é necessário os seguintes dados: Matricula,Nome, CPF, Data Nascimento, Cargo| S2 |
-|US_04|Eu, como administrador, preciso de uma interface para acesso as rotinas administrativas| Na interface é necessário ter um painel/link que leva para outra interface de cadastro(cada uma para um propósito)| S3 |
-|US_05|Eu, como administrador, preciso de uma interface para cadastrar produtos| Cadastro de produtos: Código, Nome, Unidade de medida | S3 |
-|US_06|Eu, como administrador, preciso de uma interface para cadastrar fornecedores/transportadora|"Para se tornar um fornecedor é necessário os seguintes dados: Código, Nome da empresa (fantasia), CNPJ, Razão, Social Endereço" |  S3 |
-|US_07|Eu, como administrador, preciso de uma interface para cadastrar colaboradores| "Para todo colaborador é necessário os seguintes dados: Matrícula, Nome, CPF, Data, Nascimento, Cargo" | S3 |
-|US_08|Eu, como administrador preciso de uma interface para cadastrar compras| "Pedido de compra necessário: Nº do pedido, Cód do produto, Nome do produto, Cód do fornecedor, Nome do fornecedor, Tipo de frete, Condição de pagamento" | S3 |
-|US_09|Eu, como conferente, preciso de uma interface para fazer login| Interface com os campos Matrícula, senha e um botão para entrar |  S2 |
-|US_10|Eu, como conferente, preciso de uma interface para dar entrada no recebimento de mercadoria| Interfaces com os processos de entrada | S2 |
-|US_11|Eu, como gerente, preciso de um interface para acompanhar o status da entrega| Interface de acompanhamento de entrega | S4 |
-|US_12|Eu, como gerente, preciso gerar relatórios para analise| Botão correspondente ao pedido | S4 |
-|US_13|Eu, como gerente, preciso de uma interface onde posso inserir regras de recebimento| Interface de cadastro de regras | S4 |
-|US_14|Eu, como gerente, preciso realizar recebimento forçado caso seja recusada a entrega conforme as regras cadastradas| Botão na interface do gerente | S2 |
+<img src="/doc/BacklogTotal.jpg">
 
 #
 
