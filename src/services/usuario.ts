@@ -70,16 +70,7 @@ class UsuarioServices {
             startsWith: nome,
           },
         },
-        select: {
-          id: true,
-          nome: true,
-          login: true,
-          senha: true,
-          cpf: true,
-          dataNascimento: true,
-          tipoUsuarioId: true,
-          matricula: true,
-        },
+       
       });
       if (usuario.length === 0) {
         throw new Error("Nenhum usuário encontrado");

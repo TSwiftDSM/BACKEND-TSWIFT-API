@@ -29,7 +29,7 @@ class UsuarioController {
     // GET para pegar os usuários de acordo com o nome
     try {
       const nome = req.params.nomeUsuario;
-      const usuarios = await UsuarioServices.getPorNome(String(nome));
+      const usuarios = await UsuarioServices.getPorNome(nome);
       return res.status(200).json(usuarios);
     } catch {
       res.send("Erro ao retornar dados");
