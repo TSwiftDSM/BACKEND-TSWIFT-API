@@ -97,14 +97,14 @@ class UsuarioServices {
       }
 
       matriculaInt = matriculaInt + 1;
-
+      const tipousuarioC = parseInt(data.tipoUsuarioId.toString())
       const novoUsuario = await prisma.usuario.create({
         data: {
           nome: data.nome,
           cpf: data.cpf,
           dataNascimento: new Date(data.dataNascimento),
-          tipoUsuarioId: data.tipoUsuarioId,
           matricula: matriculaInt.toString(),
+          tipoUsuarioId:tipousuarioC
         },
       });
       return novoUsuario;
