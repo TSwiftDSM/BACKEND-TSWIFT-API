@@ -70,7 +70,6 @@ class UsuarioServices {
             startsWith: nome,
           },
         },
-       
       });
       if (usuario.length === 0) {
         throw new Error("Nenhum usuário encontrado");
@@ -97,14 +96,14 @@ class UsuarioServices {
       }
 
       matriculaInt = matriculaInt + 1;
-      const tipousuarioC = parseInt(data.tipoUsuarioId.toString())
+      const tipousuarioC = parseInt(data.tipoUsuarioId.toString());
       const novoUsuario = await prisma.usuario.create({
         data: {
           nome: data.nome,
           cpf: data.cpf,
           dataNascimento: new Date(data.dataNascimento),
           matricula: matriculaInt.toString(),
-          tipoUsuarioId:tipousuarioC
+          tipoUsuarioId: tipousuarioC,
         },
       });
       return novoUsuario;
@@ -148,8 +147,6 @@ class UsuarioServices {
         },
         data: {
           nome: data.nome,
-          login: data.login,
-          senha: data.senha,
           cpf: data.cpf,
           dataNascimento: new Date(data.dataNascimento),
           tipoUsuarioId: data.tipoUsuarioId,
