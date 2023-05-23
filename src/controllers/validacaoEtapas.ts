@@ -23,15 +23,32 @@ class ValidacaoEtapasController {
 
   async validacaoQuantitativa(req: Request, res: Response) {
     const req_json = req.body;
-    const recusado: boolean =
-      await ValidacaoEtapasServices.testeRecusaQuantitativa(
-        req_json.update_objects
-      );
-    if (recusado == true) {
-      res.send("Etapa Recusada");
-    } else {
-      res.send("Etapa Aprovada");
+  try {
+    const resultados: boolean[] = await ValidacaoEtapasServices.testeRecusaQuantitativa(
+      req_json.update_objects
+    );
+
+    const aprovados: number[] = [];
+    const reprovados: number[] = [];
+
+    for (let i = 0; i < resultados.length; i++) {
+      if (resultados[i]) {
+        reprovados.push(req_json.update_objects[i].id_entrega_produto);
+      } else {
+        aprovados.push(req_json.update_objects[i].id_entrega_produto);
+      }
     }
+
+    const resposta = {
+      Id_entrega_produtos_aprovados: aprovados,
+      Id_entrega_produtos_reprovados: reprovados
+    };
+
+    res.json(resposta);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Erro na validação quantitativa.' });
+  }
   }
 
   async validacaoQualitativa(req: Request, res: Response) {

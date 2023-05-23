@@ -69,21 +69,23 @@ class validacaoEtapasServices {
     });
   }
 
-  async testeRecusaQuantitativa(dataObj: Array<dataObject>): Promise<boolean> {
+  async testeRecusaQuantitativa(dataObj: Array<dataObject>) {
     try {
+      const resultados = [];
+  
       for (let cont = 0; cont < dataObj.length; cont++) {
-        if (
-          dataObj[cont].valorTotal < dataObj[cont].peso_previsto * 0.95 ||
-          dataObj[cont].valorTotal > dataObj[cont].peso_previsto * 1.05
-        ) {
-          return true;
-        }
+        const obj = dataObj[cont];
+        const recusado =
+          obj.valorTotal < obj.peso_previsto * 0.95 ||
+          obj.valorTotal > obj.peso_previsto * 1.05;
+  
+        resultados.push(recusado);
       }
-      return false;
+  
+      return resultados;
     } catch (error) {
-      // Lidar com exceções ou erros caso ocorram
       console.error(error);
-      return false;
+      return Promise.reject(error);
     }
   }
 
