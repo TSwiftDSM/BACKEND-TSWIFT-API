@@ -30,7 +30,7 @@ class validacaoEtapasServices {
         data.nfe == pedido.nfe &&
         data.fornecedor == pedido.Fornecedor.nomeFantasia &&
         data.transportadora ==
-          pedido.Transportadora.FornecedorTransportadora.nomeFantasia &&
+        pedido.Transportadora.FornecedorTransportadora.nomeFantasia &&
         data.tipoFrete == pedido.tipoFrete &&
         data.formaPagamento == pedido.formaPagamento
       )
@@ -72,16 +72,16 @@ class validacaoEtapasServices {
   async testeRecusaQuantitativa(dataObj: Array<dataObject>) {
     try {
       const resultados = [];
-  
+
       for (let cont = 0; cont < dataObj.length; cont++) {
         const obj = dataObj[cont];
         const recusado =
           obj.valorTotal < obj.peso_previsto * 0.95 ||
           obj.valorTotal > obj.peso_previsto * 1.05;
-  
+
         resultados.push(recusado);
       }
-  
+
       return resultados;
     } catch (error) {
       console.error(error);
@@ -90,35 +90,29 @@ class validacaoEtapasServices {
   }
 
   public async VerificandoRecusaQualitativa(testeProdutos: TesteProdutos) {
-    let aprovado = true;
+    const aprovados: { [idProduto: number]: number[] } = {};
+    const reprovados: { [idProduto: number]: number[] } = {};
 
     for (const testeProduto of testeProdutos.testeProdutos) {
-      if (!testeProduto.status) {
-        const obrigatorio = await prisma.qualidadeProduto.findFirst({
-          where: {
-            Produto: {
-              id: testeProduto.idProduto,
-            },
-            TesteQualidade: {
-              id: testeProduto.idQualidade,
-            },
-          },
-          select: {
-            obrigatorio: true,
-          },
-        });
-        if (obrigatorio?.obrigatorio) {
-          aprovado = false;
-          testeProduto.Obrigatorio = true;
+      const idProduto = testeProduto.idProduto;
+      const idQualidade = testeProduto.idQualidade;
+
+      if (!testeProduto.status && testeProduto.Obrigatorio) {
+        if (reprovados[idProduto]) {
+          reprovados[idProduto].push(idQualidade);
         } else {
-          testeProduto.Obrigatorio = false;
+          reprovados[idProduto] = [idQualidade];
         }
       } else {
-        testeProduto.Obrigatorio = true;
+        if (aprovados[idProduto]) {
+          aprovados[idProduto].push(idQualidade);
+        } else {
+          aprovados[idProduto] = [idQualidade];
+        }
       }
     }
 
-    return aprovado;
+    return { Aprovados: aprovados, Reprovados: reprovados };
   }
 }
 
