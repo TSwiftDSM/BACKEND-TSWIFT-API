@@ -3,10 +3,11 @@ import { Router } from "express";
 import { Fornecedor } from "../controllers";
 import { schemaValidator } from "../middlewares";
 import { FornecedorSchema } from "../schemas";
+import Autenticador from "../middlewares/autenticadorMiddleware"
 
 const routes = Router();
 
-routes.get("/", Fornecedor.get);
+routes.get("/", Autenticador,Fornecedor.get);
 routes.get("/nome/porNome/:nomeFantaisa", Fornecedor.getNomePornome);
 routes.get("/porId/:id", Fornecedor.getPorId);
 routes.get("/porNome/:nomeFantasia", Fornecedor.getPorNome);

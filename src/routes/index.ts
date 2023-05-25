@@ -23,6 +23,7 @@ import { default as transportadoraFornecedorRoutes } from "./transportadoraForne
 import { default as permissao } from "./permissao";
 import { default as permissaoUsuario } from "./permissaoUsuario";
 import { default as validacaoEtapasRoutes } from "./validacaoEtapas";
+import {default as autenticador } from "./autenticador"
 
 const router = Router();
 
@@ -50,5 +51,6 @@ router.use("/transportadorasFornecedores", transportadoraFornecedorRoutes);
 router.use("/permissao", permissao);
 router.use("/permissaoUsuario", permissaoUsuario);
 router.use("/validacao", validacaoEtapasRoutes);
+router.use("/autenticacao", autenticador)
 
 export default router;

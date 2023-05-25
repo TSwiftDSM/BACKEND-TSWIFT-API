@@ -22,3 +22,4 @@ export { default as TransportadoraFornecedorController } from "./transportadoraF
 export { default as PermissaoController } from "./permissao";
 export { default as PermissaoUsuarioController } from "./permissaoUsuario";
 export { default as ValidacaoEtapasController } from "./validacaoEtapas";
+export { default as autenticarUsuario } from "./autenticador"
