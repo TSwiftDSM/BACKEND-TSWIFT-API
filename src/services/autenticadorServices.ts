@@ -6,7 +6,7 @@ const prisma = new PrismaClient();
 class AutenticadorServices {
   async geradorToken(usuario: any) {
     try {
-      const token = await jwt.sign({ id: usuario.id }, "segredo", {
+      const token = await jwt.sign({ usuarioPermissao: usuario }, "segredo", {
         expiresIn: "1d",
       });
       return token;
