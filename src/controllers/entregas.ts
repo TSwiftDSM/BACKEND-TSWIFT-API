@@ -40,7 +40,7 @@ class EntregaController {
         fornecedorId,
         transportadoraId,
       } = req.body;
-      
+
       const numeroPedidoTeste = await prisma.entrega.findFirst({
         select: {
           numeroPedido: true,
@@ -50,11 +50,11 @@ class EntregaController {
         },
       });
 
-      let numeroPedido = 0
+      let numeroPedido = 0;
 
       if (numeroPedidoTeste?.numeroPedido) {
-        numeroPedido = parseInt(numeroPedidoTeste.numeroPedido) + 1
-      } 
+        numeroPedido = parseInt(numeroPedidoTeste.numeroPedido) + 1;
+      }
 
       const entrega = await prisma.entrega.create({
         data: {

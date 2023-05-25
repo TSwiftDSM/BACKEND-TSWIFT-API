@@ -3,6 +3,6 @@ import { autenticarUsuario } from "../controllers";
 
 const routes = Router();
 
-routes.post('/', autenticarUsuario.autenticar)
+routes.post("/", autenticarUsuario.autenticar);
 
 export default routes;

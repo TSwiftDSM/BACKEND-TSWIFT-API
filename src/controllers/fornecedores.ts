@@ -87,7 +87,7 @@ class FornecedorController {
     try {
       const { id } = req.params;
       const resp = await fornecedorServices.delete(parseInt(id));
-      res.status(200).send(resp)
+      res.status(200).send(resp);
     } catch {
       res.status(400).send("Erro ao deletar Fornecedor");
     }

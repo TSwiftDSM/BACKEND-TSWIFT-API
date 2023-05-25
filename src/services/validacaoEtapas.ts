@@ -30,7 +30,7 @@ class validacaoEtapasServices {
         data.nfe == pedido.nfe &&
         data.fornecedor == pedido.Fornecedor.nomeFantasia &&
         data.transportadora ==
-        pedido.Transportadora.FornecedorTransportadora.nomeFantasia &&
+          pedido.Transportadora.FornecedorTransportadora.nomeFantasia &&
         data.tipoFrete == pedido.tipoFrete &&
         data.formaPagamento == pedido.formaPagamento
       )

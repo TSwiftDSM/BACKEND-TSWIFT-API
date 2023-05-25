@@ -24,9 +24,10 @@ class ValidacaoEtapasController {
   async validacaoQuantitativa(req: Request, res: Response) {
     const req_json = req.body;
     try {
-      const resultados: boolean[] = await ValidacaoEtapasServices.testeRecusaQuantitativa(
-        req_json.update_objects
-      );
+      const resultados: boolean[] =
+        await ValidacaoEtapasServices.testeRecusaQuantitativa(
+          req_json.update_objects
+        );
 
       const aprovados: number[] = [];
       const reprovados: number[] = [];
@@ -41,30 +42,31 @@ class ValidacaoEtapasController {
 
       const resposta = {
         Id_entrega_produtos_aprovados: aprovados,
-        Id_entrega_produtos_reprovados: reprovados
+        Id_entrega_produtos_reprovados: reprovados,
       };
 
       res.json(resposta);
     } catch (error) {
       console.error(error);
-      res.status(500).json({ error: 'Erro na validação quantitativa.' });
+      res.status(500).json({ error: "Erro na validação quantitativa." });
     }
   }
 
   async validacaoQualitativa(req: Request, res: Response) {
     const data = req.body;
-    const resultado = await ValidacaoEtapasServices.VerificandoRecusaQualitativa(data);
+    const resultado =
+      await ValidacaoEtapasServices.VerificandoRecusaQualitativa(data);
 
     const resposta = {
       Aprovados: [] as { id_Produto: number; id_Qualidade: number[] }[],
-      Reprovados: [] as { id_Produto: number; id_Qualidade: number[] }[]
+      Reprovados: [] as { id_Produto: number; id_Qualidade: number[] }[],
     };
 
     for (const idProduto in resultado.Aprovados) {
       const idQualidades = resultado.Aprovados[idProduto];
       resposta.Aprovados.push({
         id_Produto: parseInt(idProduto),
-        id_Qualidade: idQualidades
+        id_Qualidade: idQualidades,
       });
     }
 
@@ -72,7 +74,7 @@ class ValidacaoEtapasController {
       const idQualidades = resultado.Reprovados[idProduto];
       resposta.Reprovados.push({
         id_Produto: parseInt(idProduto),
-        id_Qualidade: idQualidades
+        id_Qualidade: idQualidades,
       });
     }
 
