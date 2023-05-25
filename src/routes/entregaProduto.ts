@@ -3,22 +3,24 @@ import { Router } from "express";
 import { EntregaProduto } from "../controllers";
 import { schemaValidator } from "../middlewares";
 import { EntregaProdutoSchema } from "../schemas";
+import Autenticador from "../middlewares/autenticadorMiddleware"
+
 
 const routes = Router();
 
-routes.get("/", EntregaProduto.get);
-routes.get("/porIdEntrega/:idEntrega", EntregaProduto.getPorIdEntrega);
-routes.get("/porId/:id", EntregaProduto.getPorId);
+routes.get("/",Autenticador, EntregaProduto.get);
+routes.get("/porIdEntrega/:idEntrega",Autenticador, EntregaProduto.getPorIdEntrega);
+routes.get("/porId/:id",Autenticador, EntregaProduto.getPorId);
 routes.post(
-  "/",
+  "/",Autenticador,
   schemaValidator(EntregaProdutoSchema.joi),
   EntregaProduto.post
 );
 routes.put(
-  "/:id",
+  "/:id",Autenticador,
   schemaValidator(EntregaProdutoSchema.joi),
   EntregaProduto.update
 );
-routes.delete("/:id", EntregaProduto.delete);
+routes.delete("/:id",Autenticador, EntregaProduto.delete);
 
 export default routes;
