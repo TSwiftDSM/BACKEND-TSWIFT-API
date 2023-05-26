@@ -18,6 +18,23 @@ class TesteQualidadeServices {
       console.log(e.message);
     }
   }
+  async getPorNome(nome: string) {
+    try {
+      const testeQualidade = await prisma.testeQualidade.findMany({
+        where: {
+          nomeTeste: {
+            startsWith: nome
+          }
+        },
+      });
+      if (!testeQualidade) {
+        throw new Error("Nenhum Teste Qualidade encontrado");
+      }
+      return testeQualidade;
+    } catch (e: any) {
+      console.log(e.message);
+    }
+  }
   async get() {
     try {
       const testeQualidades = await prisma.testeQualidade.findMany();

@@ -8,6 +8,7 @@ const routes = Router();
 
 routes.get("/", TesteQualidade.get);
 routes.get("/porId/:id", TesteQualidade.getPorId);
+routes.get("/porNome/:nome", TesteQualidade.getPorNome);
 routes.post(
   "/",
   schemaValidator(TesteQualidadeSchema.joi),
