@@ -1,8 +1,18 @@
 import { Request, Response } from "express";
 import { default as ServiceEntregaDesaprovada } from "../services/serviceEntregaDesaprovada";
+import verificaPermissao from "../services/verificaPermissao";
+import { Permissoes } from "../data/permissoes";
 
 class ControllerEntregaDesaprovada {
   async get(req: Request, res: Response) {
+    const { authorization } = req.headers;
+      if (!authorization) {
+        return res.status(401)
+      }
+      const permissao = await verificaPermissao.validaPermissao(authorization, Permissoes.RECEBIMENTO)
+      if (!permissao) {
+        return res.status(401)
+      }
     if (req.params.idEntregaDesaprovada) {
       const url_params = Number(req.params.idEntregaDesaprovada);
       const resp = await ServiceEntregaDesaprovada.getEntregaDesaprovadaUnique(
@@ -17,6 +27,14 @@ class ControllerEntregaDesaprovada {
   }
 
   async post(req: Request, res: Response) {
+    const { authorization } = req.headers;
+      if (!authorization) {
+        return res.status(401)
+      }
+      const permissao = await verificaPermissao.validaPermissao(authorization, Permissoes.RECEBIMENTO)
+      if (!permissao) {
+        return res.status(401)
+      }
     const body = req.body;
     const resp_code = await ServiceEntregaDesaprovada.postEntregaDesaprovada(
       body
@@ -26,6 +44,14 @@ class ControllerEntregaDesaprovada {
   }
 
   async put(req: Request, res: Response) {
+    const { authorization } = req.headers;
+      if (!authorization) {
+        return res.status(401)
+      }
+      const permissao = await verificaPermissao.validaPermissao(authorization, Permissoes.RECEBIMENTO)
+      if (!permissao) {
+        return res.status(401)
+      }
     if (req.params.idEntregaDesaprovada) {
       const url_params = Number(req.params.idEntregaDesaprovada);
       const body = req.body;
@@ -41,6 +67,14 @@ class ControllerEntregaDesaprovada {
   }
 
   async delete(req: Request, res: Response) {
+    const { authorization } = req.headers;
+      if (!authorization) {
+        return res.status(401)
+      }
+      const permissao = await verificaPermissao.validaPermissao(authorization, Permissoes.RECEBIMENTO)
+      if (!permissao) {
+        return res.status(401)
+      }
     if (req.params.idEntregaDesaprovada) {
       const url_params = Number(req.params.idEntregaDesaprovada);
       const resp_code =
