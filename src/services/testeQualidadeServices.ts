@@ -23,8 +23,8 @@ class TesteQualidadeServices {
       const testeQualidade = await prisma.testeQualidade.findMany({
         where: {
           nomeTeste: {
-            startsWith: nome
-          }
+            startsWith: nome,
+          },
         },
       });
       if (!testeQualidade) {

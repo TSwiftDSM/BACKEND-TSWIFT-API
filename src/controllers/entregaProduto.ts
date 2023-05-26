@@ -1,9 +1,22 @@
 import { Request, Response } from "express";
 import entregaProdutosServices from "../services/entregaProdutosServices";
+import verificaPermissao from "../services/verificaPermissao";
+import { Permissoes } from "../data/permissoes";
 
 class EntregaProduto {
   async getPorId(req: Request, res: Response) {
     try {
+      const { authorization } = req.headers;
+      if (!authorization) {
+        return res.status(401);
+      }
+      const permissao = await verificaPermissao.validaPermissao(
+        authorization,
+        Permissoes.RECEBIMENTO
+      );
+      if (!permissao) {
+        return res.status(401);
+      }
       const { id } = req.params;
       const entregasProdutos = await entregaProdutosServices.getPorId(
         parseInt(id)
@@ -15,6 +28,17 @@ class EntregaProduto {
   }
   async getPorIdEntrega(req: Request, res: Response) {
     try {
+      const { authorization } = req.headers;
+      if (!authorization) {
+        return res.status(401);
+      }
+      const permissao = await verificaPermissao.validaPermissao(
+        authorization,
+        Permissoes.RECEBIMENTO
+      );
+      if (!permissao) {
+        return res.status(401);
+      }
       const { idEntrega } = req.params;
       const entregasProdutos = await entregaProdutosServices.getPorIdEntrega(
         parseInt(idEntrega)
@@ -26,6 +50,17 @@ class EntregaProduto {
   }
   async get(req: Request, res: Response) {
     try {
+      const { authorization } = req.headers;
+      if (!authorization) {
+        return res.status(401);
+      }
+      const permissao = await verificaPermissao.validaPermissao(
+        authorization,
+        Permissoes.RECEBIMENTO
+      );
+      if (!permissao) {
+        return res.status(401);
+      }
       const entregasProdutos = await entregaProdutosServices.get();
       res.status(200).json(entregasProdutos);
     } catch {
@@ -35,6 +70,17 @@ class EntregaProduto {
   async post(req: Request, res: Response) {
     try {
       //
+      const { authorization } = req.headers;
+      if (!authorization) {
+        return res.status(401);
+      }
+      const permissao = await verificaPermissao.validaPermissao(
+        authorization,
+        Permissoes.RECEBIMENTO
+      );
+      if (!permissao) {
+        return res.status(401);
+      }
       const data = req.body;
       const novoEntregaProduto = await entregaProdutosServices.post(data);
       return res.status(201).json(novoEntregaProduto);
@@ -44,6 +90,17 @@ class EntregaProduto {
   }
   async delete(req: Request, res: Response) {
     try {
+      const { authorization } = req.headers;
+      if (!authorization) {
+        return res.status(401);
+      }
+      const permissao = await verificaPermissao.validaPermissao(
+        authorization,
+        Permissoes.RECEBIMENTO
+      );
+      if (!permissao) {
+        return res.status(401);
+      }
       const { id } = req.params;
       await entregaProdutosServices.delete(parseInt(id));
       res.status(200).send("EntregaProduto deletado");
@@ -53,6 +110,17 @@ class EntregaProduto {
   }
   async update(req: Request, res: Response) {
     try {
+      const { authorization } = req.headers;
+      if (!authorization) {
+        return res.status(401);
+      }
+      const permissao = await verificaPermissao.validaPermissao(
+        authorization,
+        Permissoes.RECEBIMENTO
+      );
+      if (!permissao) {
+        return res.status(401);
+      }
       const { id } = req.params;
       const data = req.body;
       const entregaProduto = await entregaProdutosServices.update(

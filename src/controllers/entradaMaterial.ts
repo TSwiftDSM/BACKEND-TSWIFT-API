@@ -1,11 +1,24 @@
 import { Request, Response } from "express";
 import EntradaMaterialServices from "../services/entradaMaterialServices";
 import { Etapas } from "../data/EnumEtapa";
+import verificaPermissao from "../services/verificaPermissao";
+import { Permissoes } from "../data/permissoes";
 
 const entradaMaterial = new EntradaMaterialServices();
 
 class EntradaMaterial {
   async get(req: Request, res: Response) {
+    const { authorization } = req.headers;
+    if (!authorization) {
+      return res.status(401);
+    }
+    const permissao = await verificaPermissao.validaPermissao(
+      authorization,
+      Permissoes.RECEBIMENTO
+    );
+    if (!permissao) {
+      return res.status(401);
+    }
     const idEntrega = parseInt(req.params.idEntrega);
     const pedido = await entradaMaterial.PesquisaEntradaMaterial(idEntrega);
     res.send(pedido);
@@ -13,6 +26,17 @@ class EntradaMaterial {
 
   async post(req: Request, res: Response) {
     //
+    const { authorization } = req.headers;
+    if (!authorization) {
+      return res.status(401);
+    }
+    const permissao = await verificaPermissao.validaPermissao(
+      authorization,
+      Permissoes.RECEBIMENTO
+    );
+    if (!permissao) {
+      return res.status(401);
+    }
     const idEntrega = req.body.idEntrega;
     const pedido = await entradaMaterial.PesquisaEntradaMaterial(idEntrega);
 

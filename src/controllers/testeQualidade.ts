@@ -1,9 +1,22 @@
 import { Request, Response } from "express";
 import testeQualidadeServices from "../services/testeQualidadeServices";
+import verificaPermissao from "../services/verificaPermissao";
+import { Permissoes } from "../data/permissoes";
 
 class TesteQualidade {
   async get(req: Request, res: Response) {
     try {
+      const { authorization } = req.headers;
+      if (!authorization) {
+        return res.status(401);
+      }
+      const permissao = await verificaPermissao.validaPermissao(
+        authorization,
+        Permissoes.REGRAS
+      );
+      if (!permissao) {
+        return res.status(401);
+      }
       const testeQualidades = await testeQualidadeServices.get();
       res.status(200).json(testeQualidades);
     } catch {
@@ -12,10 +25,19 @@ class TesteQualidade {
   }
   async getPorNome(req: Request, res: Response) {
     try {
-      const { nome } = req.params;
-      const testeQualidade = await testeQualidadeServices.getPorNome(
-        nome
+      const { authorization } = req.headers;
+      if (!authorization) {
+        return res.status(401);
+      }
+      const permissao = await verificaPermissao.validaPermissao(
+        authorization,
+        Permissoes.REGRAS
       );
+      if (!permissao) {
+        return res.status(401);
+      }
+      const { nome } = req.params;
+      const testeQualidade = await testeQualidadeServices.getPorNome(nome);
       res.status(200).json(testeQualidade);
     } catch {
       res.send("Erro ao retornar dados");
@@ -23,6 +45,17 @@ class TesteQualidade {
   }
   async getPorId(req: Request, res: Response) {
     try {
+      const { authorization } = req.headers;
+      if (!authorization) {
+        return res.status(401);
+      }
+      const permissao = await verificaPermissao.validaPermissao(
+        authorization,
+        Permissoes.REGRAS
+      );
+      if (!permissao) {
+        return res.status(401);
+      }
       const { id } = req.params;
       const testeQualidade = await testeQualidadeServices.getPorId(
         parseInt(id)
@@ -34,6 +67,17 @@ class TesteQualidade {
   }
   async post(req: Request, res: Response) {
     try {
+      const { authorization } = req.headers;
+      if (!authorization) {
+        return res.status(401);
+      }
+      const permissao = await verificaPermissao.validaPermissao(
+        authorization,
+        Permissoes.REGRAS
+      );
+      if (!permissao) {
+        return res.status(401);
+      }
       const data = req.body;
       const testeQualidade = testeQualidadeServices.post(data);
       return res.status(201).json(testeQualidade);
@@ -43,6 +87,17 @@ class TesteQualidade {
   }
   async update(req: Request, res: Response) {
     try {
+      const { authorization } = req.headers;
+      if (!authorization) {
+        return res.status(401);
+      }
+      const permissao = await verificaPermissao.validaPermissao(
+        authorization,
+        Permissoes.REGRAS
+      );
+      if (!permissao) {
+        return res.status(401);
+      }
       const { id } = req.params;
       const data = req.body;
       const testeQualidade = await testeQualidadeServices.update(
@@ -56,6 +111,17 @@ class TesteQualidade {
   }
   async delete(req: Request, res: Response) {
     try {
+      const { authorization } = req.headers;
+      if (!authorization) {
+        return res.status(401);
+      }
+      const permissao = await verificaPermissao.validaPermissao(
+        authorization,
+        Permissoes.REGRAS
+      );
+      if (!permissao) {
+        return res.status(401);
+      }
       const { id } = req.params;
       await testeQualidadeServices.delete(parseInt(id));
       res.status(200).send("Fornecedor deletada");

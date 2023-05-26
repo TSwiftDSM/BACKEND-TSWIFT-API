@@ -150,9 +150,9 @@ model TipoUsuario {
 model Usuario {
   id             Int      @id @default(autoincrement())
   nome           String
-  login          String?
+  login          String?  @unique
   senha          String?
-  cpf            String
+  cpf            String   @unique
   matricula      String?  @unique
   dataNascimento DateTime
 
