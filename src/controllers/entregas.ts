@@ -2,12 +2,23 @@
 import { Request, Response } from "express";
 
 import { PrismaClient } from "@prisma/client";
+import verificaPermissao from "../services/verificaPermissao";
+import { Permissoes } from "../data/permissoes";
 
 const prisma = new PrismaClient();
 
 class EntregaController {
   async get(req: Request, res: Response) {
     try {
+      const { authorization } = req.headers;
+      if (!authorization) {
+        return res.status(401)
+      }
+      const permissao = await verificaPermissao.validaPermissao(authorization, Permissoes.RECEBIMENTO)
+      const permissao2 = await verificaPermissao.validaPermissao(authorization, Permissoes.PEDIDOS)
+      if (!permissao && !permissao2) {
+        return res.status(401)
+      }
       const entregas = await prisma.entrega.findMany({
         include: {
           Fornecedor: {
@@ -30,6 +41,15 @@ class EntregaController {
 
   async post(req: Request, res: Response) {
     try {
+      const { authorization } = req.headers;
+      if (!authorization) {
+        return res.status(401)
+      }
+      const permissao = await verificaPermissao.validaPermissao(authorization, Permissoes.RECEBIMENTO)
+      const permissao2 = await verificaPermissao.validaPermissao(authorization, Permissoes.PEDIDOS)
+      if (!permissao && !permissao2) {
+        return res.status(401)
+      }
       const {
         id,
         tipoFrete,
@@ -79,6 +99,15 @@ class EntregaController {
   async getById(req: Request, res: Response) {
     const { id } = req.params;
     try {
+      const { authorization } = req.headers;
+      if (!authorization) {
+        return res.status(401)
+      }
+      const permissao = await verificaPermissao.validaPermissao(authorization, Permissoes.RECEBIMENTO)
+      const permissao2 = await verificaPermissao.validaPermissao(authorization, Permissoes.PEDIDOS)
+      if (!permissao && !permissao2) {
+        return res.status(401)
+      }
       const user = await prisma.entrega.findUnique({
         where: {
           id: parseInt(id),
@@ -117,6 +146,15 @@ class EntregaController {
 
   async getPorNumeropedido(req: Request, res: Response) {
     try {
+      const { authorization } = req.headers;
+      if (!authorization) {
+        return res.status(401)
+      }
+      const permissao = await verificaPermissao.validaPermissao(authorization, Permissoes.RECEBIMENTO)
+      const permissao2 = await verificaPermissao.validaPermissao(authorization, Permissoes.PEDIDOS)
+      if (!permissao && !permissao2) {
+        return res.status(401)
+      }
       const { numeroPedido } = req.params;
       const entrega = await prisma.entrega.findMany({
         where: {
@@ -158,6 +196,15 @@ class EntregaController {
 
   async update(req: Request, res: Response) {
     try {
+      const { authorization } = req.headers;
+      if (!authorization) {
+        return res.status(401)
+      }
+      const permissao = await verificaPermissao.validaPermissao(authorization, Permissoes.RECEBIMENTO)
+      const permissao2 = await verificaPermissao.validaPermissao(authorization, Permissoes.PEDIDOS)
+      if (!permissao && !permissao2) {
+        return res.status(401)
+      }
       const { id } = req.params;
       const data = req.body;
 
@@ -178,6 +225,15 @@ class EntregaController {
     const { id } = req.params;
 
     try {
+      const { authorization } = req.headers;
+      if (!authorization) {
+        return res.status(401)
+      }
+      const permissao = await verificaPermissao.validaPermissao(authorization, Permissoes.RECEBIMENTO)
+      const permissao2 = await verificaPermissao.validaPermissao(authorization, Permissoes.PEDIDOS)
+      if (!permissao && !permissao2) {
+        return res.status(401)
+      }
       await prisma.entrega.delete({
         where: {
           id: parseInt(id),

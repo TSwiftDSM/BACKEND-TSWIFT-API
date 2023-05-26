@@ -3,6 +3,7 @@ import { default as ServiceQualidadeProduto } from "../services/serviceQualidade
 
 class ControllerQualidadeProduto {
   async get(req: Request, res: Response) {
+    
     const query_params = req.query;
     const url_params = req.params.idQualidadeProduto;
     if (query_params.m) {
