@@ -95,7 +95,7 @@ class EntregaController {
           formaPagamento,
           nfe,
           numeroPedido: numeroPedido.toString(),
-          etapaEntrega,
+          etapaEntrega: '',
           dataEntrega: new Date(dataEntrega),
           fornecedorId: parseInt(fornecedorId),
           transportadoraId: parseInt(transportadoraId),
