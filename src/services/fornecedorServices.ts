@@ -178,17 +178,40 @@ class Fornecedor {
   }
   async post(data: any) {
     try {
-      const novoFornecedor = await prisma.fornecedor.create({
-        data: {
-          nomeFantasia: data.nomeFantasia,
-          fornecedorCNPJ: data.fornecedorCNPJ,
-          razaoSocial: data.razaoSocial,
-          endereco: data.endereco,
-          transportadora: data.transportadora,
-          fornecedor: data.fornecedor,
-        },
+      const fornecedor = await prisma.fornecedor.findUnique({
+        where: {
+          fornecedorCNPJ: data.fornecedorCNPJ
+        }
       });
-      return novoFornecedor;
+      if (!fornecedor) {
+        return await prisma.fornecedor.create({
+          data: {
+            nomeFantasia: data.nomeFantasia,
+            fornecedorCNPJ: data.fornecedorCNPJ,
+            razaoSocial: data.razaoSocial,
+            endereco: data.endereco,
+            transportadora: data.transportadora,
+            fornecedor: data.fornecedor,
+          },
+        });
+      } 
+      if (fornecedor) {
+        const updateData: { fornecedor?: boolean; transportadora?: boolean } = {};
+    
+        if (data.transportadora) {
+          updateData.transportadora = true;
+        }
+    
+        if (data.fornecedor) {
+          updateData.fornecedor = true;
+        }
+        return await prisma.fornecedor.update({
+          where: {
+            fornecedorCNPJ: data.fornecedorCNPJ
+          },
+          data: updateData
+        });
+      }
     } catch (error: any) {
       console.error(error);
       throw new Error("Erro ao criar fornecedor");
