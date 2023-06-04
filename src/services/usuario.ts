@@ -1,5 +1,4 @@
 import { PrismaClient } from "@prisma/client";
-import { any } from "joi";
 
 const prisma = new PrismaClient();
 
@@ -161,7 +160,7 @@ class UsuarioServices {
 
   async delete(idUsuario: number) {
     try {
-      await prisma.permissaoUsuario.deleteMany({
+        await prisma.permissaoUsuario.deleteMany({
         where: {
           usuarioId: idUsuario,
           Usuario: {
