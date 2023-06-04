@@ -18,10 +18,9 @@ model Fornecedor {
   transportadora Boolean
   fornecedor     Boolean
 
-  Entrega                  Entrega[]
-  FornecedorProduto        FornecedorProduto[]
-  FornecedorTransportado   TransportadoraFornecedor[] @relation("Fornecedor")
-  TransportadoraFornecedor TransportadoraFornecedor[] @relation("Transportadora")
+  Entrega           Entrega[]           @relation("Fornecedor")
+  FornecedorProduto FornecedorProduto[]
+  EntregaTeste      Entrega[]           @relation("Transportadora")
 
   @@map("fornecedores")
 }
@@ -30,12 +29,12 @@ model TransportadoraFornecedor {
   id Int @id @default(autoincrement())
 
   fornecedorId Int
-  Fornecedor   Fornecedor @relation("Fornecedor", fields: [fornecedorId], references: [id])
+  //Fornecedor   Fornecedor @relation("Fornecedor", fields: [fornecedorId], references: [id])
 
-  transportadoraId         Int
-  FornecedorTransportadora Fornecedor @relation("Transportadora", fields: [transportadoraId], references: [id])
+  transportadoraId Int
+  //FornecedorTransportadora Fornecedor @relation("Transportadora", fields: [transportadoraId], references: [id])
 
-  Entrega Entrega[]
+  //Entrega Entrega[]
 
   @@unique([fornecedorId, transportadoraId])
   @@map("transportadorasFornecedores")
@@ -97,10 +96,10 @@ model Entrega {
   dataEntrega    DateTime?
 
   fornecedorId Int?
-  Fornecedor   Fornecedor? @relation(fields: [fornecedorId], references: [id])
+  Fornecedor   Fornecedor? @relation("Fornecedor", fields: [fornecedorId], references: [id])
 
-  transportadoraId Int?
-  Transportadora   TransportadoraFornecedor? @relation(fields: [transportadoraId], references: [id])
+  transportadoraId         Int?
+  FornecedorTransportadora Fornecedor? @relation("Transportadora", fields: [transportadoraId], references: [id])
 
   StatusEntrega      StatusEntrega[]
   EntregaProduto     EntregaProduto[]
