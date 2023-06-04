@@ -42,7 +42,7 @@ Esse ambiente de desenvolvimento permitiu uma colaboração mais eficiente entre
 <img src="/doc/img/Desktop.gif">
 
 #### Mockup no Figma:
-https://www.figma.com/file/iy9b2cY2hmpDLlnXDOKI2h/agro-%C3%A9-tec?node-id=0%3A1&t=Fc2jGCh2zCfoWF6M-1
+https://www.figma.com/file/lnwNoQQ8pSOLKlcePC50V8/Prototipo---TSwift?type=design&node-id=0-1&t=hHEYIRfGke18DTCp-0
 #
 
 ### :black_flag: Sprint 2: <a id="s2"></a>
