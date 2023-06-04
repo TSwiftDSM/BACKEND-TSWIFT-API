@@ -102,6 +102,7 @@ class UsuarioServices {
         data: {
           nome: data.nome,
           cpf: data.cpf,
+          login: data.cpf,
           dataNascimento: new Date(data.dataNascimento),
           matricula: matriculaInt.toString(),
           tipoUsuarioId:tipousuarioC

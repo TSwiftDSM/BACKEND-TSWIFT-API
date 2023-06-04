@@ -36,13 +36,21 @@ class PermissaoServices {
 
   async post(data: any) {
     try {
-      const novaPermissao = await prisma.permissaoUsuario.create({
-        data: {
-          usuarioId: data.usuarioId,
-          permissaoId: data.usuarioId,
-        },
+      const usuario = await prisma.usuario.aggregate({
+        _max: {
+          id: true
+        }
       });
-      return novaPermissao;
+
+      if (usuario._max.id) {
+        const novaPermissao = await prisma.permissaoUsuario.create({
+          data: {
+            usuarioId: usuario._max.id,
+            permissaoId: data.permissaoId,
+          },
+        });
+        return novaPermissao;
+      }
     } catch (error: any) {
       console.error(error);
       throw new Error("Erro ao criar Permissão");
