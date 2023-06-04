@@ -147,6 +147,13 @@ model TipoUsuario {
   @@map("tiposUsuarios")
 }
 
+model regraQuantitativa {
+  id Int @id @default(autoincrement())
+  porcentagem Float @default(0)
+
+  @@map("regraQuantitativa")
+}
+
 model Usuario {
   id             Int      @id @default(autoincrement())
   nome           String

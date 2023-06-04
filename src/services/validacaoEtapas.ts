@@ -30,7 +30,7 @@ class validacaoEtapasServices {
         data.nfe == pedido.nfe &&
         data.fornecedor == pedido.Fornecedor.nomeFantasia &&
         data.transportadora ==
-          pedido.Transportadora.FornecedorTransportadora.nomeFantasia &&
+        pedido.Transportadora.FornecedorTransportadora.nomeFantasia &&
         data.tipoFrete == pedido.tipoFrete &&
         data.formaPagamento == pedido.formaPagamento
       )
@@ -73,11 +73,24 @@ class validacaoEtapasServices {
     try {
       const resultados = [];
 
+      const porcentagem = await prisma.regraQuantitativa.findUnique({
+        where: {
+          id: 1
+        },
+        select: {
+          porcentagem: true
+        }
+      });
+      let porcentagemPositiva = 0
+      if (porcentagem?.porcentagem) {
+        porcentagemPositiva = (porcentagem?.porcentagem / 100)
+      }
+
       for (let cont = 0; cont < dataObj.length; cont++) {
         const obj = dataObj[cont];
         const recusado =
-          obj.valorTotal < obj.peso_previsto * 0.95 ||
-          obj.valorTotal > obj.peso_previsto * 1.05;
+          obj.valorTotal < obj.peso_previsto * (1 - porcentagemPositiva) ||
+          obj.valorTotal > obj.peso_previsto * (1 + porcentagemPositiva);
 
         resultados.push(recusado);
       }

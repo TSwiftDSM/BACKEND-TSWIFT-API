@@ -24,6 +24,7 @@ import { default as permissao } from "./permissao";
 import { default as permissaoUsuario } from "./permissaoUsuario";
 import { default as validacaoEtapasRoutes } from "./validacaoEtapas";
 import { default as autenticador } from "./autenticador";
+import { default as regraQuantitativa } from "./regraQuantitativa"
 
 const router = Router();
 
@@ -52,5 +53,6 @@ router.use("/permissao", permissao);
 router.use("/permissaoUsuario", permissaoUsuario);
 router.use("/validacao", validacaoEtapasRoutes);
 router.use("/autenticacao", autenticador);
+router.use("/regraQuantitativa", regraQuantitativa)
 
 export default router;

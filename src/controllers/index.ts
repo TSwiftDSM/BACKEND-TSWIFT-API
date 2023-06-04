@@ -23,3 +23,4 @@ export { default as PermissaoController } from "./permissao";
 export { default as PermissaoUsuarioController } from "./permissaoUsuario";
 export { default as ValidacaoEtapasController } from "./validacaoEtapas";
 export { default as autenticarUsuario } from "./autenticador";
+export { default as regraQuantitativa } from "./regraQuantitativa"
