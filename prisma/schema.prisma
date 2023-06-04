@@ -93,7 +93,7 @@ model Entrega {
   formaPagamento String
   nfe            String?   @unique
   numeroPedido   String?   @unique
-  etapaEntrega   String?
+  etapaEntrega   String?   @default("")
   dataEntrega    DateTime?
 
   fornecedorId Int?
