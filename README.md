@@ -10,10 +10,10 @@
 </p>
 
 <p align="center">
- <a href="#s1">Sprint 1</a> •
- <a href="#s2">Sprint 2</a> • 
- <a href="#s3">Sprint 3</a> • 
- <a href="#s4">Sprint 4</a> • 
+ <a href="#s1">Sprint 1</a> |
+ <a href="#s2">Sprint 2</a> | 
+ <a href="#s3">Sprint 3</a> | 
+ <a href="#s4">Sprint 4</a> 
 </p>
 
 <hr>
