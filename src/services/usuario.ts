@@ -1,4 +1,5 @@
 import { PrismaClient } from "@prisma/client";
+import { any } from "joi";
 
 const prisma = new PrismaClient();
 
@@ -88,7 +89,7 @@ class UsuarioServices {
           matricula: true
         }
       });
-      
+
       if (matricula._max.matricula) {
         matriculaInt = matricula._max.matricula + 1;
       } else {
@@ -160,12 +161,19 @@ class UsuarioServices {
 
   async delete(idUsuario: number) {
     try {
-      const deletarUsuario = await prisma.usuario.delete({
+      await prisma.permissaoUsuario.deleteMany({
         where: {
-          id: idUsuario,
-        },
+          usuarioId: idUsuario,
+          Usuario: {
+            id: idUsuario
+          }
+        }
       });
-      return deletarUsuario;
+      await prisma.usuario.delete({
+        where: {
+          id: idUsuario
+        }
+      });
     } catch (error: any) {
       console.error(error);
       throw new Error("Erro ao excluir usuário");
