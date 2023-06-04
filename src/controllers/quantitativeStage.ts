@@ -110,7 +110,7 @@ async function updateQuantitative(
         data: {
           especificacao: update_data[cont].especificacao,
           quantidade: update_data[cont].quantidade,
-          pesoReal: update_data[cont].quantidade,
+          pesoReal: update_data[cont].valorTotal,
         },
       });
 
