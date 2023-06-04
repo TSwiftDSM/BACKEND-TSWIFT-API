@@ -158,7 +158,7 @@ model Usuario {
   id             Int      @id @default(autoincrement())
   nome           String
   login          String?  @unique
-  senha          String?
+  senha          String?  @default("senha")
   cpf            String   @unique
   matricula      Int?  @unique
   dataNascimento DateTime

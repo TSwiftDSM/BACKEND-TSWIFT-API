@@ -19,13 +19,13 @@ class RegraQuantitativa {
         return res.status(200).json(regraQuantitativa);
     }
     async put(req: Request, res: Response) {
-        const { data } = req.body
+        const  data  = req.body
         const regraQuantitativa = await prisma.regraQuantitativa.update({
             where: {
                 id: 1
             },
             data: {
-                porcentagem: data.porcentagem
+                porcentagem: parseInt(data.porcentagem)
             }
         });
         return res.status(201).json(regraQuantitativa);

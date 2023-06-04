@@ -81,7 +81,7 @@ class EntregaProduto {
       if (!permissao) {
         return res.status(401);
       }
-      const data = req.body;
+      const  data  = req.body;
       const novoEntregaProduto = await entregaProdutosServices.post(data);
       return res.status(201).json(novoEntregaProduto);
     } catch {
