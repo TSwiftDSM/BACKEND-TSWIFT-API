@@ -471,6 +471,8 @@ INSERT INTO permissoes(descricao)
 VALUES ('REGRAS');
 INSERT INTO permissoes(descricao) 
 VALUES ('TRANSPORTADORA');	
+INSERT INTO permissoes(descricao) 
+VALUES ('RELATORIOS');	
 
 INSERT INTO permissoesusuario(permissaoId, usuarioId)
 VALUES(1,1);
@@ -486,6 +488,8 @@ INSERT INTO permissoesusuario(permissaoId, usuarioId)
 VALUES(6,1);
 INSERT INTO permissoesusuario(permissaoId, usuarioId)
 VALUES(7,1);
+INSERT INTO permissoesusuario(permissaoId, usuarioId)
+VALUES(8,1);
 
 SELECT * FROM permissoes; 
 

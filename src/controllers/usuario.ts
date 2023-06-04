@@ -86,8 +86,8 @@ class UsuarioController {
         return res.status(401);
       }
       const data = req.body;
-      await UsuarioServices.post(data);
-      return res.send("Usuario cadastrado com sucesso").status(200);
+      const novoUsuario = await UsuarioServices.post(data);
+      return res.json(novoUsuario).status(200);
     } catch {
       res.send("Erro ao cadastrar usuário");
     }

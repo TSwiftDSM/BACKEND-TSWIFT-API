@@ -39,7 +39,7 @@ class PermissaoServices {
       const novaPermissao = await prisma.permissaoUsuario.create({
         data: {
           usuarioId: data.usuarioId,
-          permissaoId: data.usuarioId,
+          permissaoId: data.permissaoId,
         },
       });
       return novaPermissao;
