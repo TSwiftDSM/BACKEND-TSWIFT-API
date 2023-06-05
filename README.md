@@ -10,10 +10,10 @@
 </p>
 
 <p align="center">
- <a href="#s1">Sprint 1</a> •
- <a href="#s2">Sprint 2</a> • 
- <a href="#s3">Sprint 3</a> • 
- <a href="#s4">Sprint 4</a> • 
+ <a href="#s1">Sprint 1</a> |
+ <a href="#s2">Sprint 2</a> | 
+ <a href="#s3">Sprint 3</a> | 
+ <a href="#s4">Sprint 4</a> 
 </p>
 
 <hr>
@@ -42,7 +42,7 @@ Esse ambiente de desenvolvimento permitiu uma colaboração mais eficiente entre
 <img src="/doc/img/Desktop.gif">
 
 #### Mockup no Figma:
-https://www.figma.com/file/iy9b2cY2hmpDLlnXDOKI2h/agro-%C3%A9-tec?node-id=0%3A1&t=Fc2jGCh2zCfoWF6M-1
+https://www.figma.com/file/lnwNoQQ8pSOLKlcePC50V8/Prototipo---TSwift?type=design&node-id=0-1&t=hHEYIRfGke18DTCp-0
 #
 
 ### :black_flag: Sprint 2: <a id="s2"></a>
@@ -96,7 +96,7 @@ Na última sprint, a equipe concluiu a implementação do controle de acesso per
 <a href="https://github.com/ymosena"><img src="https://avatars.githubusercontent.com/u/111094893?v=4" align="center" height="50" width="50"></a>| Yasmin Mosena|https://github.com/ymosena| <a href="https://www.linkedin.com/in/yasmin-m%C3%B3sena-11b256249/">LinkedIn</a> | Scrum Master |
 <a href="https://github.com/JacklesKerley"><img src="https://avatars.githubusercontent.com/u/100358141?v=4" align="center" height="50" width="50"></a>|Jackles Kerley|https://github.com/JacklesKerley| <a href="https://www.linkedin.com/in/jackles-kerley/">LinkedIn</a> | Product Owner |
 <a href="https://github.com/Vitaog"><img src="https://avatars.githubusercontent.com/u/86271800?v=4" align="center" height="50" width="50"></a>|Vitor Garcez|https://github.com/Vitaog| <a href="https://www.linkedin.com/in/vitorgarcezdeoliveira/">LinkedIn</a> | Desenvolvedor |
-<a href="https://github.com/dosantos-ogabriel"><img src="https://avatars.githubusercontent.com/u/92482112?v=4" align="center" height="50" width="50"></a>|Gabriel Santos|https://github.com/dosantos-ogabriel| <a href="#">LinkedIn</a> | Desenvolvedor |
+<a href="https://github.com/dosantos-ogabriel"><img src="https://avatars.githubusercontent.com/u/92482112?v=4" align="center" height="50" width="50"></a>|Gabriel Santos|https://github.com/dosantos-ogabriel| <a href="https://www.linkedin.com/in/gabriel-santos-6b46b7228/">LinkedIn</a> | Desenvolvedor |
 <a href="https://github.com/otavioabreu27"><img src="https://avatars.githubusercontent.com/u/54289303?v=4" align="center" height="50" width="50"></a>|Otávio Abreu|https://github.com/otavioabreu27| <a href="https://br.linkedin.com/in/o-abreu?trk=public_profile_samename-profile">LinkedIn</a> | Desenvolvedor |
 <a href="https://github.com/Miguel-C1"><img src ="https://avatars.githubusercontent.com/u/104818982?v=4" align="center" height="50" width="50"></a>|Miguel Soares|https://github.com/Miguel-C1|  <a href="https://www.linkedin.com/in/miguel-carvalho-soares-722b161a3/">LinkedIn</a>|Desenvolvedor |
 <a href="https://github.com/dmssjk"><img src="https://avatars.githubusercontent.com/u/106353031?v=4" align="center" height="50" width="50"></a>|Daniel Machado|https://github.com/dmssjk| <a href="https://www.linkedin.com/in/dmssjk/">LinkedIn</a> | Desenvolvedor |
