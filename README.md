@@ -48,9 +48,9 @@ https://www.figma.com/file/lnwNoQQ8pSOLKlcePC50V8/Prototipo---TSwift?type=design
 ### :black_flag: Sprint 2: <a id="s2"></a>
 Nessa sprint, a equipe concentrou seus esforços na criação da interface administrativa do projeto, que é responsável por fornecer todas as funcionalidades do sistema. O que foi trabalhado durante esse período foi a identificação dos requisitos da interface a implementação do front-end e a integração com o back-end. No final, a equipe conseguiu entregar uma interface administrativa funcional que permite receber pedidos e processá-los, o que representa um avanço significativo no desenvolvimento do projeto.
 
-### :octocat: Vídeo do produto entregue na Sprint 2:
+### :octocat: Gif do protótipo entregue na Sprint 2:
 
-https://youtu.be/6gblBDUkuOE
+<img src="/doc/img/gifs2.gif">
 
 #
 ### :black_flag: Sprint 3: <a id="s3"></a>
@@ -68,7 +68,7 @@ Na última sprint, a equipe concluiu a implementação do controle de acesso per
 
 ### :octocat: Gif do protótipo entregue na Sprint 4:
 
-<img src="/doc/img/">
+<img src="/doc/img/gifs4.gif">
 
 #
 
