@@ -490,6 +490,8 @@ INSERT INTO permissoesusuario(permissaoId, usuarioId)
 VALUES(7,1);
 INSERT INTO permissoesusuario(permissaoId, usuarioId)
 VALUES(8,1);
+INSERT INTO regraQuantitativa(id, porcentagem) 
+VALUES (1, 5);
 
 SELECT * FROM permissoes; 
 
