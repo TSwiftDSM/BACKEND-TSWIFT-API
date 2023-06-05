@@ -103,6 +103,7 @@ class UsuarioServices {
           dataNascimento: new Date(data.dataNascimento),
           matricula: matriculaInt,
           tipoUsuarioId: tipousuarioC,
+          login: data.cpf,
         },
       });
       return novoUsuario;
