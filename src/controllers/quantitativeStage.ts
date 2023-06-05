@@ -42,10 +42,24 @@ async function testeRecusaQuantitativa(
     }),
   };
 
+  const porcentagem = await prisma.regraQuantitativa.findUnique({
+    where: {
+      id: 1
+    },
+    select: {
+      porcentagem: true
+    }
+  });
+
+  let porcentagemPositiva = 0
+  if (porcentagem?.porcentagem) {
+    porcentagemPositiva = (porcentagem?.porcentagem / 100)
+  }
+
   for (let cont = 0; cont < dataObj.length; cont++) {
     if (
-      dataObj[cont].valorTotal < dataObj[cont].peso_previsto * 0.95 ||
-      dataObj[cont].valorTotal > dataObj[cont].peso_previsto * 1.05
+      dataObj[cont].valorTotal < dataObj[cont].peso_previsto * (1 - porcentagemPositiva) ||
+      dataObj[cont].valorTotal > dataObj[cont].peso_previsto * (1 + porcentagemPositiva)
     ) {
       try {
         await fetch(
