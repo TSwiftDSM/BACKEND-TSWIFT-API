@@ -19,6 +19,13 @@ type StatusDelivery = {
 };
 
 class RecusarQualitativaController {
+
+  async getId(req: Request, res: Response) {
+    const { idEntrega } = req.params
+    const recusarQualitativa = await DeclineStepsServices.get(parseInt(idEntrega))
+    return res.status(200).json(recusarQualitativa);
+  }
+
   async post(req: Request, res: Response) {
     const objeto: TestData = req.body;
     let nomesTestes: string = "";

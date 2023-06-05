@@ -56,7 +56,7 @@ async function testeRecusaQuantitativa(
     porcentagemPositiva = (porcentagem?.porcentagem / 100)
   }
 
-  for (let cont = 0; cont < dataObj.length; cont++) {
+  for (let cont =   0; cont < dataObj.length; cont++) {
     if (
       dataObj[cont].valorTotal < dataObj[cont].peso_previsto * (1 - porcentagemPositiva) ||
       dataObj[cont].valorTotal > dataObj[cont].peso_previsto * (1 + porcentagemPositiva)

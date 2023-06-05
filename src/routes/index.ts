@@ -21,6 +21,7 @@ import { default as entregaDesaprovada } from "./entregaDesaprovada";
 import { default as tiposUsuariosRoutes } from "./tipoUsuario";
 import { default as transportadoraFornecedorRoutes } from "./transportadoraFornecedor";
 import { default as permissao } from "./permissao";
+import { default as recusarQualitativaPost } from "./recusarQualitativaPost"
 import { default as permissaoUsuario } from "./permissaoUsuario";
 import { default as validacaoEtapasRoutes } from "./validacaoEtapas";
 import { default as autenticador } from "./autenticador";
@@ -56,5 +57,6 @@ router.use("/validacao", validacaoEtapasRoutes);
 router.use("/autenticacao", autenticador);
 router.use("/regraQuantitativa", regraQuantitativa);
 router.use("/relatorios", relatorios);
+router.use("/recusarQualitativaPost", recusarQualitativaPost)
 
 export default router;

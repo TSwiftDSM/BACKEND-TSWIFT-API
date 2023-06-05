@@ -5,6 +5,40 @@ import { Etapas } from "../data/EnumEtapa";
 const prisma = new PrismaClient();
 
 class DeclineStepServices {
+
+  public async get(idEntrega: number) {
+    const recusarEntrada = await prisma.entregaDesaprovada.findMany({
+      where: {
+        entregaId: idEntrega,
+        NOT: [
+          {
+            produtoId: null
+          },
+          {
+            testeQualidadeId: null
+          }
+        ]
+      },
+      orderBy: {
+        produtoId: 'asc'
+      },
+      select: {
+        Produto: {
+          select: {
+            nomeProduto: true
+          }
+        },
+        TesteQualidade: {
+          select: {
+            nomeTeste: true
+          }
+        },
+      }
+    });
+
+    return recusarEntrada
+  }
+
   //Função para persistencia de dados das inconsistencias e motivos da recusa da entrega
   public async declineDelivery(motivoCompleto: string, entregaId: number) {
     try {

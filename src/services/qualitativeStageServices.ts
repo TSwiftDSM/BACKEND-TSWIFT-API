@@ -42,6 +42,7 @@ export class CadastroStatusEntrega {
               motivo: "Produto: " + testeProduto.idProduto,
               testeQualidadeId: testeProduto.idQualidade,
               entregaId: testeProduto.idEntrega,
+              produtoId: testeProduto.idProduto
             },
           });
         }

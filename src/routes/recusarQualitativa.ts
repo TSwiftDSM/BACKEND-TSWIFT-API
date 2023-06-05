@@ -6,5 +6,6 @@ const routes = Router();
 
 // routes.get("/",Autenticador,DeclineTwoController.get);
 routes.post("/:entregaId", Autenticador, RecusarQualitativaController.post);
+routes.get("/:idEntrega", Autenticador, RecusarQualitativaController.getId)
 
 export default routes;

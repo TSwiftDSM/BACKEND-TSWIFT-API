@@ -56,9 +56,10 @@ model Produto {
   nomeProduto String
   unidade     String?
 
-  FornecedorProduto FornecedorProduto[]
-  EntregaProduto    EntregaProduto[]
-  QualidadeProduto  QualidadeProduto[]
+  FornecedorProduto  FornecedorProduto[]
+  EntregaProduto     EntregaProduto[]
+  QualidadeProduto   QualidadeProduto[]
+  EntregaDesaprovada EntregaDesaprovada[]
 
   @@map("produtos")
 }
@@ -115,6 +116,9 @@ model EntregaDesaprovada {
 
   testeQualidadeId Int?
   TesteQualidade   TesteQualidade? @relation(fields: [testeQualidadeId], references: [id])
+  
+  Produto          Produto?        @relation(fields: [produtoId], references: [id])
+  produtoId        Int?
 
   entregaId Int
   Entrega   Entrega @relation(fields: [entregaId], references: [id])
@@ -148,7 +152,7 @@ model TipoUsuario {
 }
 
 model regraQuantitativa {
-  id Int @id @default(autoincrement())
+  id          Int   @id @default(autoincrement())
   porcentagem Float @default(0)
 
   @@map("regraQuantitativa")
@@ -160,7 +164,7 @@ model Usuario {
   login          String?  @unique
   senha          String?  @default("senha")
   cpf            String   @unique
-  matricula      Int?  @unique
+  matricula      Int?     @unique
   dataNascimento DateTime
 
   tipoUsuarioId Int?
