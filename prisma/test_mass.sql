@@ -236,17 +236,17 @@ VALUES
 INSERT INTO
     entregaProdutos
 VALUES
-(1, NULL, 50, NULL, NULL, 1, 1);
+(1, 2, 50, 100, "teste1", 1, 1);
 
 INSERT INTO
     entregaProdutos
 VALUES
-(2, NULL, 50, NULL, NULL, 2, 1);
+(2, 2, 50, 100, "teste2", 2, 1);
 
 INSERT INTO
     entregaProdutos
 VALUES
-(3, NULL, 50, NULL, NULL, 4, 1);
+(3, 2, 50, 100, "teste3", 4, 1);
 
 -- ENTREGA 2
 INSERT INTO
@@ -266,7 +266,7 @@ VALUES
 INSERT INTO
     entregaProdutos
 VALUES
-(4, NULL, 50, NULL, NULL, 3, 2);
+(4, 2, 50, 100, "teste4", 3, 2);
 
 -- ENTREGA 3
 INSERT INTO
@@ -286,12 +286,12 @@ VALUES
 INSERT INTO
     entregaProdutos
 VALUES
-(5, NULL, 50, NULL, NULL, 3, 3);
+(5, 2, 50, 100, "5", 3, 3);
 
 INSERT INTO
     entregaProdutos
 VALUES
-(6, NULL, 70, NULL, NULL, 2, 3);
+(6, 2, 70, 140, "6", 2, 3);
 
 -- ENTREGA 4
 INSERT INTO
@@ -311,22 +311,22 @@ VALUES
 INSERT INTO
     entregaProdutos
 VALUES
-(7, NULL, 50, NULL, NULL, 1, 4);
+(7, 2, 50, 100, "7", 1, 4);
 
 INSERT INTO
     entregaProdutos
 VALUES
-(8, NULL, 70, NULL, NULL, 2, 4);
+(8, 2, 70, 140, "8", 2, 4);
 
 INSERT INTO
     entregaProdutos
 VALUES
-(9, NULL, 60, NULL, NULL, 3, 4);
+(9, 2, 60, 120, "9", 3, 4);
 
 INSERT INTO
     entregaProdutos
 VALUES
-(10, NULL, 40, NULL, NULL, 4, 4);
+(10, 2, 40, 80, "10", 4, 4);
 
 -- ENTREGA 5
 INSERT INTO
@@ -346,12 +346,12 @@ VALUES
 INSERT INTO
     entregaProdutos
 VALUES
-(11, NULL, 50, NULL, NULL, 2, 5);
+(11, 2, 50, 100, "11", 2, 5);
 
 INSERT INTO
     entregaProdutos
 VALUES
-(12, NULL, 10, NULL, NULL, 4, 5);
+(12, 2, 10, 20, "12", 4, 5);
 
 -- ENTREGA 6
 INSERT INTO
@@ -371,12 +371,12 @@ VALUES
 INSERT INTO
     entregaProdutos
 VALUES
-(13, NULL, 50, NULL, NULL, 2, 6);
+(13, 2, 50, 100, "13", 2, 6);
 
 INSERT INTO
     entregaProdutos
 VALUES
-(14, NULL, 10, NULL, NULL, 3, 6);
+(14, 2, 10, 20, "14", 3, 6);
 
 -- USUARIOS
 INSERT INTO
@@ -491,4 +491,8 @@ VALUES(7,1);
 INSERT INTO permissoesusuario(permissaoId, usuarioId)
 VALUES(8,1);
 
-INSERT INTO `tswift`.`regraquantitativa` (`id`, `porcentagem`) VALUES ('1', '5');
+SELECT * FROM permissoes; 
+
+SELECT * FROM permissoesusuario;
+
+SELECT * FROM usuarios;
