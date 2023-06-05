@@ -58,13 +58,21 @@ class ServiceQualidadeProduto {
 
   public async postQualidadeProduto(obj: objQualidadeProduto) {
     try {
-      await prisma.qualidadeProduto.create({
-        data: {
-          obrigatorio: obj.obrigatorio,
-          testeQualidadeId: obj.testeQualidadeId,
-          produtoId: obj.produtoId,
-        },
-      });
+      const regraQualidade = await prisma.testeQualidade.aggregate({
+        _max: {
+          id: true
+        }
+      })
+      if (regraQualidade._max.id) {
+        await prisma.qualidadeProduto.create({
+          data: {
+            obrigatorio: obj.obrigatorio,
+            testeQualidadeId: regraQualidade._max.id,
+            produtoId: obj.produtoId,
+          },
+        });
+      }
+     
 
       return 201;
     } catch (exception) {
