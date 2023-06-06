@@ -9,11 +9,7 @@ interface putBodyObj {
 }
 
 // Formato de Objeto Padrão
-interface objQualidadeProduto {
-  obrigatorio: boolean;
-  produtoId: number;
-  testeQualidadeId: number;
-}
+
 
 class ServiceQualidadeProduto {
   public async getQualidadeProduto(mod: string, id: number) {
@@ -56,19 +52,27 @@ class ServiceQualidadeProduto {
     return resp;
   }
 
-  public async postQualidadeProduto(obj: objQualidadeProduto) {
+  public async postQualidadeProduto(obj: any) {
     try {
       const regraQualidade = await prisma.testeQualidade.aggregate({
         _max: {
           id: true
         }
       })
-      if (regraQualidade._max.id) {
+      if (regraQualidade._max.id && !obj.testeQualidadeId) {
         await prisma.qualidadeProduto.create({
           data: {
             obrigatorio: obj.obrigatorio,
             testeQualidadeId: regraQualidade._max.id,
             produtoId: obj.produtoId,
+          },
+        });
+      } else {
+        await prisma.qualidadeProduto.create({
+          data: {
+            obrigatorio: obj.obrigatorio,
+            testeQualidadeId: parseInt(obj.testeQualidadeId),
+            produtoId: parseInt(obj.produtoId),
           },
         });
       }

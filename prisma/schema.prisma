@@ -65,7 +65,7 @@ model Produto {
 }
 
 model QualidadeProduto {
-  obrigatorio Boolean @default(true)
+  obrigatorio Boolean @default(false)
 
   testeQualidadeId Int
   TesteQualidade   TesteQualidade @relation(fields: [testeQualidadeId], references: [id])
